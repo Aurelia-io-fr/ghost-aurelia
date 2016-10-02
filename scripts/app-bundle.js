@@ -227,90 +227,6 @@ define('api/posts',['exports', 'aurelia-framework', './api'], function (exports,
     return Posts;
   }()) || _class);
 });
-define('home/home',['exports', 'aurelia-framework', '../api/posts'], function (exports, _aureliaFramework, _posts) {
-  'use strict';
-
-  Object.defineProperty(exports, "__esModule", {
-    value: true
-  });
-  exports.Home = undefined;
-
-  function _asyncToGenerator(fn) {
-    return function () {
-      var gen = fn.apply(this, arguments);
-      return new Promise(function (resolve, reject) {
-        function step(key, arg) {
-          try {
-            var info = gen[key](arg);
-            var value = info.value;
-          } catch (error) {
-            reject(error);
-            return;
-          }
-
-          if (info.done) {
-            resolve(value);
-          } else {
-            return Promise.resolve(value).then(function (value) {
-              step("next", value);
-            }, function (err) {
-              step("throw", err);
-            });
-          }
-        }
-
-        return step("next");
-      });
-    };
-  }
-
-  function _classCallCheck(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError("Cannot call a class as a function");
-    }
-  }
-
-  var _dec, _class;
-
-  var Home = exports.Home = (_dec = (0, _aureliaFramework.inject)(_posts.Posts), _dec(_class = function () {
-    function Home(posts) {
-      _classCallCheck(this, Home);
-
-      this.posts = posts;
-    }
-
-    Home.prototype.activate = function () {
-      var _ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee() {
-        return regeneratorRuntime.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                _context.next = 2;
-                return this.posts.get();
-
-              case 2:
-                this.posts = _context.sent;
-
-                console.log(this.posts);
-
-              case 4:
-              case 'end':
-                return _context.stop();
-            }
-          }
-        }, _callee, this);
-      }));
-
-      function activate() {
-        return _ref.apply(this, arguments);
-      }
-
-      return activate;
-    }();
-
-    return Home;
-  }()) || _class);
-});
 define('resources/index',["exports"], function (exports) {
   "use strict";
 
@@ -319,90 +235,6 @@ define('resources/index',["exports"], function (exports) {
   });
   exports.configure = configure;
   function configure(config) {}
-});
-define('posts/home',['exports', 'aurelia-framework', '../api/posts'], function (exports, _aureliaFramework, _posts) {
-  'use strict';
-
-  Object.defineProperty(exports, "__esModule", {
-    value: true
-  });
-  exports.Home = undefined;
-
-  function _asyncToGenerator(fn) {
-    return function () {
-      var gen = fn.apply(this, arguments);
-      return new Promise(function (resolve, reject) {
-        function step(key, arg) {
-          try {
-            var info = gen[key](arg);
-            var value = info.value;
-          } catch (error) {
-            reject(error);
-            return;
-          }
-
-          if (info.done) {
-            resolve(value);
-          } else {
-            return Promise.resolve(value).then(function (value) {
-              step("next", value);
-            }, function (err) {
-              step("throw", err);
-            });
-          }
-        }
-
-        return step("next");
-      });
-    };
-  }
-
-  function _classCallCheck(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError("Cannot call a class as a function");
-    }
-  }
-
-  var _dec, _class;
-
-  var Home = exports.Home = (_dec = (0, _aureliaFramework.inject)(_posts.Posts), _dec(_class = function () {
-    function Home(posts) {
-      _classCallCheck(this, Home);
-
-      this.posts = posts;
-    }
-
-    Home.prototype.activate = function () {
-      var _ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee() {
-        return regeneratorRuntime.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                _context.next = 2;
-                return this.posts.get();
-
-              case 2:
-                this.posts = _context.sent;
-
-                console.log(this.posts);
-
-              case 4:
-              case 'end':
-                return _context.stop();
-            }
-          }
-        }, _callee, this);
-      }));
-
-      function activate() {
-        return _ref.apply(this, arguments);
-      }
-
-      return activate;
-    }();
-
-    return Home;
-  }()) || _class);
 });
 define('posts/list',['exports', 'aurelia-framework', 'aurelia-router', '../api/posts'], function (exports, _aureliaFramework, _aureliaRouter, _posts) {
   'use strict';
@@ -495,16 +327,17 @@ define('posts/list',['exports', 'aurelia-framework', 'aurelia-router', '../api/p
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.next = 2;
-                return this.postsService.get({ page: this.current, limit: 5 });
+                return this.postsService.get({ page: this.current, limit: 5, include: ['author', 'tags'] });
 
               case 2:
                 results = _context2.sent;
 
                 this.posts = results.posts;
+                console.log(this.posts);
                 this.total = +results.meta.pagination.total;
                 this.perPage = +results.meta.pagination.limit;
 
-              case 6:
+              case 7:
               case 'end':
                 return _context2.stop();
             }
@@ -531,6 +364,74 @@ define('posts/list',['exports', 'aurelia-framework', 'aurelia-router', '../api/p
 
     return List;
   }()) || _class);
+});
+define('posts/post-in-list',['exports', 'aurelia-framework'], function (exports, _aureliaFramework) {
+  'use strict';
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.PostInList = undefined;
+
+  function _initDefineProp(target, property, descriptor, context) {
+    if (!descriptor) return;
+    Object.defineProperty(target, property, {
+      enumerable: descriptor.enumerable,
+      configurable: descriptor.configurable,
+      writable: descriptor.writable,
+      value: descriptor.initializer ? descriptor.initializer.call(context) : void 0
+    });
+  }
+
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
+    }
+  }
+
+  function _applyDecoratedDescriptor(target, property, decorators, descriptor, context) {
+    var desc = {};
+    Object['ke' + 'ys'](descriptor).forEach(function (key) {
+      desc[key] = descriptor[key];
+    });
+    desc.enumerable = !!desc.enumerable;
+    desc.configurable = !!desc.configurable;
+
+    if ('value' in desc || desc.initializer) {
+      desc.writable = true;
+    }
+
+    desc = decorators.slice().reverse().reduce(function (desc, decorator) {
+      return decorator(target, property, desc) || desc;
+    }, desc);
+
+    if (context && desc.initializer !== void 0) {
+      desc.value = desc.initializer ? desc.initializer.call(context) : void 0;
+      desc.initializer = undefined;
+    }
+
+    if (desc.initializer === void 0) {
+      Object['define' + 'Property'](target, property, desc);
+      desc = null;
+    }
+
+    return desc;
+  }
+
+  function _initializerWarningHelper(descriptor, context) {
+    throw new Error('Decorating class property failed. Please ensure that transform-class-properties is enabled.');
+  }
+
+  var _desc, _value, _class, _descriptor;
+
+  var PostInList = exports.PostInList = (_class = function PostInList() {
+    _classCallCheck(this, PostInList);
+
+    _initDefineProp(this, 'post', _descriptor, this);
+  }, (_descriptor = _applyDecoratedDescriptor(_class.prototype, 'post', [_aureliaFramework.bindable], {
+    enumerable: true,
+    initializer: null
+  })), _class);
 });
 define('resources/elements/pagination',['exports', 'aurelia-framework'], function (exports, _aureliaFramework) {
   'use strict';
@@ -700,9 +601,86 @@ define('resources/elements/pagination',['exports', 'aurelia-framework'], functio
     }
   }), _applyDecoratedDescriptor(_class.prototype, 'pages', [_dec], Object.getOwnPropertyDescriptor(_class.prototype, 'pages'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'lastPage', [_dec2], Object.getOwnPropertyDescriptor(_class.prototype, 'lastPage'), _class.prototype)), _class));
 });
+define('resources/value-converters/date-format',['exports', 'aurelia-framework', 'moment'], function (exports, _aureliaFramework, _moment) {
+  'use strict';
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.DateFormatValueConverter = undefined;
+
+  var _moment2 = _interopRequireDefault(_moment);
+
+  function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : {
+      default: obj
+    };
+  }
+
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
+    }
+  }
+
+  var _dec, _class;
+
+  var DateFormatValueConverter = exports.DateFormatValueConverter = (_dec = (0, _aureliaFramework.inject)(function () {
+    return _moment2.default;
+  }), _dec(_class = function () {
+    function DateFormatValueConverter(moment) {
+      _classCallCheck(this, DateFormatValueConverter);
+
+      this.moment = moment;
+    }
+
+    DateFormatValueConverter.prototype.toView = function toView(date, format) {
+      return this.moment(date).format(format);
+    };
+
+    return DateFormatValueConverter;
+  }()) || _class);
+});
+define('resources/value-converters/excerpt',['exports'], function (exports) {
+  'use strict';
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
+    }
+  }
+
+  var ExcerptValueConverter = exports.ExcerptValueConverter = function () {
+    function ExcerptValueConverter() {
+      _classCallCheck(this, ExcerptValueConverter);
+    }
+
+    ExcerptValueConverter.prototype.toView = function toView(str, _ref) {
+      var length = _ref.length;
+      var type = _ref.type;
+
+      var div = document.createElement('div');
+      div.innerHTML = str;
+      var text = div.innerText;
+
+      if (type === 'words') {
+        var words = text.split(/\s+/);
+        return words.splice(0, length).join(' ') + '…';
+      } else {
+        return text.substr(0, length) + '…';
+      }
+    };
+
+    return ExcerptValueConverter;
+  }();
+});
 define('text!app.html', ['module'], function(module) { module.exports = "<template>\n  <router-view></router-view>\n</template>\n"; });
-define('text!home/home.html', ['module'], function(module) { module.exports = "<template>\n  <p>Hello World</p>\n</template>\n"; });
-define('text!posts/list.html', ['module'], function(module) { module.exports = "<template>\n<require\n  from=\"resources/elements/pagination\"></require>\n<p>Hello World</p>\n<ul>\n  <li\n    repeat.for=\"post of posts\">${post.title}</li>\n</ul>\n<pagination\n  total.bind=\"total\"\n  per-page.bind=\"perPage\"\n  current.bind=\"current\"\n  navigate.call=\"navigate($event)\"></pagination>\n</template>\n"; });
-define('text!resources/elements/pagination.html', ['module'], function(module) { module.exports = "<template>\n<require\n  from=\"./pagination.css\"></require>\n<div>\n  <ul\n    class=\"pagination\">\n    <li\n      class=\"paginate_button previous ${current == 1 ? 'disabled' : ''}\">\n      <a\n        href=\"#\"\n        tabindex=\"0\"\n        click.delegate=\"(current != 1) && navigateTo($event, current - 1)\">Previous</a>\n    </li>\n    <li\n      class=\"\n        paginate_button\n        ${current == page ? 'active' : ''}\n        ${loading == page ? 'loading' : ''}\"\n      repeat.for=\"page of pages\">\n      <a\n        href=\"#\"\n        tabindex=\"0\"\n        click.delegate=\"navigateTo($event, page)\">${page}</a>\n    </li>\n    <li\n      class=\"paginate_button next ${current == lastPage ? 'disabled' : ''}\">\n      <a\n        href=\"#\"\n        tabindex=\"0\"\n        click.delegate=\"(current != lastPage) && navigateTo($event, current + 1)\">Next</a>\n    </li>\n  </ul>\n</div>\n</template>\n"; });
 define('text!resources/elements/pagination.css', ['module'], function(module) { module.exports = ""; });
+define('text!posts/list.html', ['module'], function(module) { module.exports = "<template>\n<require\n  from=\"resources/elements/pagination\"></require>\n<require\n  from=\"./post-in-list\"></require>\n\n<pagination\n  total.bind=\"total\"\n  per-page.bind=\"perPage\"\n  current.bind=\"current\"\n  navigate.call=\"navigate($event)\"></pagination>\n\n<post-in-list\n  repeat.for=\"post of posts\"\n  post.bind=\"post\"></post-in-list>\n\n<pagination\n  total.bind=\"total\"\n  per-page.bind=\"perPage\"\n  current.bind=\"current\"\n  navigate.call=\"navigate($event)\"></pagination>\n</template>\n"; });
+define('text!posts/post-in-list.html', ['module'], function(module) { module.exports = "<template>\n<require\n  from=\"resources/value-converters/excerpt\"></require>\n<require\n  from=\"resources/value-converters/date-format\"></require>\n<article\n  class=\"post\">\n  <header\n    class=\"post-header\">\n    <h2\n      class=\"post-title\"><a href=\"${post.url}\">${post.title}</a></h2>\n  </header>\n  <section class=\"post-excerpt\">\n    <p>\n      ${post.html|excerpt:{ length: 26, type: 'words' }}\n      <a\n        class=\"read-more\" href=\"${post.url}\">&raquo;</a>\n    </p>\n  </section>\n  <footer\n    class=\"post-meta\">\n    <img\n      if.bind=\"post.author.image\"\n      class=\"author-thumb\"\n      src.bind=\"post.author.image\"\n      alt.bind=\"post.author.name\"\n      nopin=\"nopin\" />\n      ${post.author.name}\n      on\n      <span\n        repeat.for=\"tag of post.tags\">\n        <a\n          route-href=\"route: tag; params.bind: { tag: tag.slug }\">${tag.name}</a><span\n          if.bind=\"!$last\">, </span>\n      </span>\n      <time\n        class=\"post-date\"\n        datetime=\"${date|dateFormat:'YYYY-MM-DD'}\">\n        ${date|dateFormat:'DD MMMM YYYY'}\n      </time>\n  </footer>\n</article>\n</template>\n"; });
+define('text!resources/elements/pagination.html', ['module'], function(module) { module.exports = "<template>\n<require\n  from=\"./pagination.css\"></require>\n<div>\n  <ul\n    class=\"pagination\">\n    <li\n      class=\"paginate_button previous ${current == 1 ? 'disabled' : ''}\">\n      <a\n        href=\"#\"\n        tabindex=\"0\"\n        click.delegate=\"(current != 1) && navigateTo($event, current - 1)\">Previous</a>\n    </li>\n    <li\n      class=\"\n        paginate_button\n        ${current == page ? 'active' : ''}\n        ${loading == page ? 'loading' : ''}\"\n      repeat.for=\"page of pages\">\n      <a\n        href=\"#\"\n        tabindex=\"0\"\n        click.delegate=\"navigateTo($event, page)\">${page}</a>\n    </li>\n    <li\n      class=\"paginate_button next ${current == lastPage ? 'disabled' : ''}\">\n      <a\n        href=\"#\"\n        tabindex=\"0\"\n        click.delegate=\"(current != lastPage) && navigateTo($event, current + 1)\">Next</a>\n    </li>\n  </ul>\n</div>\n</template>\n"; });
 //# sourceMappingURL=app-bundle.js.map

@@ -20,7 +20,7 @@ export class List {
   }
 
   async loadPosts() {
-    const results = await this.postsService.get({ page: this.current, limit: 5 });
+    const results = await this.postsService.get({ page: this.current, limit: 5, include: ['author', 'tags'] });
     this.posts = results.posts;
     this.total = +results.meta.pagination.total;
     this.perPage = +results.meta.pagination.limit;

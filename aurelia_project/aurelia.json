@@ -139,6 +139,10 @@
             "name": "regenerator-runtime",
             "path": "../node_modules/regenerator-runtime",
             "main": "runtime"
+          }, {
+            "name": "moment",
+            "path": "../node_modules/moment/min",
+            "main": "moment-with-locales"
           }
         ]
       }

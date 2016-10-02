@@ -1,0 +1,43 @@
+<template>
+<require
+  from="resources/value-converters/excerpt"></require>
+<require
+  from="resources/value-converters/date-format"></require>
+<article
+  class="post">
+  <header
+    class="post-header">
+    <h2
+      class="post-title"><a href="${post.url}">${post.title}</a></h2>
+  </header>
+  <section class="post-excerpt">
+    <p>
+      ${post.html|excerpt:{ length: 26, type: 'words' }}
+      <a
+        class="read-more" href="${post.url}">&raquo;</a>
+    </p>
+  </section>
+  <footer
+    class="post-meta">
+    <img
+      if.bind="post.author.image"
+      class="author-thumb"
+      src.bind="post.author.image"
+      alt.bind="post.author.name"
+      nopin="nopin" />
+      ${post.author.name}
+      on
+      <span
+        repeat.for="tag of post.tags">
+        <a
+          route-href="route: tag; params.bind: { tag: tag.slug }">${tag.name}</a><span
+          if.bind="!$last">, </span>
+      </span>
+      <time
+        class="post-date"
+        datetime="${date|dateFormat:'YYYY-MM-DD'}">
+        ${date|dateFormat:'DD MMMM YYYY'}
+      </time>
+  </footer>
+</article>
+</template>

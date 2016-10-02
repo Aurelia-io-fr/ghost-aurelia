@@ -1,11 +1,19 @@
 <template>
 <require
   from="resources/elements/pagination"></require>
-<p>Hello World</p>
-<ul>
-  <li
-    repeat.for="post of posts">${post.title}</li>
-</ul>
+<require
+  from="./post-in-list"></require>
+
+<pagination
+  total.bind="total"
+  per-page.bind="perPage"
+  current.bind="current"
+  navigate.call="navigate($event)"></pagination>
+
+<post-in-list
+  repeat.for="post of posts"
+  post.bind="post"></post-in-list>
+
 <pagination
   total.bind="total"
   per-page.bind="perPage"

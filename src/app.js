@@ -9,7 +9,19 @@ export class App {
     config.map([{
       route: '/',
       name: 'home',
-      moduleId: './home/home'
+      moduleId: './posts/list'
+    }, {
+      route: '/page/:page',
+      name: 'posts',
+      moduleId: './posts/list'
+    }, {
+      route: '/tag/:tag',
+      name: 'tag',
+      moduleId: './tags/tag'
+    }, {
+      route: '/:slug',
+      name: 'post',
+      moduleId: './posts/list'
     }]);
 
     router.handleUnknownRoutes({

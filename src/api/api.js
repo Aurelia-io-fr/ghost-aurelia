@@ -10,8 +10,8 @@ export class Api {
     this.ghost = ghost;
   }
 
-  async get(path) {
-    const response = await this.client.fetch(this.ghost.url.api(path));
+  async get(path, options/*{ include, limit, page, order, fields, filter, resource }*/) {
+    const response = await this.client.fetch(this.ghost.url.api(path, options));
     const data = await response.json();
     return data;
   }

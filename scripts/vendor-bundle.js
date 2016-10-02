@@ -3791,8 +3791,734 @@ K(require)||(w=require,require=void 0);g=requirejs=function(b,c,d,m){var r,q="_"
 0),importScripts(d),b.completeLoad(c)}catch(q){b.onError(F("importscripts","importScripts failed for "+c+" at "+d,q,[c]))}};E&&!w.skipDataMain&&X(document.getElementsByTagName("script"),function(b){C||(C=b.parentNode);if(O=b.getAttribute("data-main"))return u=O,w.baseUrl||-1!==u.indexOf("!")||(I=u.split("/"),u=I.pop(),T=I.length?I.join("/")+"/":"./",w.baseUrl=T),u=u.replace(U,""),g.jsExtRegExp.test(u)&&(u=O),w.deps=w.deps?w.deps.concat(u):[u],!0});define=function(b,c,d){var e,g;"string"!==typeof b&&
 (d=c,c=b,b=null);L(c)||(d=c,c=null);!c&&K(d)&&(c=[],d.length&&(d.toString().replace(qa,ka).replace(ra,function(b,d){c.push(d)}),c=(1===d.length?["require"]:["require","exports","module"]).concat(c)));S&&(e=P||pa())&&(b||(b=e.getAttribute("data-requiremodule")),g=J[e.getAttribute("data-requirecontext")]);g?(g.defQueue.push([b,c,d]),g.defQueueMap[b]=!0):V.push([b,c,d])};define.amd={jQuery:!0};g.exec=function(b){return eval(b)};g(w)}})(this);
 
-requirejs.config({"baseUrl":"src/","paths":{"text":"../scripts/text","aurelia-binding":"../node_modules/aurelia-binding/dist/amd/aurelia-binding","aurelia-dependency-injection":"../node_modules/aurelia-dependency-injection/dist/amd/aurelia-dependency-injection","aurelia-bootstrapper":"../node_modules/aurelia-bootstrapper/dist/amd/aurelia-bootstrapper","aurelia-framework":"../node_modules/aurelia-framework/dist/amd/aurelia-framework","aurelia-event-aggregator":"../node_modules/aurelia-event-aggregator/dist/amd/aurelia-event-aggregator","aurelia-history":"../node_modules/aurelia-history/dist/amd/aurelia-history","aurelia-history-browser":"../node_modules/aurelia-history-browser/dist/amd/aurelia-history-browser","aurelia-loader":"../node_modules/aurelia-loader/dist/amd/aurelia-loader","aurelia-metadata":"../node_modules/aurelia-metadata/dist/amd/aurelia-metadata","aurelia-pal":"../node_modules/aurelia-pal/dist/amd/aurelia-pal","aurelia-loader-default":"../node_modules/aurelia-loader-default/dist/amd/aurelia-loader-default","aurelia-logging":"../node_modules/aurelia-logging/dist/amd/aurelia-logging","aurelia-polyfills":"../node_modules/aurelia-polyfills/dist/amd/aurelia-polyfills","aurelia-logging-console":"../node_modules/aurelia-logging-console/dist/amd/aurelia-logging-console","aurelia-pal-browser":"../node_modules/aurelia-pal-browser/dist/amd/aurelia-pal-browser","aurelia-path":"../node_modules/aurelia-path/dist/amd/aurelia-path","aurelia-route-recognizer":"../node_modules/aurelia-route-recognizer/dist/amd/aurelia-route-recognizer","aurelia-router":"../node_modules/aurelia-router/dist/amd/aurelia-router","aurelia-task-queue":"../node_modules/aurelia-task-queue/dist/amd/aurelia-task-queue","aurelia-templating":"../node_modules/aurelia-templating/dist/amd/aurelia-templating","aurelia-fetch-client":"../node_modules/aurelia-fetch-client/dist/amd/aurelia-fetch-client","aurelia-templating-binding":"../node_modules/aurelia-templating-binding/dist/amd/aurelia-templating-binding","app-bundle":"../scripts/app-bundle"},"packages":[{"name":"aurelia-templating-resources","location":"../node_modules/aurelia-templating-resources/dist/amd","main":"aurelia-templating-resources"},{"name":"aurelia-templating-router","location":"../node_modules/aurelia-templating-router/dist/amd","main":"aurelia-templating-router"},{"name":"aurelia-testing","location":"../node_modules/aurelia-testing/dist/amd","main":"aurelia-testing"},{"name":"regenerator-runtime","location":"../node_modules/regenerator-runtime","main":"runtime"}],"stubModules":["text"],"shim":{},"bundles":{"app-bundle":["app","environment","main","api/api","api/posts","home/home","resources/index"]}});
+requirejs.config({"baseUrl":"src/","paths":{"text":"../scripts/text","aurelia-dependency-injection":"../node_modules/aurelia-dependency-injection/dist/amd/aurelia-dependency-injection","aurelia-binding":"../node_modules/aurelia-binding/dist/amd/aurelia-binding","aurelia-bootstrapper":"../node_modules/aurelia-bootstrapper/dist/amd/aurelia-bootstrapper","aurelia-event-aggregator":"../node_modules/aurelia-event-aggregator/dist/amd/aurelia-event-aggregator","aurelia-framework":"../node_modules/aurelia-framework/dist/amd/aurelia-framework","aurelia-history":"../node_modules/aurelia-history/dist/amd/aurelia-history","aurelia-history-browser":"../node_modules/aurelia-history-browser/dist/amd/aurelia-history-browser","aurelia-loader":"../node_modules/aurelia-loader/dist/amd/aurelia-loader","aurelia-metadata":"../node_modules/aurelia-metadata/dist/amd/aurelia-metadata","aurelia-loader-default":"../node_modules/aurelia-loader-default/dist/amd/aurelia-loader-default","aurelia-logging":"../node_modules/aurelia-logging/dist/amd/aurelia-logging","aurelia-pal":"../node_modules/aurelia-pal/dist/amd/aurelia-pal","aurelia-logging-console":"../node_modules/aurelia-logging-console/dist/amd/aurelia-logging-console","aurelia-polyfills":"../node_modules/aurelia-polyfills/dist/amd/aurelia-polyfills","aurelia-pal-browser":"../node_modules/aurelia-pal-browser/dist/amd/aurelia-pal-browser","aurelia-path":"../node_modules/aurelia-path/dist/amd/aurelia-path","aurelia-route-recognizer":"../node_modules/aurelia-route-recognizer/dist/amd/aurelia-route-recognizer","aurelia-router":"../node_modules/aurelia-router/dist/amd/aurelia-router","aurelia-task-queue":"../node_modules/aurelia-task-queue/dist/amd/aurelia-task-queue","aurelia-templating-binding":"../node_modules/aurelia-templating-binding/dist/amd/aurelia-templating-binding","aurelia-fetch-client":"../node_modules/aurelia-fetch-client/dist/amd/aurelia-fetch-client","aurelia-templating":"../node_modules/aurelia-templating/dist/amd/aurelia-templating","app-bundle":"../scripts/app-bundle"},"packages":[{"name":"aurelia-templating-router","location":"../node_modules/aurelia-templating-router/dist/amd","main":"aurelia-templating-router"},{"name":"aurelia-testing","location":"../node_modules/aurelia-testing/dist/amd","main":"aurelia-testing"},{"name":"regenerator-runtime","location":"../node_modules/regenerator-runtime","main":"runtime"},{"name":"aurelia-templating-resources","location":"../node_modules/aurelia-templating-resources/dist/amd","main":"aurelia-templating-resources"}],"stubModules":["text"],"shim":{},"bundles":{"app-bundle":["app","environment","main","api/api","api/posts","home/home","resources/index"]}});
 define('text',{});
+define('aurelia-dependency-injection',['exports', 'aurelia-metadata', 'aurelia-pal'], function (exports, _aureliaMetadata, _aureliaPal) {
+  'use strict';
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.Container = exports.InvocationHandler = exports._emptyParameters = exports.SingletonRegistration = exports.TransientRegistration = exports.FactoryInvoker = exports.NewInstance = exports.Factory = exports.StrategyResolver = exports.Parent = exports.Optional = exports.All = exports.Lazy = exports.resolver = undefined;
+  exports.getDecoratorDependencies = getDecoratorDependencies;
+  exports.lazy = lazy;
+  exports.all = all;
+  exports.optional = optional;
+  exports.parent = parent;
+  exports.factory = factory;
+  exports.newInstance = newInstance;
+  exports.invoker = invoker;
+  exports.factory = factory;
+  exports.registration = registration;
+  exports.transient = transient;
+  exports.singleton = singleton;
+  exports.autoinject = autoinject;
+  exports.inject = inject;
+
+  
+
+  var _dec, _class, _dec2, _class3, _dec3, _class5, _dec4, _class7, _dec5, _class9, _dec6, _class11, _dec7, _class13, _classInvokers;
+
+  var resolver = exports.resolver = _aureliaMetadata.protocol.create('aurelia:resolver', function (target) {
+    if (!(typeof target.get === 'function')) {
+      return 'Resolvers must implement: get(container: Container, key: any): any';
+    }
+
+    return true;
+  });
+
+  var Lazy = exports.Lazy = (_dec = resolver(), _dec(_class = function () {
+    function Lazy(key) {
+      
+
+      this._key = key;
+    }
+
+    Lazy.prototype.get = function get(container) {
+      var _this = this;
+
+      return function () {
+        return container.get(_this._key);
+      };
+    };
+
+    Lazy.of = function of(key) {
+      return new Lazy(key);
+    };
+
+    return Lazy;
+  }()) || _class);
+  var All = exports.All = (_dec2 = resolver(), _dec2(_class3 = function () {
+    function All(key) {
+      
+
+      this._key = key;
+    }
+
+    All.prototype.get = function get(container) {
+      return container.getAll(this._key);
+    };
+
+    All.of = function of(key) {
+      return new All(key);
+    };
+
+    return All;
+  }()) || _class3);
+  var Optional = exports.Optional = (_dec3 = resolver(), _dec3(_class5 = function () {
+    function Optional(key) {
+      var checkParent = arguments.length <= 1 || arguments[1] === undefined ? true : arguments[1];
+
+      
+
+      this._key = key;
+      this._checkParent = checkParent;
+    }
+
+    Optional.prototype.get = function get(container) {
+      if (container.hasResolver(this._key, this._checkParent)) {
+        return container.get(this._key);
+      }
+
+      return null;
+    };
+
+    Optional.of = function of(key) {
+      var checkParent = arguments.length <= 1 || arguments[1] === undefined ? true : arguments[1];
+
+      return new Optional(key, checkParent);
+    };
+
+    return Optional;
+  }()) || _class5);
+  var Parent = exports.Parent = (_dec4 = resolver(), _dec4(_class7 = function () {
+    function Parent(key) {
+      
+
+      this._key = key;
+    }
+
+    Parent.prototype.get = function get(container) {
+      return container.parent ? container.parent.get(this._key) : null;
+    };
+
+    Parent.of = function of(key) {
+      return new Parent(key);
+    };
+
+    return Parent;
+  }()) || _class7);
+  var StrategyResolver = exports.StrategyResolver = (_dec5 = resolver(), _dec5(_class9 = function () {
+    function StrategyResolver(strategy, state) {
+      
+
+      this.strategy = strategy;
+      this.state = state;
+    }
+
+    StrategyResolver.prototype.get = function get(container, key) {
+      switch (this.strategy) {
+        case 0:
+          return this.state;
+        case 1:
+          var singleton = container.invoke(this.state);
+          this.state = singleton;
+          this.strategy = 0;
+          return singleton;
+        case 2:
+          return container.invoke(this.state);
+        case 3:
+          return this.state(container, key, this);
+        case 4:
+          return this.state[0].get(container, key);
+        case 5:
+          return container.get(this.state);
+        default:
+          throw new Error('Invalid strategy: ' + this.strategy);
+      }
+    };
+
+    return StrategyResolver;
+  }()) || _class9);
+  var Factory = exports.Factory = (_dec6 = resolver(), _dec6(_class11 = function () {
+    function Factory(key) {
+      
+
+      this._key = key;
+    }
+
+    Factory.prototype.get = function get(container) {
+      var _this2 = this;
+
+      return function () {
+        for (var _len = arguments.length, rest = Array(_len), _key = 0; _key < _len; _key++) {
+          rest[_key] = arguments[_key];
+        }
+
+        return container.invoke(_this2._key, rest);
+      };
+    };
+
+    Factory.of = function of(key) {
+      return new Factory(key);
+    };
+
+    return Factory;
+  }()) || _class11);
+  var NewInstance = exports.NewInstance = (_dec7 = resolver(), _dec7(_class13 = function () {
+    function NewInstance(key) {
+      
+
+      this.key = key;
+      this.asKey = key;
+    }
+
+    NewInstance.prototype.get = function get(container) {
+      var instance = container.invoke(this.key);
+      container.registerInstance(this.asKey, instance);
+      return instance;
+    };
+
+    NewInstance.prototype.as = function as(key) {
+      this.asKey = key;
+      return this;
+    };
+
+    NewInstance.of = function of(key) {
+      return new NewInstance(key);
+    };
+
+    return NewInstance;
+  }()) || _class13);
+  function getDecoratorDependencies(target, name) {
+    var dependencies = target.inject;
+    if (typeof dependencies === 'function') {
+      throw new Error('Decorator ' + name + ' cannot be used with "inject()".  Please use an array instead.');
+    }
+    if (!dependencies) {
+      dependencies = _aureliaMetadata.metadata.getOwn(_aureliaMetadata.metadata.paramTypes, target).slice();
+      target.inject = dependencies;
+    }
+
+    return dependencies;
+  }
+
+  function lazy(keyValue) {
+    return function (target, key, index) {
+      var params = getDecoratorDependencies(target, 'lazy');
+      params[index] = Lazy.of(keyValue);
+    };
+  }
+
+  function all(keyValue) {
+    return function (target, key, index) {
+      var params = getDecoratorDependencies(target, 'all');
+      params[index] = All.of(keyValue);
+    };
+  }
+
+  function optional() {
+    var checkParentOrTarget = arguments.length <= 0 || arguments[0] === undefined ? true : arguments[0];
+
+    var deco = function deco(checkParent) {
+      return function (target, key, index) {
+        var params = getDecoratorDependencies(target, 'optional');
+        params[index] = Optional.of(params[index], checkParent);
+      };
+    };
+    if (typeof checkParentOrTarget === 'boolean') {
+      return deco(checkParentOrTarget);
+    }
+    return deco(true);
+  }
+
+  function parent(target, key, index) {
+    var params = getDecoratorDependencies(target, 'parent');
+    params[index] = Parent.of(params[index]);
+  }
+
+  function factory(keyValue, asValue) {
+    return function (target, key, index) {
+      var params = getDecoratorDependencies(target, 'factory');
+      var factory = Factory.of(keyValue);
+      params[index] = asValue ? factory.as(asValue) : factory;
+    };
+  }
+
+  function newInstance(asKeyOrTarget) {
+    var deco = function deco(asKey) {
+      return function (target, key, index) {
+        var params = getDecoratorDependencies(target, 'newInstance');
+        params[index] = NewInstance.of(params[index]);
+        if (!!asKey) {
+          params[index].as(asKey);
+        }
+      };
+    };
+    if (arguments.length === 1) {
+      return deco(asKeyOrTarget);
+    }
+    return deco();
+  }
+
+  function invoker(value) {
+    return function (target) {
+      _aureliaMetadata.metadata.define(_aureliaMetadata.metadata.invoker, value, target);
+    };
+  }
+
+  function factory(potentialTarget) {
+    var deco = function deco(target) {
+      _aureliaMetadata.metadata.define(_aureliaMetadata.metadata.invoker, FactoryInvoker.instance, target);
+    };
+
+    return potentialTarget ? deco(potentialTarget) : deco;
+  }
+
+  var FactoryInvoker = exports.FactoryInvoker = function () {
+    function FactoryInvoker() {
+      
+    }
+
+    FactoryInvoker.prototype.invoke = function invoke(container, fn, dependencies) {
+      var i = dependencies.length;
+      var args = new Array(i);
+
+      while (i--) {
+        args[i] = container.get(dependencies[i]);
+      }
+
+      return fn.apply(undefined, args);
+    };
+
+    FactoryInvoker.prototype.invokeWithDynamicDependencies = function invokeWithDynamicDependencies(container, fn, staticDependencies, dynamicDependencies) {
+      var i = staticDependencies.length;
+      var args = new Array(i);
+
+      while (i--) {
+        args[i] = container.get(staticDependencies[i]);
+      }
+
+      if (dynamicDependencies !== undefined) {
+        args = args.concat(dynamicDependencies);
+      }
+
+      return fn.apply(undefined, args);
+    };
+
+    return FactoryInvoker;
+  }();
+
+  FactoryInvoker.instance = new FactoryInvoker();
+
+  function registration(value) {
+    return function (target) {
+      _aureliaMetadata.metadata.define(_aureliaMetadata.metadata.registration, value, target);
+    };
+  }
+
+  function transient(key) {
+    return registration(new TransientRegistration(key));
+  }
+
+  function singleton(keyOrRegisterInChild) {
+    var registerInChild = arguments.length <= 1 || arguments[1] === undefined ? false : arguments[1];
+
+    return registration(new SingletonRegistration(keyOrRegisterInChild, registerInChild));
+  }
+
+  var TransientRegistration = exports.TransientRegistration = function () {
+    function TransientRegistration(key) {
+      
+
+      this._key = key;
+    }
+
+    TransientRegistration.prototype.registerResolver = function registerResolver(container, key, fn) {
+      return container.registerTransient(this._key || key, fn);
+    };
+
+    return TransientRegistration;
+  }();
+
+  var SingletonRegistration = exports.SingletonRegistration = function () {
+    function SingletonRegistration(keyOrRegisterInChild) {
+      var registerInChild = arguments.length <= 1 || arguments[1] === undefined ? false : arguments[1];
+
+      
+
+      if (typeof keyOrRegisterInChild === 'boolean') {
+        this._registerInChild = keyOrRegisterInChild;
+      } else {
+        this._key = keyOrRegisterInChild;
+        this._registerInChild = registerInChild;
+      }
+    }
+
+    SingletonRegistration.prototype.registerResolver = function registerResolver(container, key, fn) {
+      return this._registerInChild ? container.registerSingleton(this._key || key, fn) : container.root.registerSingleton(this._key || key, fn);
+    };
+
+    return SingletonRegistration;
+  }();
+
+  var badKeyError = 'key/value cannot be null or undefined. Are you trying to inject/register something that doesn\'t exist with DI?';
+  var _emptyParameters = exports._emptyParameters = Object.freeze([]);
+
+  _aureliaMetadata.metadata.registration = 'aurelia:registration';
+  _aureliaMetadata.metadata.invoker = 'aurelia:invoker';
+
+  var resolverDecorates = resolver.decorates;
+
+  var InvocationHandler = exports.InvocationHandler = function () {
+    function InvocationHandler(fn, invoker, dependencies) {
+      
+
+      this.fn = fn;
+      this.invoker = invoker;
+      this.dependencies = dependencies;
+    }
+
+    InvocationHandler.prototype.invoke = function invoke(container, dynamicDependencies) {
+      return dynamicDependencies !== undefined ? this.invoker.invokeWithDynamicDependencies(container, this.fn, this.dependencies, dynamicDependencies) : this.invoker.invoke(container, this.fn, this.dependencies);
+    };
+
+    return InvocationHandler;
+  }();
+
+  function invokeWithDynamicDependencies(container, fn, staticDependencies, dynamicDependencies) {
+    var i = staticDependencies.length;
+    var args = new Array(i);
+
+    while (i--) {
+      args[i] = container.get(staticDependencies[i]);
+    }
+
+    if (dynamicDependencies !== undefined) {
+      args = args.concat(dynamicDependencies);
+    }
+
+    return Reflect.construct(fn, args);
+  }
+
+  var classInvokers = (_classInvokers = {}, _classInvokers[0] = {
+    invoke: function invoke(container, Type) {
+      return new Type();
+    },
+
+    invokeWithDynamicDependencies: invokeWithDynamicDependencies
+  }, _classInvokers[1] = {
+    invoke: function invoke(container, Type, deps) {
+      return new Type(container.get(deps[0]));
+    },
+
+    invokeWithDynamicDependencies: invokeWithDynamicDependencies
+  }, _classInvokers[2] = {
+    invoke: function invoke(container, Type, deps) {
+      return new Type(container.get(deps[0]), container.get(deps[1]));
+    },
+
+    invokeWithDynamicDependencies: invokeWithDynamicDependencies
+  }, _classInvokers[3] = {
+    invoke: function invoke(container, Type, deps) {
+      return new Type(container.get(deps[0]), container.get(deps[1]), container.get(deps[2]));
+    },
+
+    invokeWithDynamicDependencies: invokeWithDynamicDependencies
+  }, _classInvokers[4] = {
+    invoke: function invoke(container, Type, deps) {
+      return new Type(container.get(deps[0]), container.get(deps[1]), container.get(deps[2]), container.get(deps[3]));
+    },
+
+    invokeWithDynamicDependencies: invokeWithDynamicDependencies
+  }, _classInvokers[5] = {
+    invoke: function invoke(container, Type, deps) {
+      return new Type(container.get(deps[0]), container.get(deps[1]), container.get(deps[2]), container.get(deps[3]), container.get(deps[4]));
+    },
+
+    invokeWithDynamicDependencies: invokeWithDynamicDependencies
+  }, _classInvokers.fallback = {
+    invoke: invokeWithDynamicDependencies,
+    invokeWithDynamicDependencies: invokeWithDynamicDependencies
+  }, _classInvokers);
+
+  function getDependencies(f) {
+    if (!f.hasOwnProperty('inject')) {
+      return [];
+    }
+
+    if (typeof f.inject === 'function') {
+      return f.inject();
+    }
+
+    return f.inject;
+  }
+
+  var Container = exports.Container = function () {
+    function Container(configuration) {
+      
+
+      if (configuration === undefined) {
+        configuration = {};
+      }
+
+      this._configuration = configuration;
+      this._onHandlerCreated = configuration.onHandlerCreated;
+      this._handlers = configuration.handlers || (configuration.handlers = new Map());
+      this._resolvers = new Map();
+      this.root = this;
+      this.parent = null;
+    }
+
+    Container.prototype.makeGlobal = function makeGlobal() {
+      Container.instance = this;
+      return this;
+    };
+
+    Container.prototype.setHandlerCreatedCallback = function setHandlerCreatedCallback(onHandlerCreated) {
+      this._onHandlerCreated = onHandlerCreated;
+      this._configuration.onHandlerCreated = onHandlerCreated;
+    };
+
+    Container.prototype.registerInstance = function registerInstance(key, instance) {
+      return this.registerResolver(key, new StrategyResolver(0, instance === undefined ? key : instance));
+    };
+
+    Container.prototype.registerSingleton = function registerSingleton(key, fn) {
+      return this.registerResolver(key, new StrategyResolver(1, fn === undefined ? key : fn));
+    };
+
+    Container.prototype.registerTransient = function registerTransient(key, fn) {
+      return this.registerResolver(key, new StrategyResolver(2, fn === undefined ? key : fn));
+    };
+
+    Container.prototype.registerHandler = function registerHandler(key, handler) {
+      return this.registerResolver(key, new StrategyResolver(3, handler));
+    };
+
+    Container.prototype.registerAlias = function registerAlias(originalKey, aliasKey) {
+      return this.registerResolver(aliasKey, new StrategyResolver(5, originalKey));
+    };
+
+    Container.prototype.registerResolver = function registerResolver(key, resolver) {
+      if (key === null || key === undefined) {
+        throw new Error(badKeyError);
+      }
+
+      var allResolvers = this._resolvers;
+      var result = allResolvers.get(key);
+
+      if (result === undefined) {
+        allResolvers.set(key, resolver);
+      } else if (result.strategy === 4) {
+        result.state.push(resolver);
+      } else {
+        allResolvers.set(key, new StrategyResolver(4, [result, resolver]));
+      }
+
+      return resolver;
+    };
+
+    Container.prototype.autoRegister = function autoRegister(key, fn) {
+      fn = fn === undefined ? key : fn;
+
+      if (typeof fn === 'function') {
+        var _registration = _aureliaMetadata.metadata.get(_aureliaMetadata.metadata.registration, fn);
+
+        if (_registration === undefined) {
+          return this.registerResolver(key, new StrategyResolver(1, fn));
+        }
+
+        return _registration.registerResolver(this, key, fn);
+      }
+
+      return this.registerResolver(key, new StrategyResolver(0, fn));
+    };
+
+    Container.prototype.autoRegisterAll = function autoRegisterAll(fns) {
+      var i = fns.length;
+      while (i--) {
+        this.autoRegister(fns[i]);
+      }
+    };
+
+    Container.prototype.unregister = function unregister(key) {
+      this._resolvers.delete(key);
+    };
+
+    Container.prototype.hasResolver = function hasResolver(key) {
+      var checkParent = arguments.length <= 1 || arguments[1] === undefined ? false : arguments[1];
+
+      if (key === null || key === undefined) {
+        throw new Error(badKeyError);
+      }
+
+      return this._resolvers.has(key) || checkParent && this.parent !== null && this.parent.hasResolver(key, checkParent);
+    };
+
+    Container.prototype.get = function get(key) {
+      if (key === null || key === undefined) {
+        throw new Error(badKeyError);
+      }
+
+      if (key === Container) {
+        return this;
+      }
+
+      if (resolverDecorates(key)) {
+        return key.get(this, key);
+      }
+
+      var resolver = this._resolvers.get(key);
+
+      if (resolver === undefined) {
+        if (this.parent === null) {
+          return this.autoRegister(key).get(this, key);
+        }
+
+        return this.parent._get(key);
+      }
+
+      return resolver.get(this, key);
+    };
+
+    Container.prototype._get = function _get(key) {
+      var resolver = this._resolvers.get(key);
+
+      if (resolver === undefined) {
+        if (this.parent === null) {
+          return this.autoRegister(key).get(this, key);
+        }
+
+        return this.parent._get(key);
+      }
+
+      return resolver.get(this, key);
+    };
+
+    Container.prototype.getAll = function getAll(key) {
+      if (key === null || key === undefined) {
+        throw new Error(badKeyError);
+      }
+
+      var resolver = this._resolvers.get(key);
+
+      if (resolver === undefined) {
+        if (this.parent === null) {
+          return _emptyParameters;
+        }
+
+        return this.parent.getAll(key);
+      }
+
+      if (resolver.strategy === 4) {
+        var state = resolver.state;
+        var i = state.length;
+        var results = new Array(i);
+
+        while (i--) {
+          results[i] = state[i].get(this, key);
+        }
+
+        return results;
+      }
+
+      return [resolver.get(this, key)];
+    };
+
+    Container.prototype.createChild = function createChild() {
+      var child = new Container(this._configuration);
+      child.root = this.root;
+      child.parent = this;
+      return child;
+    };
+
+    Container.prototype.invoke = function invoke(fn, dynamicDependencies) {
+      try {
+        var _handler = this._handlers.get(fn);
+
+        if (_handler === undefined) {
+          _handler = this._createInvocationHandler(fn);
+          this._handlers.set(fn, _handler);
+        }
+
+        return _handler.invoke(this, dynamicDependencies);
+      } catch (e) {
+        throw new _aureliaPal.AggregateError('Error invoking ' + fn.name + '. Check the inner error for details.', e, true);
+      }
+    };
+
+    Container.prototype._createInvocationHandler = function _createInvocationHandler(fn) {
+      var dependencies = void 0;
+
+      if (fn.inject === undefined) {
+        dependencies = _aureliaMetadata.metadata.getOwn(_aureliaMetadata.metadata.paramTypes, fn) || _emptyParameters;
+      } else {
+        dependencies = [];
+        var ctor = fn;
+        while (typeof ctor === 'function') {
+          var _dependencies;
+
+          (_dependencies = dependencies).push.apply(_dependencies, getDependencies(ctor));
+          ctor = Object.getPrototypeOf(ctor);
+        }
+      }
+
+      var invoker = _aureliaMetadata.metadata.getOwn(_aureliaMetadata.metadata.invoker, fn) || classInvokers[dependencies.length] || classInvokers.fallback;
+
+      var handler = new InvocationHandler(fn, invoker, dependencies);
+      return this._onHandlerCreated !== undefined ? this._onHandlerCreated(handler) : handler;
+    };
+
+    return Container;
+  }();
+
+  function autoinject(potentialTarget) {
+    var deco = function deco(target) {
+      var previousInject = target.inject;
+      var autoInject = _aureliaMetadata.metadata.getOwn(_aureliaMetadata.metadata.paramTypes, target) || _emptyParameters;
+      if (!previousInject) {
+        target.inject = autoInject;
+      } else {
+        for (var i = 0; i++; i < autoInject.length) {
+          if (!previousInject[i]) {
+            previousInject[i] = autoInject[i];
+          }
+        }
+      }
+    };
+
+    return potentialTarget ? deco(potentialTarget) : deco;
+  }
+
+  function inject() {
+    for (var _len2 = arguments.length, rest = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+      rest[_key2] = arguments[_key2];
+    }
+
+    return function (target, key, descriptor) {
+      if (typeof descriptor === 'number' && rest.length === 1) {
+        var params = target.inject;
+        if (typeof params === 'function') {
+          throw new Error('Decorator inject cannot be used with "inject()".  Please use an array instead.');
+        }
+        if (!params) {
+          params = _aureliaMetadata.metadata.getOwn(_aureliaMetadata.metadata.paramTypes, target).slice();
+          target.inject = params;
+        }
+        params[descriptor] = rest[0];
+        return;
+      }
+
+      if (descriptor) {
+        var _fn = descriptor.value;
+        _fn.inject = rest;
+      } else {
+        target.inject = rest;
+      }
+    };
+  }
+});
 define('aurelia-binding',['exports', 'aurelia-logging', 'aurelia-pal', 'aurelia-task-queue', 'aurelia-metadata'], function (exports, _aureliaLogging, _aureliaPal, _aureliaTaskQueue, _aureliaMetadata) {
   'use strict';
 
@@ -9153,732 +9879,6 @@ define('aurelia-binding',['exports', 'aurelia-logging', 'aurelia-pal', 'aurelia-
     return deco(targetOrConfig, key, descriptor);
   }
 });
-define('aurelia-dependency-injection',['exports', 'aurelia-metadata', 'aurelia-pal'], function (exports, _aureliaMetadata, _aureliaPal) {
-  'use strict';
-
-  Object.defineProperty(exports, "__esModule", {
-    value: true
-  });
-  exports.Container = exports.InvocationHandler = exports._emptyParameters = exports.SingletonRegistration = exports.TransientRegistration = exports.FactoryInvoker = exports.NewInstance = exports.Factory = exports.StrategyResolver = exports.Parent = exports.Optional = exports.All = exports.Lazy = exports.resolver = undefined;
-  exports.getDecoratorDependencies = getDecoratorDependencies;
-  exports.lazy = lazy;
-  exports.all = all;
-  exports.optional = optional;
-  exports.parent = parent;
-  exports.factory = factory;
-  exports.newInstance = newInstance;
-  exports.invoker = invoker;
-  exports.factory = factory;
-  exports.registration = registration;
-  exports.transient = transient;
-  exports.singleton = singleton;
-  exports.autoinject = autoinject;
-  exports.inject = inject;
-
-  
-
-  var _dec, _class, _dec2, _class3, _dec3, _class5, _dec4, _class7, _dec5, _class9, _dec6, _class11, _dec7, _class13, _classInvokers;
-
-  var resolver = exports.resolver = _aureliaMetadata.protocol.create('aurelia:resolver', function (target) {
-    if (!(typeof target.get === 'function')) {
-      return 'Resolvers must implement: get(container: Container, key: any): any';
-    }
-
-    return true;
-  });
-
-  var Lazy = exports.Lazy = (_dec = resolver(), _dec(_class = function () {
-    function Lazy(key) {
-      
-
-      this._key = key;
-    }
-
-    Lazy.prototype.get = function get(container) {
-      var _this = this;
-
-      return function () {
-        return container.get(_this._key);
-      };
-    };
-
-    Lazy.of = function of(key) {
-      return new Lazy(key);
-    };
-
-    return Lazy;
-  }()) || _class);
-  var All = exports.All = (_dec2 = resolver(), _dec2(_class3 = function () {
-    function All(key) {
-      
-
-      this._key = key;
-    }
-
-    All.prototype.get = function get(container) {
-      return container.getAll(this._key);
-    };
-
-    All.of = function of(key) {
-      return new All(key);
-    };
-
-    return All;
-  }()) || _class3);
-  var Optional = exports.Optional = (_dec3 = resolver(), _dec3(_class5 = function () {
-    function Optional(key) {
-      var checkParent = arguments.length <= 1 || arguments[1] === undefined ? true : arguments[1];
-
-      
-
-      this._key = key;
-      this._checkParent = checkParent;
-    }
-
-    Optional.prototype.get = function get(container) {
-      if (container.hasResolver(this._key, this._checkParent)) {
-        return container.get(this._key);
-      }
-
-      return null;
-    };
-
-    Optional.of = function of(key) {
-      var checkParent = arguments.length <= 1 || arguments[1] === undefined ? true : arguments[1];
-
-      return new Optional(key, checkParent);
-    };
-
-    return Optional;
-  }()) || _class5);
-  var Parent = exports.Parent = (_dec4 = resolver(), _dec4(_class7 = function () {
-    function Parent(key) {
-      
-
-      this._key = key;
-    }
-
-    Parent.prototype.get = function get(container) {
-      return container.parent ? container.parent.get(this._key) : null;
-    };
-
-    Parent.of = function of(key) {
-      return new Parent(key);
-    };
-
-    return Parent;
-  }()) || _class7);
-  var StrategyResolver = exports.StrategyResolver = (_dec5 = resolver(), _dec5(_class9 = function () {
-    function StrategyResolver(strategy, state) {
-      
-
-      this.strategy = strategy;
-      this.state = state;
-    }
-
-    StrategyResolver.prototype.get = function get(container, key) {
-      switch (this.strategy) {
-        case 0:
-          return this.state;
-        case 1:
-          var singleton = container.invoke(this.state);
-          this.state = singleton;
-          this.strategy = 0;
-          return singleton;
-        case 2:
-          return container.invoke(this.state);
-        case 3:
-          return this.state(container, key, this);
-        case 4:
-          return this.state[0].get(container, key);
-        case 5:
-          return container.get(this.state);
-        default:
-          throw new Error('Invalid strategy: ' + this.strategy);
-      }
-    };
-
-    return StrategyResolver;
-  }()) || _class9);
-  var Factory = exports.Factory = (_dec6 = resolver(), _dec6(_class11 = function () {
-    function Factory(key) {
-      
-
-      this._key = key;
-    }
-
-    Factory.prototype.get = function get(container) {
-      var _this2 = this;
-
-      return function () {
-        for (var _len = arguments.length, rest = Array(_len), _key = 0; _key < _len; _key++) {
-          rest[_key] = arguments[_key];
-        }
-
-        return container.invoke(_this2._key, rest);
-      };
-    };
-
-    Factory.of = function of(key) {
-      return new Factory(key);
-    };
-
-    return Factory;
-  }()) || _class11);
-  var NewInstance = exports.NewInstance = (_dec7 = resolver(), _dec7(_class13 = function () {
-    function NewInstance(key) {
-      
-
-      this.key = key;
-      this.asKey = key;
-    }
-
-    NewInstance.prototype.get = function get(container) {
-      var instance = container.invoke(this.key);
-      container.registerInstance(this.asKey, instance);
-      return instance;
-    };
-
-    NewInstance.prototype.as = function as(key) {
-      this.asKey = key;
-      return this;
-    };
-
-    NewInstance.of = function of(key) {
-      return new NewInstance(key);
-    };
-
-    return NewInstance;
-  }()) || _class13);
-  function getDecoratorDependencies(target, name) {
-    var dependencies = target.inject;
-    if (typeof dependencies === 'function') {
-      throw new Error('Decorator ' + name + ' cannot be used with "inject()".  Please use an array instead.');
-    }
-    if (!dependencies) {
-      dependencies = _aureliaMetadata.metadata.getOwn(_aureliaMetadata.metadata.paramTypes, target).slice();
-      target.inject = dependencies;
-    }
-
-    return dependencies;
-  }
-
-  function lazy(keyValue) {
-    return function (target, key, index) {
-      var params = getDecoratorDependencies(target, 'lazy');
-      params[index] = Lazy.of(keyValue);
-    };
-  }
-
-  function all(keyValue) {
-    return function (target, key, index) {
-      var params = getDecoratorDependencies(target, 'all');
-      params[index] = All.of(keyValue);
-    };
-  }
-
-  function optional() {
-    var checkParentOrTarget = arguments.length <= 0 || arguments[0] === undefined ? true : arguments[0];
-
-    var deco = function deco(checkParent) {
-      return function (target, key, index) {
-        var params = getDecoratorDependencies(target, 'optional');
-        params[index] = Optional.of(params[index], checkParent);
-      };
-    };
-    if (typeof checkParentOrTarget === 'boolean') {
-      return deco(checkParentOrTarget);
-    }
-    return deco(true);
-  }
-
-  function parent(target, key, index) {
-    var params = getDecoratorDependencies(target, 'parent');
-    params[index] = Parent.of(params[index]);
-  }
-
-  function factory(keyValue, asValue) {
-    return function (target, key, index) {
-      var params = getDecoratorDependencies(target, 'factory');
-      var factory = Factory.of(keyValue);
-      params[index] = asValue ? factory.as(asValue) : factory;
-    };
-  }
-
-  function newInstance(asKeyOrTarget) {
-    var deco = function deco(asKey) {
-      return function (target, key, index) {
-        var params = getDecoratorDependencies(target, 'newInstance');
-        params[index] = NewInstance.of(params[index]);
-        if (!!asKey) {
-          params[index].as(asKey);
-        }
-      };
-    };
-    if (arguments.length === 1) {
-      return deco(asKeyOrTarget);
-    }
-    return deco();
-  }
-
-  function invoker(value) {
-    return function (target) {
-      _aureliaMetadata.metadata.define(_aureliaMetadata.metadata.invoker, value, target);
-    };
-  }
-
-  function factory(potentialTarget) {
-    var deco = function deco(target) {
-      _aureliaMetadata.metadata.define(_aureliaMetadata.metadata.invoker, FactoryInvoker.instance, target);
-    };
-
-    return potentialTarget ? deco(potentialTarget) : deco;
-  }
-
-  var FactoryInvoker = exports.FactoryInvoker = function () {
-    function FactoryInvoker() {
-      
-    }
-
-    FactoryInvoker.prototype.invoke = function invoke(container, fn, dependencies) {
-      var i = dependencies.length;
-      var args = new Array(i);
-
-      while (i--) {
-        args[i] = container.get(dependencies[i]);
-      }
-
-      return fn.apply(undefined, args);
-    };
-
-    FactoryInvoker.prototype.invokeWithDynamicDependencies = function invokeWithDynamicDependencies(container, fn, staticDependencies, dynamicDependencies) {
-      var i = staticDependencies.length;
-      var args = new Array(i);
-
-      while (i--) {
-        args[i] = container.get(staticDependencies[i]);
-      }
-
-      if (dynamicDependencies !== undefined) {
-        args = args.concat(dynamicDependencies);
-      }
-
-      return fn.apply(undefined, args);
-    };
-
-    return FactoryInvoker;
-  }();
-
-  FactoryInvoker.instance = new FactoryInvoker();
-
-  function registration(value) {
-    return function (target) {
-      _aureliaMetadata.metadata.define(_aureliaMetadata.metadata.registration, value, target);
-    };
-  }
-
-  function transient(key) {
-    return registration(new TransientRegistration(key));
-  }
-
-  function singleton(keyOrRegisterInChild) {
-    var registerInChild = arguments.length <= 1 || arguments[1] === undefined ? false : arguments[1];
-
-    return registration(new SingletonRegistration(keyOrRegisterInChild, registerInChild));
-  }
-
-  var TransientRegistration = exports.TransientRegistration = function () {
-    function TransientRegistration(key) {
-      
-
-      this._key = key;
-    }
-
-    TransientRegistration.prototype.registerResolver = function registerResolver(container, key, fn) {
-      return container.registerTransient(this._key || key, fn);
-    };
-
-    return TransientRegistration;
-  }();
-
-  var SingletonRegistration = exports.SingletonRegistration = function () {
-    function SingletonRegistration(keyOrRegisterInChild) {
-      var registerInChild = arguments.length <= 1 || arguments[1] === undefined ? false : arguments[1];
-
-      
-
-      if (typeof keyOrRegisterInChild === 'boolean') {
-        this._registerInChild = keyOrRegisterInChild;
-      } else {
-        this._key = keyOrRegisterInChild;
-        this._registerInChild = registerInChild;
-      }
-    }
-
-    SingletonRegistration.prototype.registerResolver = function registerResolver(container, key, fn) {
-      return this._registerInChild ? container.registerSingleton(this._key || key, fn) : container.root.registerSingleton(this._key || key, fn);
-    };
-
-    return SingletonRegistration;
-  }();
-
-  var badKeyError = 'key/value cannot be null or undefined. Are you trying to inject/register something that doesn\'t exist with DI?';
-  var _emptyParameters = exports._emptyParameters = Object.freeze([]);
-
-  _aureliaMetadata.metadata.registration = 'aurelia:registration';
-  _aureliaMetadata.metadata.invoker = 'aurelia:invoker';
-
-  var resolverDecorates = resolver.decorates;
-
-  var InvocationHandler = exports.InvocationHandler = function () {
-    function InvocationHandler(fn, invoker, dependencies) {
-      
-
-      this.fn = fn;
-      this.invoker = invoker;
-      this.dependencies = dependencies;
-    }
-
-    InvocationHandler.prototype.invoke = function invoke(container, dynamicDependencies) {
-      return dynamicDependencies !== undefined ? this.invoker.invokeWithDynamicDependencies(container, this.fn, this.dependencies, dynamicDependencies) : this.invoker.invoke(container, this.fn, this.dependencies);
-    };
-
-    return InvocationHandler;
-  }();
-
-  function invokeWithDynamicDependencies(container, fn, staticDependencies, dynamicDependencies) {
-    var i = staticDependencies.length;
-    var args = new Array(i);
-
-    while (i--) {
-      args[i] = container.get(staticDependencies[i]);
-    }
-
-    if (dynamicDependencies !== undefined) {
-      args = args.concat(dynamicDependencies);
-    }
-
-    return Reflect.construct(fn, args);
-  }
-
-  var classInvokers = (_classInvokers = {}, _classInvokers[0] = {
-    invoke: function invoke(container, Type) {
-      return new Type();
-    },
-
-    invokeWithDynamicDependencies: invokeWithDynamicDependencies
-  }, _classInvokers[1] = {
-    invoke: function invoke(container, Type, deps) {
-      return new Type(container.get(deps[0]));
-    },
-
-    invokeWithDynamicDependencies: invokeWithDynamicDependencies
-  }, _classInvokers[2] = {
-    invoke: function invoke(container, Type, deps) {
-      return new Type(container.get(deps[0]), container.get(deps[1]));
-    },
-
-    invokeWithDynamicDependencies: invokeWithDynamicDependencies
-  }, _classInvokers[3] = {
-    invoke: function invoke(container, Type, deps) {
-      return new Type(container.get(deps[0]), container.get(deps[1]), container.get(deps[2]));
-    },
-
-    invokeWithDynamicDependencies: invokeWithDynamicDependencies
-  }, _classInvokers[4] = {
-    invoke: function invoke(container, Type, deps) {
-      return new Type(container.get(deps[0]), container.get(deps[1]), container.get(deps[2]), container.get(deps[3]));
-    },
-
-    invokeWithDynamicDependencies: invokeWithDynamicDependencies
-  }, _classInvokers[5] = {
-    invoke: function invoke(container, Type, deps) {
-      return new Type(container.get(deps[0]), container.get(deps[1]), container.get(deps[2]), container.get(deps[3]), container.get(deps[4]));
-    },
-
-    invokeWithDynamicDependencies: invokeWithDynamicDependencies
-  }, _classInvokers.fallback = {
-    invoke: invokeWithDynamicDependencies,
-    invokeWithDynamicDependencies: invokeWithDynamicDependencies
-  }, _classInvokers);
-
-  function getDependencies(f) {
-    if (!f.hasOwnProperty('inject')) {
-      return [];
-    }
-
-    if (typeof f.inject === 'function') {
-      return f.inject();
-    }
-
-    return f.inject;
-  }
-
-  var Container = exports.Container = function () {
-    function Container(configuration) {
-      
-
-      if (configuration === undefined) {
-        configuration = {};
-      }
-
-      this._configuration = configuration;
-      this._onHandlerCreated = configuration.onHandlerCreated;
-      this._handlers = configuration.handlers || (configuration.handlers = new Map());
-      this._resolvers = new Map();
-      this.root = this;
-      this.parent = null;
-    }
-
-    Container.prototype.makeGlobal = function makeGlobal() {
-      Container.instance = this;
-      return this;
-    };
-
-    Container.prototype.setHandlerCreatedCallback = function setHandlerCreatedCallback(onHandlerCreated) {
-      this._onHandlerCreated = onHandlerCreated;
-      this._configuration.onHandlerCreated = onHandlerCreated;
-    };
-
-    Container.prototype.registerInstance = function registerInstance(key, instance) {
-      return this.registerResolver(key, new StrategyResolver(0, instance === undefined ? key : instance));
-    };
-
-    Container.prototype.registerSingleton = function registerSingleton(key, fn) {
-      return this.registerResolver(key, new StrategyResolver(1, fn === undefined ? key : fn));
-    };
-
-    Container.prototype.registerTransient = function registerTransient(key, fn) {
-      return this.registerResolver(key, new StrategyResolver(2, fn === undefined ? key : fn));
-    };
-
-    Container.prototype.registerHandler = function registerHandler(key, handler) {
-      return this.registerResolver(key, new StrategyResolver(3, handler));
-    };
-
-    Container.prototype.registerAlias = function registerAlias(originalKey, aliasKey) {
-      return this.registerResolver(aliasKey, new StrategyResolver(5, originalKey));
-    };
-
-    Container.prototype.registerResolver = function registerResolver(key, resolver) {
-      if (key === null || key === undefined) {
-        throw new Error(badKeyError);
-      }
-
-      var allResolvers = this._resolvers;
-      var result = allResolvers.get(key);
-
-      if (result === undefined) {
-        allResolvers.set(key, resolver);
-      } else if (result.strategy === 4) {
-        result.state.push(resolver);
-      } else {
-        allResolvers.set(key, new StrategyResolver(4, [result, resolver]));
-      }
-
-      return resolver;
-    };
-
-    Container.prototype.autoRegister = function autoRegister(key, fn) {
-      fn = fn === undefined ? key : fn;
-
-      if (typeof fn === 'function') {
-        var _registration = _aureliaMetadata.metadata.get(_aureliaMetadata.metadata.registration, fn);
-
-        if (_registration === undefined) {
-          return this.registerResolver(key, new StrategyResolver(1, fn));
-        }
-
-        return _registration.registerResolver(this, key, fn);
-      }
-
-      return this.registerResolver(key, new StrategyResolver(0, fn));
-    };
-
-    Container.prototype.autoRegisterAll = function autoRegisterAll(fns) {
-      var i = fns.length;
-      while (i--) {
-        this.autoRegister(fns[i]);
-      }
-    };
-
-    Container.prototype.unregister = function unregister(key) {
-      this._resolvers.delete(key);
-    };
-
-    Container.prototype.hasResolver = function hasResolver(key) {
-      var checkParent = arguments.length <= 1 || arguments[1] === undefined ? false : arguments[1];
-
-      if (key === null || key === undefined) {
-        throw new Error(badKeyError);
-      }
-
-      return this._resolvers.has(key) || checkParent && this.parent !== null && this.parent.hasResolver(key, checkParent);
-    };
-
-    Container.prototype.get = function get(key) {
-      if (key === null || key === undefined) {
-        throw new Error(badKeyError);
-      }
-
-      if (key === Container) {
-        return this;
-      }
-
-      if (resolverDecorates(key)) {
-        return key.get(this, key);
-      }
-
-      var resolver = this._resolvers.get(key);
-
-      if (resolver === undefined) {
-        if (this.parent === null) {
-          return this.autoRegister(key).get(this, key);
-        }
-
-        return this.parent._get(key);
-      }
-
-      return resolver.get(this, key);
-    };
-
-    Container.prototype._get = function _get(key) {
-      var resolver = this._resolvers.get(key);
-
-      if (resolver === undefined) {
-        if (this.parent === null) {
-          return this.autoRegister(key).get(this, key);
-        }
-
-        return this.parent._get(key);
-      }
-
-      return resolver.get(this, key);
-    };
-
-    Container.prototype.getAll = function getAll(key) {
-      if (key === null || key === undefined) {
-        throw new Error(badKeyError);
-      }
-
-      var resolver = this._resolvers.get(key);
-
-      if (resolver === undefined) {
-        if (this.parent === null) {
-          return _emptyParameters;
-        }
-
-        return this.parent.getAll(key);
-      }
-
-      if (resolver.strategy === 4) {
-        var state = resolver.state;
-        var i = state.length;
-        var results = new Array(i);
-
-        while (i--) {
-          results[i] = state[i].get(this, key);
-        }
-
-        return results;
-      }
-
-      return [resolver.get(this, key)];
-    };
-
-    Container.prototype.createChild = function createChild() {
-      var child = new Container(this._configuration);
-      child.root = this.root;
-      child.parent = this;
-      return child;
-    };
-
-    Container.prototype.invoke = function invoke(fn, dynamicDependencies) {
-      try {
-        var _handler = this._handlers.get(fn);
-
-        if (_handler === undefined) {
-          _handler = this._createInvocationHandler(fn);
-          this._handlers.set(fn, _handler);
-        }
-
-        return _handler.invoke(this, dynamicDependencies);
-      } catch (e) {
-        throw new _aureliaPal.AggregateError('Error invoking ' + fn.name + '. Check the inner error for details.', e, true);
-      }
-    };
-
-    Container.prototype._createInvocationHandler = function _createInvocationHandler(fn) {
-      var dependencies = void 0;
-
-      if (fn.inject === undefined) {
-        dependencies = _aureliaMetadata.metadata.getOwn(_aureliaMetadata.metadata.paramTypes, fn) || _emptyParameters;
-      } else {
-        dependencies = [];
-        var ctor = fn;
-        while (typeof ctor === 'function') {
-          var _dependencies;
-
-          (_dependencies = dependencies).push.apply(_dependencies, getDependencies(ctor));
-          ctor = Object.getPrototypeOf(ctor);
-        }
-      }
-
-      var invoker = _aureliaMetadata.metadata.getOwn(_aureliaMetadata.metadata.invoker, fn) || classInvokers[dependencies.length] || classInvokers.fallback;
-
-      var handler = new InvocationHandler(fn, invoker, dependencies);
-      return this._onHandlerCreated !== undefined ? this._onHandlerCreated(handler) : handler;
-    };
-
-    return Container;
-  }();
-
-  function autoinject(potentialTarget) {
-    var deco = function deco(target) {
-      var previousInject = target.inject;
-      var autoInject = _aureliaMetadata.metadata.getOwn(_aureliaMetadata.metadata.paramTypes, target) || _emptyParameters;
-      if (!previousInject) {
-        target.inject = autoInject;
-      } else {
-        for (var i = 0; i++; i < autoInject.length) {
-          if (!previousInject[i]) {
-            previousInject[i] = autoInject[i];
-          }
-        }
-      }
-    };
-
-    return potentialTarget ? deco(potentialTarget) : deco;
-  }
-
-  function inject() {
-    for (var _len2 = arguments.length, rest = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-      rest[_key2] = arguments[_key2];
-    }
-
-    return function (target, key, descriptor) {
-      if (typeof descriptor === 'number' && rest.length === 1) {
-        var params = target.inject;
-        if (typeof params === 'function') {
-          throw new Error('Decorator inject cannot be used with "inject()".  Please use an array instead.');
-        }
-        if (!params) {
-          params = _aureliaMetadata.metadata.getOwn(_aureliaMetadata.metadata.paramTypes, target).slice();
-          target.inject = params;
-        }
-        params[descriptor] = rest[0];
-        return;
-      }
-
-      if (descriptor) {
-        var _fn = descriptor.value;
-        _fn.inject = rest;
-      } else {
-        target.inject = rest;
-      }
-    };
-  }
-});
 define('aurelia-bootstrapper',['exports', 'aurelia-pal', 'aurelia-pal-browser', 'aurelia-polyfills'], function (exports, _aureliaPal, _aureliaPalBrowser) {
   'use strict';
 
@@ -10023,6 +10023,162 @@ define('aurelia-bootstrapper',['exports', 'aurelia-pal', 'aurelia-pal-browser', 
   }
 
   run();
+});
+define('aurelia-event-aggregator',['exports', 'aurelia-logging'], function (exports, _aureliaLogging) {
+  'use strict';
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.EventAggregator = undefined;
+  exports.includeEventsIn = includeEventsIn;
+  exports.configure = configure;
+
+  var LogManager = _interopRequireWildcard(_aureliaLogging);
+
+  function _interopRequireWildcard(obj) {
+    if (obj && obj.__esModule) {
+      return obj;
+    } else {
+      var newObj = {};
+
+      if (obj != null) {
+        for (var key in obj) {
+          if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key];
+        }
+      }
+
+      newObj.default = obj;
+      return newObj;
+    }
+  }
+
+  
+
+  var logger = LogManager.getLogger('event-aggregator');
+
+  var Handler = function () {
+    function Handler(messageType, callback) {
+      
+
+      this.messageType = messageType;
+      this.callback = callback;
+    }
+
+    Handler.prototype.handle = function handle(message) {
+      if (message instanceof this.messageType) {
+        this.callback.call(null, message);
+      }
+    };
+
+    return Handler;
+  }();
+
+  var EventAggregator = exports.EventAggregator = function () {
+    function EventAggregator() {
+      
+
+      this.eventLookup = {};
+      this.messageHandlers = [];
+    }
+
+    EventAggregator.prototype.publish = function publish(event, data) {
+      var subscribers = void 0;
+      var i = void 0;
+
+      if (!event) {
+        throw new Error('Event was invalid.');
+      }
+
+      if (typeof event === 'string') {
+        subscribers = this.eventLookup[event];
+        if (subscribers) {
+          subscribers = subscribers.slice();
+          i = subscribers.length;
+
+          try {
+            while (i--) {
+              subscribers[i](data, event);
+            }
+          } catch (e) {
+            logger.error(e);
+          }
+        }
+      } else {
+        subscribers = this.messageHandlers.slice();
+        i = subscribers.length;
+
+        try {
+          while (i--) {
+            subscribers[i].handle(event);
+          }
+        } catch (e) {
+          logger.error(e);
+        }
+      }
+    };
+
+    EventAggregator.prototype.subscribe = function subscribe(event, callback) {
+      var handler = void 0;
+      var subscribers = void 0;
+
+      if (!event) {
+        throw new Error('Event channel/type was invalid.');
+      }
+
+      if (typeof event === 'string') {
+        handler = callback;
+        subscribers = this.eventLookup[event] || (this.eventLookup[event] = []);
+      } else {
+        handler = new Handler(event, callback);
+        subscribers = this.messageHandlers;
+      }
+
+      subscribers.push(handler);
+
+      return {
+        dispose: function dispose() {
+          var idx = subscribers.indexOf(handler);
+          if (idx !== -1) {
+            subscribers.splice(idx, 1);
+          }
+        }
+      };
+    };
+
+    EventAggregator.prototype.subscribeOnce = function subscribeOnce(event, callback) {
+      var sub = this.subscribe(event, function (a, b) {
+        sub.dispose();
+        return callback(a, b);
+      });
+
+      return sub;
+    };
+
+    return EventAggregator;
+  }();
+
+  function includeEventsIn(obj) {
+    var ea = new EventAggregator();
+
+    obj.subscribeOnce = function (event, callback) {
+      return ea.subscribeOnce(event, callback);
+    };
+
+    obj.subscribe = function (event, callback) {
+      return ea.subscribe(event, callback);
+    };
+
+    obj.publish = function (event, data) {
+      ea.publish(event, data);
+    };
+
+    return ea;
+  }
+
+  function configure(config) {
+    config.instance(EventAggregator, includeEventsIn(config.aurelia));
+  }
 });
 define('aurelia-framework',['exports', 'aurelia-dependency-injection', 'aurelia-binding', 'aurelia-metadata', 'aurelia-templating', 'aurelia-loader', 'aurelia-task-queue', 'aurelia-path', 'aurelia-pal', 'aurelia-logging'], function (exports, _aureliaDependencyInjection, _aureliaBinding, _aureliaMetadata, _aureliaTemplating, _aureliaLoader, _aureliaTaskQueue, _aureliaPath, _aureliaPal, _aureliaLogging) {
   'use strict';
@@ -10572,162 +10728,6 @@ define('aurelia-framework',['exports', 'aurelia-dependency-injection', 'aurelia-
 
   exports.FrameworkConfiguration = FrameworkConfiguration;
   var LogManager = exports.LogManager = TheLogManager;
-});
-define('aurelia-event-aggregator',['exports', 'aurelia-logging'], function (exports, _aureliaLogging) {
-  'use strict';
-
-  Object.defineProperty(exports, "__esModule", {
-    value: true
-  });
-  exports.EventAggregator = undefined;
-  exports.includeEventsIn = includeEventsIn;
-  exports.configure = configure;
-
-  var LogManager = _interopRequireWildcard(_aureliaLogging);
-
-  function _interopRequireWildcard(obj) {
-    if (obj && obj.__esModule) {
-      return obj;
-    } else {
-      var newObj = {};
-
-      if (obj != null) {
-        for (var key in obj) {
-          if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key];
-        }
-      }
-
-      newObj.default = obj;
-      return newObj;
-    }
-  }
-
-  
-
-  var logger = LogManager.getLogger('event-aggregator');
-
-  var Handler = function () {
-    function Handler(messageType, callback) {
-      
-
-      this.messageType = messageType;
-      this.callback = callback;
-    }
-
-    Handler.prototype.handle = function handle(message) {
-      if (message instanceof this.messageType) {
-        this.callback.call(null, message);
-      }
-    };
-
-    return Handler;
-  }();
-
-  var EventAggregator = exports.EventAggregator = function () {
-    function EventAggregator() {
-      
-
-      this.eventLookup = {};
-      this.messageHandlers = [];
-    }
-
-    EventAggregator.prototype.publish = function publish(event, data) {
-      var subscribers = void 0;
-      var i = void 0;
-
-      if (!event) {
-        throw new Error('Event was invalid.');
-      }
-
-      if (typeof event === 'string') {
-        subscribers = this.eventLookup[event];
-        if (subscribers) {
-          subscribers = subscribers.slice();
-          i = subscribers.length;
-
-          try {
-            while (i--) {
-              subscribers[i](data, event);
-            }
-          } catch (e) {
-            logger.error(e);
-          }
-        }
-      } else {
-        subscribers = this.messageHandlers.slice();
-        i = subscribers.length;
-
-        try {
-          while (i--) {
-            subscribers[i].handle(event);
-          }
-        } catch (e) {
-          logger.error(e);
-        }
-      }
-    };
-
-    EventAggregator.prototype.subscribe = function subscribe(event, callback) {
-      var handler = void 0;
-      var subscribers = void 0;
-
-      if (!event) {
-        throw new Error('Event channel/type was invalid.');
-      }
-
-      if (typeof event === 'string') {
-        handler = callback;
-        subscribers = this.eventLookup[event] || (this.eventLookup[event] = []);
-      } else {
-        handler = new Handler(event, callback);
-        subscribers = this.messageHandlers;
-      }
-
-      subscribers.push(handler);
-
-      return {
-        dispose: function dispose() {
-          var idx = subscribers.indexOf(handler);
-          if (idx !== -1) {
-            subscribers.splice(idx, 1);
-          }
-        }
-      };
-    };
-
-    EventAggregator.prototype.subscribeOnce = function subscribeOnce(event, callback) {
-      var sub = this.subscribe(event, function (a, b) {
-        sub.dispose();
-        return callback(a, b);
-      });
-
-      return sub;
-    };
-
-    return EventAggregator;
-  }();
-
-  function includeEventsIn(obj) {
-    var ea = new EventAggregator();
-
-    obj.subscribeOnce = function (event, callback) {
-      return ea.subscribeOnce(event, callback);
-    };
-
-    obj.subscribe = function (event, callback) {
-      return ea.subscribe(event, callback);
-    };
-
-    obj.publish = function (event, data) {
-      ea.publish(event, data);
-    };
-
-    return ea;
-  }
-
-  function configure(config) {
-    config.instance(EventAggregator, includeEventsIn(config.aurelia));
-  }
 });
 define('aurelia-history',['exports'], function (exports) {
   'use strict';
@@ -11525,87 +11525,6 @@ define('aurelia-metadata',['exports', 'aurelia-pal'], function (exports, _aureli
     return result;
   };
 });
-define('aurelia-pal',['exports'], function (exports) {
-  'use strict';
-
-  Object.defineProperty(exports, "__esModule", {
-    value: true
-  });
-  exports.AggregateError = AggregateError;
-  exports.initializePAL = initializePAL;
-  function AggregateError(message, innerError, skipIfAlreadyAggregate) {
-    if (innerError) {
-      if (innerError.innerError && skipIfAlreadyAggregate) {
-        return innerError;
-      }
-
-      var separator = '\n------------------------------------------------\n';
-
-      message += separator + 'Inner Error:\n';
-
-      if (typeof innerError === 'string') {
-        message += 'Message: ' + innerError;
-      } else {
-        if (innerError.message) {
-          message += 'Message: ' + innerError.message;
-        } else {
-          message += 'Unknown Inner Error Type. Displaying Inner Error as JSON:\n ' + JSON.stringify(innerError, null, '  ');
-        }
-
-        if (innerError.stack) {
-          message += '\nInner Error Stack:\n' + innerError.stack;
-          message += '\nEnd Inner Error Stack';
-        }
-      }
-
-      message += separator;
-    }
-
-    var e = new Error(message);
-    if (innerError) {
-      e.innerError = innerError;
-    }
-
-    return e;
-  }
-
-  var FEATURE = exports.FEATURE = {};
-
-  var PLATFORM = exports.PLATFORM = {
-    noop: function noop() {},
-    eachModule: function eachModule() {}
-  };
-
-  PLATFORM.global = function () {
-    if (typeof self !== 'undefined') {
-      return self;
-    }
-
-    if (typeof global !== 'undefined') {
-      return global;
-    }
-
-    return new Function('return this')();
-  }();
-
-  var DOM = exports.DOM = {};
-
-  function initializePAL(callback) {
-    if (typeof Object.getPropertyDescriptor !== 'function') {
-      Object.getPropertyDescriptor = function (subject, name) {
-        var pd = Object.getOwnPropertyDescriptor(subject, name);
-        var proto = Object.getPrototypeOf(subject);
-        while (typeof pd === 'undefined' && proto !== null) {
-          pd = Object.getOwnPropertyDescriptor(proto, name);
-          proto = Object.getPrototypeOf(proto);
-        }
-        return pd;
-      };
-    }
-
-    callback(PLATFORM, FEATURE, DOM);
-  }
-});
 define('aurelia-loader-default',['exports', 'aurelia-loader', 'aurelia-pal', 'aurelia-metadata'], function (exports, _aureliaLoader, _aureliaPal, _aureliaMetadata) {
   'use strict';
 
@@ -11990,6 +11909,145 @@ define('aurelia-logging',['exports'], function (exports) {
     Logger.prototype.error = function error(message) {};
 
     return Logger;
+  }();
+});
+define('aurelia-pal',['exports'], function (exports) {
+  'use strict';
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.AggregateError = AggregateError;
+  exports.initializePAL = initializePAL;
+  function AggregateError(message, innerError, skipIfAlreadyAggregate) {
+    if (innerError) {
+      if (innerError.innerError && skipIfAlreadyAggregate) {
+        return innerError;
+      }
+
+      var separator = '\n------------------------------------------------\n';
+
+      message += separator + 'Inner Error:\n';
+
+      if (typeof innerError === 'string') {
+        message += 'Message: ' + innerError;
+      } else {
+        if (innerError.message) {
+          message += 'Message: ' + innerError.message;
+        } else {
+          message += 'Unknown Inner Error Type. Displaying Inner Error as JSON:\n ' + JSON.stringify(innerError, null, '  ');
+        }
+
+        if (innerError.stack) {
+          message += '\nInner Error Stack:\n' + innerError.stack;
+          message += '\nEnd Inner Error Stack';
+        }
+      }
+
+      message += separator;
+    }
+
+    var e = new Error(message);
+    if (innerError) {
+      e.innerError = innerError;
+    }
+
+    return e;
+  }
+
+  var FEATURE = exports.FEATURE = {};
+
+  var PLATFORM = exports.PLATFORM = {
+    noop: function noop() {},
+    eachModule: function eachModule() {}
+  };
+
+  PLATFORM.global = function () {
+    if (typeof self !== 'undefined') {
+      return self;
+    }
+
+    if (typeof global !== 'undefined') {
+      return global;
+    }
+
+    return new Function('return this')();
+  }();
+
+  var DOM = exports.DOM = {};
+
+  function initializePAL(callback) {
+    if (typeof Object.getPropertyDescriptor !== 'function') {
+      Object.getPropertyDescriptor = function (subject, name) {
+        var pd = Object.getOwnPropertyDescriptor(subject, name);
+        var proto = Object.getPrototypeOf(subject);
+        while (typeof pd === 'undefined' && proto !== null) {
+          pd = Object.getOwnPropertyDescriptor(proto, name);
+          proto = Object.getPrototypeOf(proto);
+        }
+        return pd;
+      };
+    }
+
+    callback(PLATFORM, FEATURE, DOM);
+  }
+});
+define('aurelia-logging-console',['exports', 'aurelia-logging'], function (exports, _aureliaLogging) {
+  'use strict';
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.ConsoleAppender = undefined;
+
+  
+
+  var ConsoleAppender = exports.ConsoleAppender = function () {
+    function ConsoleAppender() {
+      
+    }
+
+    ConsoleAppender.prototype.debug = function debug(logger) {
+      var _console;
+
+      for (var _len = arguments.length, rest = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+        rest[_key - 1] = arguments[_key];
+      }
+
+      (_console = console).debug.apply(_console, ['DEBUG [' + logger.id + ']'].concat(rest));
+    };
+
+    ConsoleAppender.prototype.info = function info(logger) {
+      var _console2;
+
+      for (var _len2 = arguments.length, rest = Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
+        rest[_key2 - 1] = arguments[_key2];
+      }
+
+      (_console2 = console).info.apply(_console2, ['INFO [' + logger.id + ']'].concat(rest));
+    };
+
+    ConsoleAppender.prototype.warn = function warn(logger) {
+      var _console3;
+
+      for (var _len3 = arguments.length, rest = Array(_len3 > 1 ? _len3 - 1 : 0), _key3 = 1; _key3 < _len3; _key3++) {
+        rest[_key3 - 1] = arguments[_key3];
+      }
+
+      (_console3 = console).warn.apply(_console3, ['WARN [' + logger.id + ']'].concat(rest));
+    };
+
+    ConsoleAppender.prototype.error = function error(logger) {
+      var _console4;
+
+      for (var _len4 = arguments.length, rest = Array(_len4 > 1 ? _len4 - 1 : 0), _key4 = 1; _key4 < _len4; _key4++) {
+        rest[_key4 - 1] = arguments[_key4];
+      }
+
+      (_console4 = console).error.apply(_console4, ['ERROR [' + logger.id + ']'].concat(rest));
+    };
+
+    return ConsoleAppender;
   }();
 });
 define('aurelia-polyfills',['aurelia-pal'], function (_aureliaPal) {
@@ -12800,64 +12858,6 @@ define('aurelia-polyfills',['aurelia-pal'], function (_aureliaPal) {
       return Object.getOwnPropertyNames(o).concat(Object.getOwnPropertySymbols(o));
     };
   }
-});
-define('aurelia-logging-console',['exports', 'aurelia-logging'], function (exports, _aureliaLogging) {
-  'use strict';
-
-  Object.defineProperty(exports, "__esModule", {
-    value: true
-  });
-  exports.ConsoleAppender = undefined;
-
-  
-
-  var ConsoleAppender = exports.ConsoleAppender = function () {
-    function ConsoleAppender() {
-      
-    }
-
-    ConsoleAppender.prototype.debug = function debug(logger) {
-      var _console;
-
-      for (var _len = arguments.length, rest = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-        rest[_key - 1] = arguments[_key];
-      }
-
-      (_console = console).debug.apply(_console, ['DEBUG [' + logger.id + ']'].concat(rest));
-    };
-
-    ConsoleAppender.prototype.info = function info(logger) {
-      var _console2;
-
-      for (var _len2 = arguments.length, rest = Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
-        rest[_key2 - 1] = arguments[_key2];
-      }
-
-      (_console2 = console).info.apply(_console2, ['INFO [' + logger.id + ']'].concat(rest));
-    };
-
-    ConsoleAppender.prototype.warn = function warn(logger) {
-      var _console3;
-
-      for (var _len3 = arguments.length, rest = Array(_len3 > 1 ? _len3 - 1 : 0), _key3 = 1; _key3 < _len3; _key3++) {
-        rest[_key3 - 1] = arguments[_key3];
-      }
-
-      (_console3 = console).warn.apply(_console3, ['WARN [' + logger.id + ']'].concat(rest));
-    };
-
-    ConsoleAppender.prototype.error = function error(logger) {
-      var _console4;
-
-      for (var _len4 = arguments.length, rest = Array(_len4 > 1 ? _len4 - 1 : 0), _key4 = 1; _key4 < _len4; _key4++) {
-        rest[_key4 - 1] = arguments[_key4];
-      }
-
-      (_console4 = console).error.apply(_console4, ['ERROR [' + logger.id + ']'].concat(rest));
-    };
-
-    return ConsoleAppender;
-  }();
 });
 define('aurelia-pal-browser',['exports', 'aurelia-pal'], function (exports, _aureliaPal) {
   'use strict';
@@ -16087,6 +16087,927 @@ define('aurelia-task-queue',['exports', 'aurelia-pal'], function (exports, _aure
 
     return TaskQueue;
   }();
+});
+define('aurelia-templating-binding',['exports', 'aurelia-logging', 'aurelia-binding', 'aurelia-templating'], function (exports, _aureliaLogging, _aureliaBinding, _aureliaTemplating) {
+  'use strict';
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.TemplatingBindingLanguage = exports.SyntaxInterpreter = exports.ChildInterpolationBinding = exports.InterpolationBinding = exports.InterpolationBindingExpression = exports.AttributeMap = undefined;
+  exports.configure = configure;
+
+  var LogManager = _interopRequireWildcard(_aureliaLogging);
+
+  function _interopRequireWildcard(obj) {
+    if (obj && obj.__esModule) {
+      return obj;
+    } else {
+      var newObj = {};
+
+      if (obj != null) {
+        for (var key in obj) {
+          if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key];
+        }
+      }
+
+      newObj.default = obj;
+      return newObj;
+    }
+  }
+
+  function _possibleConstructorReturn(self, call) {
+    if (!self) {
+      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+    }
+
+    return call && (typeof call === "object" || typeof call === "function") ? call : self;
+  }
+
+  function _inherits(subClass, superClass) {
+    if (typeof superClass !== "function" && superClass !== null) {
+      throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
+    }
+
+    subClass.prototype = Object.create(superClass && superClass.prototype, {
+      constructor: {
+        value: subClass,
+        enumerable: false,
+        writable: true,
+        configurable: true
+      }
+    });
+    if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+  }
+
+  
+
+  var _class, _temp, _dec, _class2, _class3, _temp2, _class4, _temp3;
+
+  var AttributeMap = exports.AttributeMap = (_temp = _class = function () {
+    function AttributeMap(svg) {
+      
+
+      this.elements = Object.create(null);
+      this.allElements = Object.create(null);
+
+      this.svg = svg;
+
+      this.registerUniversal('accesskey', 'accessKey');
+      this.registerUniversal('contenteditable', 'contentEditable');
+      this.registerUniversal('tabindex', 'tabIndex');
+      this.registerUniversal('textcontent', 'textContent');
+      this.registerUniversal('innerhtml', 'innerHTML');
+      this.registerUniversal('scrolltop', 'scrollTop');
+      this.registerUniversal('scrollleft', 'scrollLeft');
+      this.registerUniversal('readonly', 'readOnly');
+
+      this.register('label', 'for', 'htmlFor');
+
+      this.register('input', 'maxlength', 'maxLength');
+      this.register('input', 'minlength', 'minLength');
+      this.register('input', 'formaction', 'formAction');
+      this.register('input', 'formenctype', 'formEncType');
+      this.register('input', 'formmethod', 'formMethod');
+      this.register('input', 'formnovalidate', 'formNoValidate');
+      this.register('input', 'formtarget', 'formTarget');
+
+      this.register('textarea', 'maxlength', 'maxLength');
+
+      this.register('td', 'rowspan', 'rowSpan');
+      this.register('td', 'colspan', 'colSpan');
+      this.register('th', 'rowspan', 'rowSpan');
+      this.register('th', 'colspan', 'colSpan');
+    }
+
+    AttributeMap.prototype.register = function register(elementName, attributeName, propertyName) {
+      elementName = elementName.toLowerCase();
+      attributeName = attributeName.toLowerCase();
+      var element = this.elements[elementName] = this.elements[elementName] || Object.create(null);
+      element[attributeName] = propertyName;
+    };
+
+    AttributeMap.prototype.registerUniversal = function registerUniversal(attributeName, propertyName) {
+      attributeName = attributeName.toLowerCase();
+      this.allElements[attributeName] = propertyName;
+    };
+
+    AttributeMap.prototype.map = function map(elementName, attributeName) {
+      if (this.svg.isStandardSvgAttribute(elementName, attributeName)) {
+        return attributeName;
+      }
+      elementName = elementName.toLowerCase();
+      attributeName = attributeName.toLowerCase();
+      var element = this.elements[elementName];
+      if (element !== undefined && attributeName in element) {
+        return element[attributeName];
+      }
+      if (attributeName in this.allElements) {
+        return this.allElements[attributeName];
+      }
+
+      if (/(^data-)|(^aria-)|:/.test(attributeName)) {
+        return attributeName;
+      }
+      return (0, _aureliaBinding.camelCase)(attributeName);
+    };
+
+    return AttributeMap;
+  }(), _class.inject = [_aureliaBinding.SVGAnalyzer], _temp);
+
+  var InterpolationBindingExpression = exports.InterpolationBindingExpression = function () {
+    function InterpolationBindingExpression(observerLocator, targetProperty, parts, mode, lookupFunctions, attribute) {
+      
+
+      this.observerLocator = observerLocator;
+      this.targetProperty = targetProperty;
+      this.parts = parts;
+      this.mode = mode;
+      this.lookupFunctions = lookupFunctions;
+      this.attribute = this.attrToRemove = attribute;
+      this.discrete = false;
+    }
+
+    InterpolationBindingExpression.prototype.createBinding = function createBinding(target) {
+      if (this.parts.length === 3) {
+        return new ChildInterpolationBinding(target, this.observerLocator, this.parts[1], this.mode, this.lookupFunctions, this.targetProperty, this.parts[0], this.parts[2]);
+      }
+      return new InterpolationBinding(this.observerLocator, this.parts, target, this.targetProperty, this.mode, this.lookupFunctions);
+    };
+
+    return InterpolationBindingExpression;
+  }();
+
+  function validateTarget(target, propertyName) {
+    if (propertyName === 'style') {
+      LogManager.getLogger('templating-binding').info('Internet Explorer does not support interpolation in "style" attributes.  Use the style attribute\'s alias, "css" instead.');
+    } else if (target.parentElement && target.parentElement.nodeName === 'TEXTAREA' && propertyName === 'textContent') {
+      throw new Error('Interpolation binding cannot be used in the content of a textarea element.  Use <textarea value.bind="expression"></textarea> instead.');
+    }
+  }
+
+  var InterpolationBinding = exports.InterpolationBinding = function () {
+    function InterpolationBinding(observerLocator, parts, target, targetProperty, mode, lookupFunctions) {
+      
+
+      validateTarget(target, targetProperty);
+      this.observerLocator = observerLocator;
+      this.parts = parts;
+      this.target = target;
+      this.targetProperty = targetProperty;
+      this.targetAccessor = observerLocator.getAccessor(target, targetProperty);
+      this.mode = mode;
+      this.lookupFunctions = lookupFunctions;
+    }
+
+    InterpolationBinding.prototype.interpolate = function interpolate() {
+      if (this.isBound) {
+        var value = '';
+        var parts = this.parts;
+        for (var i = 0, ii = parts.length; i < ii; i++) {
+          value += i % 2 === 0 ? parts[i] : this['childBinding' + i].value;
+        }
+        this.targetAccessor.setValue(value, this.target, this.targetProperty);
+      }
+    };
+
+    InterpolationBinding.prototype.updateOneTimeBindings = function updateOneTimeBindings() {
+      for (var i = 1, ii = this.parts.length; i < ii; i += 2) {
+        var child = this['childBinding' + i];
+        if (child.mode === _aureliaBinding.bindingMode.oneTime) {
+          child.call();
+        }
+      }
+    };
+
+    InterpolationBinding.prototype.bind = function bind(source) {
+      if (this.isBound) {
+        if (this.source === source) {
+          return;
+        }
+        this.unbind();
+      }
+      this.source = source;
+
+      var parts = this.parts;
+      for (var i = 1, ii = parts.length; i < ii; i += 2) {
+        var binding = new ChildInterpolationBinding(this, this.observerLocator, parts[i], this.mode, this.lookupFunctions);
+        binding.bind(source);
+        this['childBinding' + i] = binding;
+      }
+
+      this.isBound = true;
+      this.interpolate();
+    };
+
+    InterpolationBinding.prototype.unbind = function unbind() {
+      if (!this.isBound) {
+        return;
+      }
+      this.isBound = false;
+      this.source = null;
+      var parts = this.parts;
+      for (var i = 1, ii = parts.length; i < ii; i += 2) {
+        var name = 'childBinding' + i;
+        this[name].unbind();
+      }
+    };
+
+    return InterpolationBinding;
+  }();
+
+  var ChildInterpolationBinding = exports.ChildInterpolationBinding = (_dec = (0, _aureliaBinding.connectable)(), _dec(_class2 = function () {
+    function ChildInterpolationBinding(target, observerLocator, sourceExpression, mode, lookupFunctions, targetProperty, left, right) {
+      
+
+      if (target instanceof InterpolationBinding) {
+        this.parent = target;
+      } else {
+        validateTarget(target, targetProperty);
+        this.target = target;
+        this.targetProperty = targetProperty;
+        this.targetAccessor = observerLocator.getAccessor(target, targetProperty);
+      }
+      this.observerLocator = observerLocator;
+      this.sourceExpression = sourceExpression;
+      this.mode = mode;
+      this.lookupFunctions = lookupFunctions;
+      this.left = left;
+      this.right = right;
+    }
+
+    ChildInterpolationBinding.prototype.updateTarget = function updateTarget(value) {
+      value = value === null || value === undefined ? '' : value.toString();
+      if (value !== this.value) {
+        this.value = value;
+        if (this.parent) {
+          this.parent.interpolate();
+        } else {
+          this.targetAccessor.setValue(this.left + value + this.right, this.target, this.targetProperty);
+        }
+      }
+    };
+
+    ChildInterpolationBinding.prototype.call = function call() {
+      if (!this.isBound) {
+        return;
+      }
+
+      this.rawValue = this.sourceExpression.evaluate(this.source, this.lookupFunctions);
+      this.updateTarget(this.rawValue);
+
+      if (this.mode !== _aureliaBinding.bindingMode.oneTime) {
+        this._version++;
+        this.sourceExpression.connect(this, this.source);
+        if (this.rawValue instanceof Array) {
+          this.observeArray(this.rawValue);
+        }
+        this.unobserve(false);
+      }
+    };
+
+    ChildInterpolationBinding.prototype.bind = function bind(source) {
+      if (this.isBound) {
+        if (this.source === source) {
+          return;
+        }
+        this.unbind();
+      }
+      this.isBound = true;
+      this.source = source;
+
+      var sourceExpression = this.sourceExpression;
+      if (sourceExpression.bind) {
+        sourceExpression.bind(this, source, this.lookupFunctions);
+      }
+
+      this.rawValue = sourceExpression.evaluate(source, this.lookupFunctions);
+      this.updateTarget(this.rawValue);
+
+      if (this.mode === _aureliaBinding.bindingMode.oneWay) {
+        (0, _aureliaBinding.enqueueBindingConnect)(this);
+      }
+    };
+
+    ChildInterpolationBinding.prototype.unbind = function unbind() {
+      if (!this.isBound) {
+        return;
+      }
+      this.isBound = false;
+      var sourceExpression = this.sourceExpression;
+      if (sourceExpression.unbind) {
+        sourceExpression.unbind(this, this.source);
+      }
+      this.source = null;
+      this.value = null;
+      this.rawValue = null;
+      this.unobserve(true);
+    };
+
+    ChildInterpolationBinding.prototype.connect = function connect(evaluate) {
+      if (!this.isBound) {
+        return;
+      }
+      if (evaluate) {
+        this.rawValue = this.sourceExpression.evaluate(this.source, this.lookupFunctions);
+        this.updateTarget(this.rawValue);
+      }
+      this.sourceExpression.connect(this, this.source);
+      if (this.rawValue instanceof Array) {
+        this.observeArray(this.rawValue);
+      }
+    };
+
+    return ChildInterpolationBinding;
+  }()) || _class2);
+  var SyntaxInterpreter = exports.SyntaxInterpreter = (_temp2 = _class3 = function () {
+    function SyntaxInterpreter(parser, observerLocator, eventManager, attributeMap) {
+      
+
+      this.parser = parser;
+      this.observerLocator = observerLocator;
+      this.eventManager = eventManager;
+      this.attributeMap = attributeMap;
+    }
+
+    SyntaxInterpreter.prototype.interpret = function interpret(resources, element, info, existingInstruction, context) {
+      if (info.command in this) {
+        return this[info.command](resources, element, info, existingInstruction, context);
+      }
+
+      return this.handleUnknownCommand(resources, element, info, existingInstruction, context);
+    };
+
+    SyntaxInterpreter.prototype.handleUnknownCommand = function handleUnknownCommand(resources, element, info, existingInstruction, context) {
+      LogManager.getLogger('templating-binding').warn('Unknown binding command.', info);
+      return existingInstruction;
+    };
+
+    SyntaxInterpreter.prototype.determineDefaultBindingMode = function determineDefaultBindingMode(element, attrName, context) {
+      var tagName = element.tagName.toLowerCase();
+
+      if (tagName === 'input' && (attrName === 'value' || attrName === 'files') && element.type !== 'checkbox' && element.type !== 'radio' || tagName === 'input' && attrName === 'checked' && (element.type === 'checkbox' || element.type === 'radio') || (tagName === 'textarea' || tagName === 'select') && attrName === 'value' || (attrName === 'textcontent' || attrName === 'innerhtml') && element.contentEditable === 'true' || attrName === 'scrolltop' || attrName === 'scrollleft') {
+        return _aureliaBinding.bindingMode.twoWay;
+      }
+
+      if (context && attrName in context.attributes && context.attributes[attrName] && context.attributes[attrName].defaultBindingMode >= _aureliaBinding.bindingMode.oneTime) {
+        return context.attributes[attrName].defaultBindingMode;
+      }
+
+      return _aureliaBinding.bindingMode.oneWay;
+    };
+
+    SyntaxInterpreter.prototype.bind = function bind(resources, element, info, existingInstruction, context) {
+      var instruction = existingInstruction || _aureliaTemplating.BehaviorInstruction.attribute(info.attrName);
+
+      instruction.attributes[info.attrName] = new _aureliaBinding.BindingExpression(this.observerLocator, this.attributeMap.map(element.tagName, info.attrName), this.parser.parse(info.attrValue), info.defaultBindingMode || this.determineDefaultBindingMode(element, info.attrName, context), resources.lookupFunctions);
+
+      return instruction;
+    };
+
+    SyntaxInterpreter.prototype.trigger = function trigger(resources, element, info) {
+      return new _aureliaBinding.ListenerExpression(this.eventManager, info.attrName, this.parser.parse(info.attrValue), false, true, resources.lookupFunctions);
+    };
+
+    SyntaxInterpreter.prototype.delegate = function delegate(resources, element, info) {
+      return new _aureliaBinding.ListenerExpression(this.eventManager, info.attrName, this.parser.parse(info.attrValue), true, true, resources.lookupFunctions);
+    };
+
+    SyntaxInterpreter.prototype.call = function call(resources, element, info, existingInstruction) {
+      var instruction = existingInstruction || _aureliaTemplating.BehaviorInstruction.attribute(info.attrName);
+
+      instruction.attributes[info.attrName] = new _aureliaBinding.CallExpression(this.observerLocator, info.attrName, this.parser.parse(info.attrValue), resources.lookupFunctions);
+
+      return instruction;
+    };
+
+    SyntaxInterpreter.prototype.options = function options(resources, element, info, existingInstruction, context) {
+      var instruction = existingInstruction || _aureliaTemplating.BehaviorInstruction.attribute(info.attrName);
+      var attrValue = info.attrValue;
+      var language = this.language;
+      var name = null;
+      var target = '';
+      var current = void 0;
+      var i = void 0;
+      var ii = void 0;
+      var inString = false;
+      var inEscape = false;
+
+      for (i = 0, ii = attrValue.length; i < ii; ++i) {
+        current = attrValue[i];
+
+        if (current === ';' && !inString) {
+          info = language.inspectAttribute(resources, '?', name, target.trim());
+          language.createAttributeInstruction(resources, element, info, instruction, context);
+
+          if (!instruction.attributes[info.attrName]) {
+            instruction.attributes[info.attrName] = info.attrValue;
+          }
+
+          target = '';
+          name = null;
+        } else if (current === ':' && name === null) {
+          name = target.trim();
+          target = '';
+        } else if (current === '\\') {
+          target += current;
+          inEscape = true;
+          continue;
+        } else {
+          target += current;
+
+          if (name !== null && inEscape === false && current === '\'') {
+            inString = !inString;
+          }
+        }
+
+        inEscape = false;
+      }
+
+      if (name !== null) {
+        info = language.inspectAttribute(resources, '?', name, target.trim());
+        language.createAttributeInstruction(resources, element, info, instruction, context);
+
+        if (!instruction.attributes[info.attrName]) {
+          instruction.attributes[info.attrName] = info.attrValue;
+        }
+      }
+
+      return instruction;
+    };
+
+    SyntaxInterpreter.prototype['for'] = function _for(resources, element, info, existingInstruction) {
+      var parts = void 0;
+      var keyValue = void 0;
+      var instruction = void 0;
+      var attrValue = void 0;
+      var isDestructuring = void 0;
+
+      attrValue = info.attrValue;
+      isDestructuring = attrValue.match(/^ *[[].+[\]]/);
+      parts = isDestructuring ? attrValue.split('of ') : attrValue.split(' of ');
+
+      if (parts.length !== 2) {
+        throw new Error('Incorrect syntax for "for". The form is: "$local of $items" or "[$key, $value] of $items".');
+      }
+
+      instruction = existingInstruction || _aureliaTemplating.BehaviorInstruction.attribute(info.attrName);
+
+      if (isDestructuring) {
+        keyValue = parts[0].replace(/[[\]]/g, '').replace(/,/g, ' ').replace(/\s+/g, ' ').trim().split(' ');
+        instruction.attributes.key = keyValue[0];
+        instruction.attributes.value = keyValue[1];
+      } else {
+        instruction.attributes.local = parts[0];
+      }
+
+      instruction.attributes.items = new _aureliaBinding.BindingExpression(this.observerLocator, 'items', this.parser.parse(parts[1]), _aureliaBinding.bindingMode.oneWay, resources.lookupFunctions);
+
+      return instruction;
+    };
+
+    SyntaxInterpreter.prototype['two-way'] = function twoWay(resources, element, info, existingInstruction) {
+      var instruction = existingInstruction || _aureliaTemplating.BehaviorInstruction.attribute(info.attrName);
+
+      instruction.attributes[info.attrName] = new _aureliaBinding.BindingExpression(this.observerLocator, this.attributeMap.map(element.tagName, info.attrName), this.parser.parse(info.attrValue), _aureliaBinding.bindingMode.twoWay, resources.lookupFunctions);
+
+      return instruction;
+    };
+
+    SyntaxInterpreter.prototype['one-way'] = function oneWay(resources, element, info, existingInstruction) {
+      var instruction = existingInstruction || _aureliaTemplating.BehaviorInstruction.attribute(info.attrName);
+
+      instruction.attributes[info.attrName] = new _aureliaBinding.BindingExpression(this.observerLocator, this.attributeMap.map(element.tagName, info.attrName), this.parser.parse(info.attrValue), _aureliaBinding.bindingMode.oneWay, resources.lookupFunctions);
+
+      return instruction;
+    };
+
+    SyntaxInterpreter.prototype['one-time'] = function oneTime(resources, element, info, existingInstruction) {
+      var instruction = existingInstruction || _aureliaTemplating.BehaviorInstruction.attribute(info.attrName);
+
+      instruction.attributes[info.attrName] = new _aureliaBinding.BindingExpression(this.observerLocator, this.attributeMap.map(element.tagName, info.attrName), this.parser.parse(info.attrValue), _aureliaBinding.bindingMode.oneTime, resources.lookupFunctions);
+
+      return instruction;
+    };
+
+    return SyntaxInterpreter;
+  }(), _class3.inject = [_aureliaBinding.Parser, _aureliaBinding.ObserverLocator, _aureliaBinding.EventManager, AttributeMap], _temp2);
+
+  var info = {};
+
+  var TemplatingBindingLanguage = exports.TemplatingBindingLanguage = (_temp3 = _class4 = function (_BindingLanguage) {
+    _inherits(TemplatingBindingLanguage, _BindingLanguage);
+
+    function TemplatingBindingLanguage(parser, observerLocator, syntaxInterpreter, attributeMap) {
+      
+
+      var _this = _possibleConstructorReturn(this, _BindingLanguage.call(this));
+
+      _this.parser = parser;
+      _this.observerLocator = observerLocator;
+      _this.syntaxInterpreter = syntaxInterpreter;
+      _this.emptyStringExpression = _this.parser.parse('\'\'');
+      syntaxInterpreter.language = _this;
+      _this.attributeMap = attributeMap;
+      return _this;
+    }
+
+    TemplatingBindingLanguage.prototype.inspectAttribute = function inspectAttribute(resources, elementName, attrName, attrValue) {
+      var parts = attrName.split('.');
+
+      info.defaultBindingMode = null;
+
+      if (parts.length === 2) {
+        info.attrName = parts[0].trim();
+        info.attrValue = attrValue;
+        info.command = parts[1].trim();
+
+        if (info.command === 'ref') {
+          info.expression = new _aureliaBinding.NameExpression(this.parser.parse(attrValue), info.attrName, resources.lookupFunctions);
+          info.command = null;
+          info.attrName = 'ref';
+        } else {
+          info.expression = null;
+        }
+      } else if (attrName === 'ref') {
+        info.attrName = attrName;
+        info.attrValue = attrValue;
+        info.command = null;
+        info.expression = new _aureliaBinding.NameExpression(this.parser.parse(attrValue), 'element', resources.lookupFunctions);
+      } else {
+        info.attrName = attrName;
+        info.attrValue = attrValue;
+        info.command = null;
+        var interpolationParts = this.parseInterpolation(resources, attrValue);
+        if (interpolationParts === null) {
+          info.expression = null;
+        } else {
+          info.expression = new InterpolationBindingExpression(this.observerLocator, this.attributeMap.map(elementName, attrName), interpolationParts, _aureliaBinding.bindingMode.oneWay, resources.lookupFunctions, attrName);
+        }
+      }
+
+      return info;
+    };
+
+    TemplatingBindingLanguage.prototype.createAttributeInstruction = function createAttributeInstruction(resources, element, theInfo, existingInstruction, context) {
+      var instruction = void 0;
+
+      if (theInfo.expression) {
+        if (theInfo.attrName === 'ref') {
+          return theInfo.expression;
+        }
+
+        instruction = existingInstruction || _aureliaTemplating.BehaviorInstruction.attribute(theInfo.attrName);
+        instruction.attributes[theInfo.attrName] = theInfo.expression;
+      } else if (theInfo.command) {
+        instruction = this.syntaxInterpreter.interpret(resources, element, theInfo, existingInstruction, context);
+      }
+
+      return instruction;
+    };
+
+    TemplatingBindingLanguage.prototype.inspectTextContent = function inspectTextContent(resources, value) {
+      var parts = this.parseInterpolation(resources, value);
+      if (parts === null) {
+        return null;
+      }
+      return new InterpolationBindingExpression(this.observerLocator, 'textContent', parts, _aureliaBinding.bindingMode.oneWay, resources.lookupFunctions, 'textContent');
+    };
+
+    TemplatingBindingLanguage.prototype.parseInterpolation = function parseInterpolation(resources, value) {
+      var i = value.indexOf('${', 0);
+      var ii = value.length;
+      var char = void 0;
+      var pos = 0;
+      var open = 0;
+      var quote = null;
+      var interpolationStart = void 0;
+      var parts = void 0;
+      var partIndex = 0;
+
+      while (i >= 0 && i < ii - 2) {
+        open = 1;
+        interpolationStart = i;
+        i += 2;
+
+        do {
+          char = value[i];
+          i++;
+
+          if (char === "'" || char === '"') {
+            if (quote === null) {
+              quote = char;
+            } else if (quote === char) {
+              quote = null;
+            }
+            continue;
+          }
+
+          if (char === '\\') {
+            i++;
+            continue;
+          }
+
+          if (quote !== null) {
+            continue;
+          }
+
+          if (char === '{') {
+            open++;
+          } else if (char === '}') {
+            open--;
+          }
+        } while (open > 0 && i < ii);
+
+        if (open === 0) {
+          parts = parts || [];
+          if (value[interpolationStart - 1] === '\\' && value[interpolationStart - 2] !== '\\') {
+            parts[partIndex] = value.substring(pos, interpolationStart - 1) + value.substring(interpolationStart, i);
+            partIndex++;
+            parts[partIndex] = this.emptyStringExpression;
+            partIndex++;
+          } else {
+            parts[partIndex] = value.substring(pos, interpolationStart);
+            partIndex++;
+            parts[partIndex] = this.parser.parse(value.substring(interpolationStart + 2, i - 1));
+            partIndex++;
+          }
+          pos = i;
+          i = value.indexOf('${', i);
+        } else {
+          break;
+        }
+      }
+
+      if (partIndex === 0) {
+        return null;
+      }
+
+      parts[partIndex] = value.substr(pos);
+      return parts;
+    };
+
+    return TemplatingBindingLanguage;
+  }(_aureliaTemplating.BindingLanguage), _class4.inject = [_aureliaBinding.Parser, _aureliaBinding.ObserverLocator, SyntaxInterpreter, AttributeMap], _temp3);
+  function configure(config) {
+    config.container.registerSingleton(_aureliaTemplating.BindingLanguage, TemplatingBindingLanguage);
+    config.container.registerAlias(_aureliaTemplating.BindingLanguage, TemplatingBindingLanguage);
+  }
+});
+define('aurelia-fetch-client',['exports'], function (exports) {
+  'use strict';
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.json = json;
+
+  var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
+    return typeof obj;
+  } : function (obj) {
+    return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj;
+  };
+
+  
+
+  function json(body) {
+    return new Blob([JSON.stringify(body)], { type: 'application/json' });
+  }
+
+  var HttpClientConfiguration = exports.HttpClientConfiguration = function () {
+    function HttpClientConfiguration() {
+      
+
+      this.baseUrl = '';
+      this.defaults = {};
+      this.interceptors = [];
+    }
+
+    HttpClientConfiguration.prototype.withBaseUrl = function withBaseUrl(baseUrl) {
+      this.baseUrl = baseUrl;
+      return this;
+    };
+
+    HttpClientConfiguration.prototype.withDefaults = function withDefaults(defaults) {
+      this.defaults = defaults;
+      return this;
+    };
+
+    HttpClientConfiguration.prototype.withInterceptor = function withInterceptor(interceptor) {
+      this.interceptors.push(interceptor);
+      return this;
+    };
+
+    HttpClientConfiguration.prototype.useStandardConfiguration = function useStandardConfiguration() {
+      var standardConfig = { credentials: 'same-origin' };
+      Object.assign(this.defaults, standardConfig, this.defaults);
+      return this.rejectErrorResponses();
+    };
+
+    HttpClientConfiguration.prototype.rejectErrorResponses = function rejectErrorResponses() {
+      return this.withInterceptor({ response: rejectOnError });
+    };
+
+    return HttpClientConfiguration;
+  }();
+
+  function rejectOnError(response) {
+    if (!response.ok) {
+      throw response;
+    }
+
+    return response;
+  }
+
+  var HttpClient = exports.HttpClient = function () {
+    function HttpClient() {
+      
+
+      this.activeRequestCount = 0;
+      this.isRequesting = false;
+      this.isConfigured = false;
+      this.baseUrl = '';
+      this.defaults = null;
+      this.interceptors = [];
+
+      if (typeof fetch === 'undefined') {
+        throw new Error('HttpClient requires a Fetch API implementation, but the current environment doesn\'t support it. You may need to load a polyfill such as https://github.com/github/fetch.');
+      }
+    }
+
+    HttpClient.prototype.configure = function configure(config) {
+      var _interceptors;
+
+      var normalizedConfig = void 0;
+
+      if ((typeof config === 'undefined' ? 'undefined' : _typeof(config)) === 'object') {
+        normalizedConfig = { defaults: config };
+      } else if (typeof config === 'function') {
+        normalizedConfig = new HttpClientConfiguration();
+        var c = config(normalizedConfig);
+        if (HttpClientConfiguration.prototype.isPrototypeOf(c)) {
+          normalizedConfig = c;
+        }
+      } else {
+        throw new Error('invalid config');
+      }
+
+      var defaults = normalizedConfig.defaults;
+      if (defaults && Headers.prototype.isPrototypeOf(defaults.headers)) {
+        throw new Error('Default headers must be a plain object.');
+      }
+
+      this.baseUrl = normalizedConfig.baseUrl;
+      this.defaults = defaults;
+      (_interceptors = this.interceptors).push.apply(_interceptors, normalizedConfig.interceptors || []);
+      this.isConfigured = true;
+
+      return this;
+    };
+
+    HttpClient.prototype.fetch = function (_fetch) {
+      function fetch(_x, _x2) {
+        return _fetch.apply(this, arguments);
+      }
+
+      fetch.toString = function () {
+        return _fetch.toString();
+      };
+
+      return fetch;
+    }(function (input, init) {
+      var _this = this;
+
+      trackRequestStart.call(this);
+
+      var request = Promise.resolve().then(function () {
+        return buildRequest.call(_this, input, init, _this.defaults);
+      });
+      var promise = processRequest(request, this.interceptors).then(function (result) {
+        var response = null;
+
+        if (Response.prototype.isPrototypeOf(result)) {
+          response = result;
+        } else if (Request.prototype.isPrototypeOf(result)) {
+          request = Promise.resolve(result);
+          response = fetch(result);
+        } else {
+          throw new Error('An invalid result was returned by the interceptor chain. Expected a Request or Response instance, but got [' + result + ']');
+        }
+
+        return request.then(function (_request) {
+          return processResponse(response, _this.interceptors, _request);
+        });
+      });
+
+      return trackRequestEndWith.call(this, promise);
+    });
+
+    return HttpClient;
+  }();
+
+  var absoluteUrlRegexp = /^([a-z][a-z0-9+\-.]*:)?\/\//i;
+
+  function trackRequestStart() {
+    this.isRequesting = !! ++this.activeRequestCount;
+  }
+
+  function trackRequestEnd() {
+    this.isRequesting = !! --this.activeRequestCount;
+  }
+
+  function trackRequestEndWith(promise) {
+    var handle = trackRequestEnd.bind(this);
+    promise.then(handle, handle);
+    return promise;
+  }
+
+  function parseHeaderValues(headers) {
+    var parsedHeaders = {};
+    for (var name in headers || {}) {
+      if (headers.hasOwnProperty(name)) {
+        parsedHeaders[name] = typeof headers[name] === 'function' ? headers[name]() : headers[name];
+      }
+    }
+    return parsedHeaders;
+  }
+
+  function buildRequest(input, init) {
+    var defaults = this.defaults || {};
+    var request = void 0;
+    var body = void 0;
+    var requestContentType = void 0;
+
+    var parsedDefaultHeaders = parseHeaderValues(defaults.headers);
+    if (Request.prototype.isPrototypeOf(input)) {
+      request = input;
+      requestContentType = new Headers(request.headers).get('Content-Type');
+    } else {
+      init || (init = {});
+      body = init.body;
+      var bodyObj = body ? { body: body } : null;
+      var requestInit = Object.assign({}, defaults, { headers: {} }, init, bodyObj);
+      requestContentType = new Headers(requestInit.headers).get('Content-Type');
+      request = new Request(getRequestUrl(this.baseUrl, input), requestInit);
+    }
+    if (!requestContentType && new Headers(parsedDefaultHeaders).has('content-type')) {
+      request.headers.set('Content-Type', new Headers(parsedDefaultHeaders).get('content-type'));
+    }
+    setDefaultHeaders(request.headers, parsedDefaultHeaders);
+    if (body && Blob.prototype.isPrototypeOf(body) && body.type) {
+      request.headers.set('Content-Type', body.type);
+    }
+    return request;
+  }
+
+  function getRequestUrl(baseUrl, url) {
+    if (absoluteUrlRegexp.test(url)) {
+      return url;
+    }
+
+    return (baseUrl || '') + url;
+  }
+
+  function setDefaultHeaders(headers, defaultHeaders) {
+    for (var name in defaultHeaders || {}) {
+      if (defaultHeaders.hasOwnProperty(name) && !headers.has(name)) {
+        headers.set(name, defaultHeaders[name]);
+      }
+    }
+  }
+
+  function processRequest(request, interceptors) {
+    return applyInterceptors(request, interceptors, 'request', 'requestError');
+  }
+
+  function processResponse(response, interceptors, request) {
+    return applyInterceptors(response, interceptors, 'response', 'responseError', request);
+  }
+
+  function applyInterceptors(input, interceptors, successName, errorName) {
+    for (var _len = arguments.length, interceptorArgs = Array(_len > 4 ? _len - 4 : 0), _key = 4; _key < _len; _key++) {
+      interceptorArgs[_key - 4] = arguments[_key];
+    }
+
+    return (interceptors || []).reduce(function (chain, interceptor) {
+      var successHandler = interceptor[successName];
+      var errorHandler = interceptor[errorName];
+
+      return chain.then(successHandler && function (value) {
+        return successHandler.call.apply(successHandler, [interceptor, value].concat(interceptorArgs));
+      } || identity, errorHandler && function (reason) {
+        return errorHandler.call.apply(errorHandler, [interceptor, reason].concat(interceptorArgs));
+      } || thrower);
+    }, Promise.resolve(input));
+  }
+
+  function identity(x) {
+    return x;
+  }
+
+  function thrower(x) {
+    throw x;
+  }
 });
 define('aurelia-templating',['exports', 'aurelia-logging', 'aurelia-metadata', 'aurelia-pal', 'aurelia-path', 'aurelia-loader', 'aurelia-dependency-injection', 'aurelia-binding', 'aurelia-task-queue'], function (exports, _aureliaLogging, _aureliaMetadata, _aureliaPal, _aureliaPath, _aureliaLoader, _aureliaDependencyInjection, _aureliaBinding, _aureliaTaskQueue) {
   'use strict';
@@ -20882,288 +21803,36 @@ define('aurelia-templating',['exports', 'aurelia-logging', 'aurelia-metadata', '
     return TemplatingEngine;
   }()) || _class23);
 });
-define('aurelia-fetch-client',['exports'], function (exports) {
+define('aurelia-templating-router/aurelia-templating-router',['exports', 'aurelia-router', './route-loader', './router-view', './route-href'], function (exports, _aureliaRouter, _routeLoader, _routerView, _routeHref) {
   'use strict';
 
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
-  exports.json = json;
+  exports.configure = exports.RouteHref = exports.RouterView = exports.TemplatingRouteLoader = undefined;
 
-  var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
-    return typeof obj;
-  } : function (obj) {
-    return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj;
-  };
+
+  function configure(config) {
+    config.singleton(_aureliaRouter.RouteLoader, _routeLoader.TemplatingRouteLoader).singleton(_aureliaRouter.Router, _aureliaRouter.AppRouter).globalResources('./router-view', './route-href');
+
+    config.container.registerAlias(_aureliaRouter.Router, _aureliaRouter.AppRouter);
+  }
+
+  exports.TemplatingRouteLoader = _routeLoader.TemplatingRouteLoader;
+  exports.RouterView = _routerView.RouterView;
+  exports.RouteHref = _routeHref.RouteHref;
+  exports.configure = configure;
+});;define('aurelia-templating-router', ['aurelia-templating-router/aurelia-templating-router'], function (main) { return main; });
+
+define('aurelia-templating-router/route-loader',['exports', 'aurelia-dependency-injection', 'aurelia-templating', 'aurelia-router', 'aurelia-path', 'aurelia-metadata'], function (exports, _aureliaDependencyInjection, _aureliaTemplating, _aureliaRouter, _aureliaPath, _aureliaMetadata) {
+  'use strict';
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.TemplatingRouteLoader = undefined;
 
   
-
-  function json(body) {
-    return new Blob([JSON.stringify(body)], { type: 'application/json' });
-  }
-
-  var HttpClientConfiguration = exports.HttpClientConfiguration = function () {
-    function HttpClientConfiguration() {
-      
-
-      this.baseUrl = '';
-      this.defaults = {};
-      this.interceptors = [];
-    }
-
-    HttpClientConfiguration.prototype.withBaseUrl = function withBaseUrl(baseUrl) {
-      this.baseUrl = baseUrl;
-      return this;
-    };
-
-    HttpClientConfiguration.prototype.withDefaults = function withDefaults(defaults) {
-      this.defaults = defaults;
-      return this;
-    };
-
-    HttpClientConfiguration.prototype.withInterceptor = function withInterceptor(interceptor) {
-      this.interceptors.push(interceptor);
-      return this;
-    };
-
-    HttpClientConfiguration.prototype.useStandardConfiguration = function useStandardConfiguration() {
-      var standardConfig = { credentials: 'same-origin' };
-      Object.assign(this.defaults, standardConfig, this.defaults);
-      return this.rejectErrorResponses();
-    };
-
-    HttpClientConfiguration.prototype.rejectErrorResponses = function rejectErrorResponses() {
-      return this.withInterceptor({ response: rejectOnError });
-    };
-
-    return HttpClientConfiguration;
-  }();
-
-  function rejectOnError(response) {
-    if (!response.ok) {
-      throw response;
-    }
-
-    return response;
-  }
-
-  var HttpClient = exports.HttpClient = function () {
-    function HttpClient() {
-      
-
-      this.activeRequestCount = 0;
-      this.isRequesting = false;
-      this.isConfigured = false;
-      this.baseUrl = '';
-      this.defaults = null;
-      this.interceptors = [];
-
-      if (typeof fetch === 'undefined') {
-        throw new Error('HttpClient requires a Fetch API implementation, but the current environment doesn\'t support it. You may need to load a polyfill such as https://github.com/github/fetch.');
-      }
-    }
-
-    HttpClient.prototype.configure = function configure(config) {
-      var _interceptors;
-
-      var normalizedConfig = void 0;
-
-      if ((typeof config === 'undefined' ? 'undefined' : _typeof(config)) === 'object') {
-        normalizedConfig = { defaults: config };
-      } else if (typeof config === 'function') {
-        normalizedConfig = new HttpClientConfiguration();
-        var c = config(normalizedConfig);
-        if (HttpClientConfiguration.prototype.isPrototypeOf(c)) {
-          normalizedConfig = c;
-        }
-      } else {
-        throw new Error('invalid config');
-      }
-
-      var defaults = normalizedConfig.defaults;
-      if (defaults && Headers.prototype.isPrototypeOf(defaults.headers)) {
-        throw new Error('Default headers must be a plain object.');
-      }
-
-      this.baseUrl = normalizedConfig.baseUrl;
-      this.defaults = defaults;
-      (_interceptors = this.interceptors).push.apply(_interceptors, normalizedConfig.interceptors || []);
-      this.isConfigured = true;
-
-      return this;
-    };
-
-    HttpClient.prototype.fetch = function (_fetch) {
-      function fetch(_x, _x2) {
-        return _fetch.apply(this, arguments);
-      }
-
-      fetch.toString = function () {
-        return _fetch.toString();
-      };
-
-      return fetch;
-    }(function (input, init) {
-      var _this = this;
-
-      trackRequestStart.call(this);
-
-      var request = Promise.resolve().then(function () {
-        return buildRequest.call(_this, input, init, _this.defaults);
-      });
-      var promise = processRequest(request, this.interceptors).then(function (result) {
-        var response = null;
-
-        if (Response.prototype.isPrototypeOf(result)) {
-          response = result;
-        } else if (Request.prototype.isPrototypeOf(result)) {
-          request = Promise.resolve(result);
-          response = fetch(result);
-        } else {
-          throw new Error('An invalid result was returned by the interceptor chain. Expected a Request or Response instance, but got [' + result + ']');
-        }
-
-        return request.then(function (_request) {
-          return processResponse(response, _this.interceptors, _request);
-        });
-      });
-
-      return trackRequestEndWith.call(this, promise);
-    });
-
-    return HttpClient;
-  }();
-
-  var absoluteUrlRegexp = /^([a-z][a-z0-9+\-.]*:)?\/\//i;
-
-  function trackRequestStart() {
-    this.isRequesting = !! ++this.activeRequestCount;
-  }
-
-  function trackRequestEnd() {
-    this.isRequesting = !! --this.activeRequestCount;
-  }
-
-  function trackRequestEndWith(promise) {
-    var handle = trackRequestEnd.bind(this);
-    promise.then(handle, handle);
-    return promise;
-  }
-
-  function parseHeaderValues(headers) {
-    var parsedHeaders = {};
-    for (var name in headers || {}) {
-      if (headers.hasOwnProperty(name)) {
-        parsedHeaders[name] = typeof headers[name] === 'function' ? headers[name]() : headers[name];
-      }
-    }
-    return parsedHeaders;
-  }
-
-  function buildRequest(input, init) {
-    var defaults = this.defaults || {};
-    var request = void 0;
-    var body = void 0;
-    var requestContentType = void 0;
-
-    var parsedDefaultHeaders = parseHeaderValues(defaults.headers);
-    if (Request.prototype.isPrototypeOf(input)) {
-      request = input;
-      requestContentType = new Headers(request.headers).get('Content-Type');
-    } else {
-      init || (init = {});
-      body = init.body;
-      var bodyObj = body ? { body: body } : null;
-      var requestInit = Object.assign({}, defaults, { headers: {} }, init, bodyObj);
-      requestContentType = new Headers(requestInit.headers).get('Content-Type');
-      request = new Request(getRequestUrl(this.baseUrl, input), requestInit);
-    }
-    if (!requestContentType && new Headers(parsedDefaultHeaders).has('content-type')) {
-      request.headers.set('Content-Type', new Headers(parsedDefaultHeaders).get('content-type'));
-    }
-    setDefaultHeaders(request.headers, parsedDefaultHeaders);
-    if (body && Blob.prototype.isPrototypeOf(body) && body.type) {
-      request.headers.set('Content-Type', body.type);
-    }
-    return request;
-  }
-
-  function getRequestUrl(baseUrl, url) {
-    if (absoluteUrlRegexp.test(url)) {
-      return url;
-    }
-
-    return (baseUrl || '') + url;
-  }
-
-  function setDefaultHeaders(headers, defaultHeaders) {
-    for (var name in defaultHeaders || {}) {
-      if (defaultHeaders.hasOwnProperty(name) && !headers.has(name)) {
-        headers.set(name, defaultHeaders[name]);
-      }
-    }
-  }
-
-  function processRequest(request, interceptors) {
-    return applyInterceptors(request, interceptors, 'request', 'requestError');
-  }
-
-  function processResponse(response, interceptors, request) {
-    return applyInterceptors(response, interceptors, 'response', 'responseError', request);
-  }
-
-  function applyInterceptors(input, interceptors, successName, errorName) {
-    for (var _len = arguments.length, interceptorArgs = Array(_len > 4 ? _len - 4 : 0), _key = 4; _key < _len; _key++) {
-      interceptorArgs[_key - 4] = arguments[_key];
-    }
-
-    return (interceptors || []).reduce(function (chain, interceptor) {
-      var successHandler = interceptor[successName];
-      var errorHandler = interceptor[errorName];
-
-      return chain.then(successHandler && function (value) {
-        return successHandler.call.apply(successHandler, [interceptor, value].concat(interceptorArgs));
-      } || identity, errorHandler && function (reason) {
-        return errorHandler.call.apply(errorHandler, [interceptor, reason].concat(interceptorArgs));
-      } || thrower);
-    }, Promise.resolve(input));
-  }
-
-  function identity(x) {
-    return x;
-  }
-
-  function thrower(x) {
-    throw x;
-  }
-});
-define('aurelia-templating-binding',['exports', 'aurelia-logging', 'aurelia-binding', 'aurelia-templating'], function (exports, _aureliaLogging, _aureliaBinding, _aureliaTemplating) {
-  'use strict';
-
-  Object.defineProperty(exports, "__esModule", {
-    value: true
-  });
-  exports.TemplatingBindingLanguage = exports.SyntaxInterpreter = exports.ChildInterpolationBinding = exports.InterpolationBinding = exports.InterpolationBindingExpression = exports.AttributeMap = undefined;
-  exports.configure = configure;
-
-  var LogManager = _interopRequireWildcard(_aureliaLogging);
-
-  function _interopRequireWildcard(obj) {
-    if (obj && obj.__esModule) {
-      return obj;
-    } else {
-      var newObj = {};
-
-      if (obj != null) {
-        for (var key in obj) {
-          if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key];
-        }
-      }
-
-      newObj.default = obj;
-      return newObj;
-    }
-  }
 
   function _possibleConstructorReturn(self, call) {
     if (!self) {
@@ -21189,620 +21858,1310 @@ define('aurelia-templating-binding',['exports', 'aurelia-logging', 'aurelia-bind
     if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
   }
 
-  
+  var _dec, _class;
 
-  var _class, _temp, _dec, _class2, _class3, _temp2, _class4, _temp3;
+  var TemplatingRouteLoader = exports.TemplatingRouteLoader = (_dec = (0, _aureliaDependencyInjection.inject)(_aureliaTemplating.CompositionEngine), _dec(_class = function (_RouteLoader) {
+    _inherits(TemplatingRouteLoader, _RouteLoader);
 
-  var AttributeMap = exports.AttributeMap = (_temp = _class = function () {
-    function AttributeMap(svg) {
+    function TemplatingRouteLoader(compositionEngine) {
       
 
-      this.elements = Object.create(null);
-      this.allElements = Object.create(null);
+      var _this = _possibleConstructorReturn(this, _RouteLoader.call(this));
 
-      this.svg = svg;
-
-      this.registerUniversal('accesskey', 'accessKey');
-      this.registerUniversal('contenteditable', 'contentEditable');
-      this.registerUniversal('tabindex', 'tabIndex');
-      this.registerUniversal('textcontent', 'textContent');
-      this.registerUniversal('innerhtml', 'innerHTML');
-      this.registerUniversal('scrolltop', 'scrollTop');
-      this.registerUniversal('scrollleft', 'scrollLeft');
-      this.registerUniversal('readonly', 'readOnly');
-
-      this.register('label', 'for', 'htmlFor');
-
-      this.register('input', 'maxlength', 'maxLength');
-      this.register('input', 'minlength', 'minLength');
-      this.register('input', 'formaction', 'formAction');
-      this.register('input', 'formenctype', 'formEncType');
-      this.register('input', 'formmethod', 'formMethod');
-      this.register('input', 'formnovalidate', 'formNoValidate');
-      this.register('input', 'formtarget', 'formTarget');
-
-      this.register('textarea', 'maxlength', 'maxLength');
-
-      this.register('td', 'rowspan', 'rowSpan');
-      this.register('td', 'colspan', 'colSpan');
-      this.register('th', 'rowspan', 'rowSpan');
-      this.register('th', 'colspan', 'colSpan');
-    }
-
-    AttributeMap.prototype.register = function register(elementName, attributeName, propertyName) {
-      elementName = elementName.toLowerCase();
-      attributeName = attributeName.toLowerCase();
-      var element = this.elements[elementName] = this.elements[elementName] || Object.create(null);
-      element[attributeName] = propertyName;
-    };
-
-    AttributeMap.prototype.registerUniversal = function registerUniversal(attributeName, propertyName) {
-      attributeName = attributeName.toLowerCase();
-      this.allElements[attributeName] = propertyName;
-    };
-
-    AttributeMap.prototype.map = function map(elementName, attributeName) {
-      if (this.svg.isStandardSvgAttribute(elementName, attributeName)) {
-        return attributeName;
-      }
-      elementName = elementName.toLowerCase();
-      attributeName = attributeName.toLowerCase();
-      var element = this.elements[elementName];
-      if (element !== undefined && attributeName in element) {
-        return element[attributeName];
-      }
-      if (attributeName in this.allElements) {
-        return this.allElements[attributeName];
-      }
-
-      if (/(^data-)|(^aria-)|:/.test(attributeName)) {
-        return attributeName;
-      }
-      return (0, _aureliaBinding.camelCase)(attributeName);
-    };
-
-    return AttributeMap;
-  }(), _class.inject = [_aureliaBinding.SVGAnalyzer], _temp);
-
-  var InterpolationBindingExpression = exports.InterpolationBindingExpression = function () {
-    function InterpolationBindingExpression(observerLocator, targetProperty, parts, mode, lookupFunctions, attribute) {
-      
-
-      this.observerLocator = observerLocator;
-      this.targetProperty = targetProperty;
-      this.parts = parts;
-      this.mode = mode;
-      this.lookupFunctions = lookupFunctions;
-      this.attribute = this.attrToRemove = attribute;
-      this.discrete = false;
-    }
-
-    InterpolationBindingExpression.prototype.createBinding = function createBinding(target) {
-      if (this.parts.length === 3) {
-        return new ChildInterpolationBinding(target, this.observerLocator, this.parts[1], this.mode, this.lookupFunctions, this.targetProperty, this.parts[0], this.parts[2]);
-      }
-      return new InterpolationBinding(this.observerLocator, this.parts, target, this.targetProperty, this.mode, this.lookupFunctions);
-    };
-
-    return InterpolationBindingExpression;
-  }();
-
-  function validateTarget(target, propertyName) {
-    if (propertyName === 'style') {
-      LogManager.getLogger('templating-binding').info('Internet Explorer does not support interpolation in "style" attributes.  Use the style attribute\'s alias, "css" instead.');
-    } else if (target.parentElement && target.parentElement.nodeName === 'TEXTAREA' && propertyName === 'textContent') {
-      throw new Error('Interpolation binding cannot be used in the content of a textarea element.  Use <textarea value.bind="expression"></textarea> instead.');
-    }
-  }
-
-  var InterpolationBinding = exports.InterpolationBinding = function () {
-    function InterpolationBinding(observerLocator, parts, target, targetProperty, mode, lookupFunctions) {
-      
-
-      validateTarget(target, targetProperty);
-      this.observerLocator = observerLocator;
-      this.parts = parts;
-      this.target = target;
-      this.targetProperty = targetProperty;
-      this.targetAccessor = observerLocator.getAccessor(target, targetProperty);
-      this.mode = mode;
-      this.lookupFunctions = lookupFunctions;
-    }
-
-    InterpolationBinding.prototype.interpolate = function interpolate() {
-      if (this.isBound) {
-        var value = '';
-        var parts = this.parts;
-        for (var i = 0, ii = parts.length; i < ii; i++) {
-          value += i % 2 === 0 ? parts[i] : this['childBinding' + i].value;
-        }
-        this.targetAccessor.setValue(value, this.target, this.targetProperty);
-      }
-    };
-
-    InterpolationBinding.prototype.updateOneTimeBindings = function updateOneTimeBindings() {
-      for (var i = 1, ii = this.parts.length; i < ii; i += 2) {
-        var child = this['childBinding' + i];
-        if (child.mode === _aureliaBinding.bindingMode.oneTime) {
-          child.call();
-        }
-      }
-    };
-
-    InterpolationBinding.prototype.bind = function bind(source) {
-      if (this.isBound) {
-        if (this.source === source) {
-          return;
-        }
-        this.unbind();
-      }
-      this.source = source;
-
-      var parts = this.parts;
-      for (var i = 1, ii = parts.length; i < ii; i += 2) {
-        var binding = new ChildInterpolationBinding(this, this.observerLocator, parts[i], this.mode, this.lookupFunctions);
-        binding.bind(source);
-        this['childBinding' + i] = binding;
-      }
-
-      this.isBound = true;
-      this.interpolate();
-    };
-
-    InterpolationBinding.prototype.unbind = function unbind() {
-      if (!this.isBound) {
-        return;
-      }
-      this.isBound = false;
-      this.source = null;
-      var parts = this.parts;
-      for (var i = 1, ii = parts.length; i < ii; i += 2) {
-        var name = 'childBinding' + i;
-        this[name].unbind();
-      }
-    };
-
-    return InterpolationBinding;
-  }();
-
-  var ChildInterpolationBinding = exports.ChildInterpolationBinding = (_dec = (0, _aureliaBinding.connectable)(), _dec(_class2 = function () {
-    function ChildInterpolationBinding(target, observerLocator, sourceExpression, mode, lookupFunctions, targetProperty, left, right) {
-      
-
-      if (target instanceof InterpolationBinding) {
-        this.parent = target;
-      } else {
-        validateTarget(target, targetProperty);
-        this.target = target;
-        this.targetProperty = targetProperty;
-        this.targetAccessor = observerLocator.getAccessor(target, targetProperty);
-      }
-      this.observerLocator = observerLocator;
-      this.sourceExpression = sourceExpression;
-      this.mode = mode;
-      this.lookupFunctions = lookupFunctions;
-      this.left = left;
-      this.right = right;
-    }
-
-    ChildInterpolationBinding.prototype.updateTarget = function updateTarget(value) {
-      value = value === null || value === undefined ? '' : value.toString();
-      if (value !== this.value) {
-        this.value = value;
-        if (this.parent) {
-          this.parent.interpolate();
-        } else {
-          this.targetAccessor.setValue(this.left + value + this.right, this.target, this.targetProperty);
-        }
-      }
-    };
-
-    ChildInterpolationBinding.prototype.call = function call() {
-      if (!this.isBound) {
-        return;
-      }
-
-      this.rawValue = this.sourceExpression.evaluate(this.source, this.lookupFunctions);
-      this.updateTarget(this.rawValue);
-
-      if (this.mode !== _aureliaBinding.bindingMode.oneTime) {
-        this._version++;
-        this.sourceExpression.connect(this, this.source);
-        if (this.rawValue instanceof Array) {
-          this.observeArray(this.rawValue);
-        }
-        this.unobserve(false);
-      }
-    };
-
-    ChildInterpolationBinding.prototype.bind = function bind(source) {
-      if (this.isBound) {
-        if (this.source === source) {
-          return;
-        }
-        this.unbind();
-      }
-      this.isBound = true;
-      this.source = source;
-
-      var sourceExpression = this.sourceExpression;
-      if (sourceExpression.bind) {
-        sourceExpression.bind(this, source, this.lookupFunctions);
-      }
-
-      this.rawValue = sourceExpression.evaluate(source, this.lookupFunctions);
-      this.updateTarget(this.rawValue);
-
-      if (this.mode === _aureliaBinding.bindingMode.oneWay) {
-        (0, _aureliaBinding.enqueueBindingConnect)(this);
-      }
-    };
-
-    ChildInterpolationBinding.prototype.unbind = function unbind() {
-      if (!this.isBound) {
-        return;
-      }
-      this.isBound = false;
-      var sourceExpression = this.sourceExpression;
-      if (sourceExpression.unbind) {
-        sourceExpression.unbind(this, this.source);
-      }
-      this.source = null;
-      this.value = null;
-      this.rawValue = null;
-      this.unobserve(true);
-    };
-
-    ChildInterpolationBinding.prototype.connect = function connect(evaluate) {
-      if (!this.isBound) {
-        return;
-      }
-      if (evaluate) {
-        this.rawValue = this.sourceExpression.evaluate(this.source, this.lookupFunctions);
-        this.updateTarget(this.rawValue);
-      }
-      this.sourceExpression.connect(this, this.source);
-      if (this.rawValue instanceof Array) {
-        this.observeArray(this.rawValue);
-      }
-    };
-
-    return ChildInterpolationBinding;
-  }()) || _class2);
-  var SyntaxInterpreter = exports.SyntaxInterpreter = (_temp2 = _class3 = function () {
-    function SyntaxInterpreter(parser, observerLocator, eventManager, attributeMap) {
-      
-
-      this.parser = parser;
-      this.observerLocator = observerLocator;
-      this.eventManager = eventManager;
-      this.attributeMap = attributeMap;
-    }
-
-    SyntaxInterpreter.prototype.interpret = function interpret(resources, element, info, existingInstruction, context) {
-      if (info.command in this) {
-        return this[info.command](resources, element, info, existingInstruction, context);
-      }
-
-      return this.handleUnknownCommand(resources, element, info, existingInstruction, context);
-    };
-
-    SyntaxInterpreter.prototype.handleUnknownCommand = function handleUnknownCommand(resources, element, info, existingInstruction, context) {
-      LogManager.getLogger('templating-binding').warn('Unknown binding command.', info);
-      return existingInstruction;
-    };
-
-    SyntaxInterpreter.prototype.determineDefaultBindingMode = function determineDefaultBindingMode(element, attrName, context) {
-      var tagName = element.tagName.toLowerCase();
-
-      if (tagName === 'input' && (attrName === 'value' || attrName === 'files') && element.type !== 'checkbox' && element.type !== 'radio' || tagName === 'input' && attrName === 'checked' && (element.type === 'checkbox' || element.type === 'radio') || (tagName === 'textarea' || tagName === 'select') && attrName === 'value' || (attrName === 'textcontent' || attrName === 'innerhtml') && element.contentEditable === 'true' || attrName === 'scrolltop' || attrName === 'scrollleft') {
-        return _aureliaBinding.bindingMode.twoWay;
-      }
-
-      if (context && attrName in context.attributes && context.attributes[attrName] && context.attributes[attrName].defaultBindingMode >= _aureliaBinding.bindingMode.oneTime) {
-        return context.attributes[attrName].defaultBindingMode;
-      }
-
-      return _aureliaBinding.bindingMode.oneWay;
-    };
-
-    SyntaxInterpreter.prototype.bind = function bind(resources, element, info, existingInstruction, context) {
-      var instruction = existingInstruction || _aureliaTemplating.BehaviorInstruction.attribute(info.attrName);
-
-      instruction.attributes[info.attrName] = new _aureliaBinding.BindingExpression(this.observerLocator, this.attributeMap.map(element.tagName, info.attrName), this.parser.parse(info.attrValue), info.defaultBindingMode || this.determineDefaultBindingMode(element, info.attrName, context), resources.lookupFunctions);
-
-      return instruction;
-    };
-
-    SyntaxInterpreter.prototype.trigger = function trigger(resources, element, info) {
-      return new _aureliaBinding.ListenerExpression(this.eventManager, info.attrName, this.parser.parse(info.attrValue), false, true, resources.lookupFunctions);
-    };
-
-    SyntaxInterpreter.prototype.delegate = function delegate(resources, element, info) {
-      return new _aureliaBinding.ListenerExpression(this.eventManager, info.attrName, this.parser.parse(info.attrValue), true, true, resources.lookupFunctions);
-    };
-
-    SyntaxInterpreter.prototype.call = function call(resources, element, info, existingInstruction) {
-      var instruction = existingInstruction || _aureliaTemplating.BehaviorInstruction.attribute(info.attrName);
-
-      instruction.attributes[info.attrName] = new _aureliaBinding.CallExpression(this.observerLocator, info.attrName, this.parser.parse(info.attrValue), resources.lookupFunctions);
-
-      return instruction;
-    };
-
-    SyntaxInterpreter.prototype.options = function options(resources, element, info, existingInstruction, context) {
-      var instruction = existingInstruction || _aureliaTemplating.BehaviorInstruction.attribute(info.attrName);
-      var attrValue = info.attrValue;
-      var language = this.language;
-      var name = null;
-      var target = '';
-      var current = void 0;
-      var i = void 0;
-      var ii = void 0;
-      var inString = false;
-      var inEscape = false;
-
-      for (i = 0, ii = attrValue.length; i < ii; ++i) {
-        current = attrValue[i];
-
-        if (current === ';' && !inString) {
-          info = language.inspectAttribute(resources, '?', name, target.trim());
-          language.createAttributeInstruction(resources, element, info, instruction, context);
-
-          if (!instruction.attributes[info.attrName]) {
-            instruction.attributes[info.attrName] = info.attrValue;
-          }
-
-          target = '';
-          name = null;
-        } else if (current === ':' && name === null) {
-          name = target.trim();
-          target = '';
-        } else if (current === '\\') {
-          target += current;
-          inEscape = true;
-          continue;
-        } else {
-          target += current;
-
-          if (name !== null && inEscape === false && current === '\'') {
-            inString = !inString;
-          }
-        }
-
-        inEscape = false;
-      }
-
-      if (name !== null) {
-        info = language.inspectAttribute(resources, '?', name, target.trim());
-        language.createAttributeInstruction(resources, element, info, instruction, context);
-
-        if (!instruction.attributes[info.attrName]) {
-          instruction.attributes[info.attrName] = info.attrValue;
-        }
-      }
-
-      return instruction;
-    };
-
-    SyntaxInterpreter.prototype['for'] = function _for(resources, element, info, existingInstruction) {
-      var parts = void 0;
-      var keyValue = void 0;
-      var instruction = void 0;
-      var attrValue = void 0;
-      var isDestructuring = void 0;
-
-      attrValue = info.attrValue;
-      isDestructuring = attrValue.match(/^ *[[].+[\]]/);
-      parts = isDestructuring ? attrValue.split('of ') : attrValue.split(' of ');
-
-      if (parts.length !== 2) {
-        throw new Error('Incorrect syntax for "for". The form is: "$local of $items" or "[$key, $value] of $items".');
-      }
-
-      instruction = existingInstruction || _aureliaTemplating.BehaviorInstruction.attribute(info.attrName);
-
-      if (isDestructuring) {
-        keyValue = parts[0].replace(/[[\]]/g, '').replace(/,/g, ' ').replace(/\s+/g, ' ').trim().split(' ');
-        instruction.attributes.key = keyValue[0];
-        instruction.attributes.value = keyValue[1];
-      } else {
-        instruction.attributes.local = parts[0];
-      }
-
-      instruction.attributes.items = new _aureliaBinding.BindingExpression(this.observerLocator, 'items', this.parser.parse(parts[1]), _aureliaBinding.bindingMode.oneWay, resources.lookupFunctions);
-
-      return instruction;
-    };
-
-    SyntaxInterpreter.prototype['two-way'] = function twoWay(resources, element, info, existingInstruction) {
-      var instruction = existingInstruction || _aureliaTemplating.BehaviorInstruction.attribute(info.attrName);
-
-      instruction.attributes[info.attrName] = new _aureliaBinding.BindingExpression(this.observerLocator, this.attributeMap.map(element.tagName, info.attrName), this.parser.parse(info.attrValue), _aureliaBinding.bindingMode.twoWay, resources.lookupFunctions);
-
-      return instruction;
-    };
-
-    SyntaxInterpreter.prototype['one-way'] = function oneWay(resources, element, info, existingInstruction) {
-      var instruction = existingInstruction || _aureliaTemplating.BehaviorInstruction.attribute(info.attrName);
-
-      instruction.attributes[info.attrName] = new _aureliaBinding.BindingExpression(this.observerLocator, this.attributeMap.map(element.tagName, info.attrName), this.parser.parse(info.attrValue), _aureliaBinding.bindingMode.oneWay, resources.lookupFunctions);
-
-      return instruction;
-    };
-
-    SyntaxInterpreter.prototype['one-time'] = function oneTime(resources, element, info, existingInstruction) {
-      var instruction = existingInstruction || _aureliaTemplating.BehaviorInstruction.attribute(info.attrName);
-
-      instruction.attributes[info.attrName] = new _aureliaBinding.BindingExpression(this.observerLocator, this.attributeMap.map(element.tagName, info.attrName), this.parser.parse(info.attrValue), _aureliaBinding.bindingMode.oneTime, resources.lookupFunctions);
-
-      return instruction;
-    };
-
-    return SyntaxInterpreter;
-  }(), _class3.inject = [_aureliaBinding.Parser, _aureliaBinding.ObserverLocator, _aureliaBinding.EventManager, AttributeMap], _temp2);
-
-  var info = {};
-
-  var TemplatingBindingLanguage = exports.TemplatingBindingLanguage = (_temp3 = _class4 = function (_BindingLanguage) {
-    _inherits(TemplatingBindingLanguage, _BindingLanguage);
-
-    function TemplatingBindingLanguage(parser, observerLocator, syntaxInterpreter, attributeMap) {
-      
-
-      var _this = _possibleConstructorReturn(this, _BindingLanguage.call(this));
-
-      _this.parser = parser;
-      _this.observerLocator = observerLocator;
-      _this.syntaxInterpreter = syntaxInterpreter;
-      _this.emptyStringExpression = _this.parser.parse('\'\'');
-      syntaxInterpreter.language = _this;
-      _this.attributeMap = attributeMap;
+      _this.compositionEngine = compositionEngine;
       return _this;
     }
 
-    TemplatingBindingLanguage.prototype.inspectAttribute = function inspectAttribute(resources, elementName, attrName, attrValue) {
-      var parts = attrName.split('.');
+    TemplatingRouteLoader.prototype.loadRoute = function loadRoute(router, config) {
+      var childContainer = router.container.createChild();
+      var instruction = {
+        viewModel: (0, _aureliaPath.relativeToFile)(config.moduleId, _aureliaMetadata.Origin.get(router.container.viewModel.constructor).moduleId),
+        childContainer: childContainer,
+        view: config.view || config.viewStrategy,
+        router: router
+      };
 
-      info.defaultBindingMode = null;
+      childContainer.getChildRouter = function () {
+        var childRouter = void 0;
 
-      if (parts.length === 2) {
-        info.attrName = parts[0].trim();
-        info.attrValue = attrValue;
-        info.command = parts[1].trim();
+        childContainer.registerHandler(_aureliaRouter.Router, function (c) {
+          return childRouter || (childRouter = router.createChild(childContainer));
+        });
 
-        if (info.command === 'ref') {
-          info.expression = new _aureliaBinding.NameExpression(this.parser.parse(attrValue), info.attrName, resources.lookupFunctions);
-          info.command = null;
-          info.attrName = 'ref';
-        } else {
-          info.expression = null;
-        }
-      } else if (attrName === 'ref') {
-        info.attrName = attrName;
-        info.attrValue = attrValue;
-        info.command = null;
-        info.expression = new _aureliaBinding.NameExpression(this.parser.parse(attrValue), 'element', resources.lookupFunctions);
-      } else {
-        info.attrName = attrName;
-        info.attrValue = attrValue;
-        info.command = null;
-        var interpolationParts = this.parseInterpolation(resources, attrValue);
-        if (interpolationParts === null) {
-          info.expression = null;
-        } else {
-          info.expression = new InterpolationBindingExpression(this.observerLocator, this.attributeMap.map(elementName, attrName), interpolationParts, _aureliaBinding.bindingMode.oneWay, resources.lookupFunctions, attrName);
-        }
-      }
+        return childContainer.get(_aureliaRouter.Router);
+      };
 
-      return info;
+      return this.compositionEngine.ensureViewModel(instruction);
     };
 
-    TemplatingBindingLanguage.prototype.createAttributeInstruction = function createAttributeInstruction(resources, element, theInfo, existingInstruction, context) {
-      var instruction = void 0;
+    return TemplatingRouteLoader;
+  }(_aureliaRouter.RouteLoader)) || _class);
+});
+define('aurelia-templating-router/router-view',['exports', 'aurelia-dependency-injection', 'aurelia-templating', 'aurelia-router', 'aurelia-metadata', 'aurelia-pal'], function (exports, _aureliaDependencyInjection, _aureliaTemplating, _aureliaRouter, _aureliaMetadata, _aureliaPal) {
+  'use strict';
 
-      if (theInfo.expression) {
-        if (theInfo.attrName === 'ref') {
-          return theInfo.expression;
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.RouterView = undefined;
+
+  function _initDefineProp(target, property, descriptor, context) {
+    if (!descriptor) return;
+    Object.defineProperty(target, property, {
+      enumerable: descriptor.enumerable,
+      configurable: descriptor.configurable,
+      writable: descriptor.writable,
+      value: descriptor.initializer ? descriptor.initializer.call(context) : void 0
+    });
+  }
+
+  function _applyDecoratedDescriptor(target, property, decorators, descriptor, context) {
+    var desc = {};
+    Object['ke' + 'ys'](descriptor).forEach(function (key) {
+      desc[key] = descriptor[key];
+    });
+    desc.enumerable = !!desc.enumerable;
+    desc.configurable = !!desc.configurable;
+
+    if ('value' in desc || desc.initializer) {
+      desc.writable = true;
+    }
+
+    desc = decorators.slice().reverse().reduce(function (desc, decorator) {
+      return decorator(target, property, desc) || desc;
+    }, desc);
+
+    if (context && desc.initializer !== void 0) {
+      desc.value = desc.initializer ? desc.initializer.call(context) : void 0;
+      desc.initializer = undefined;
+    }
+
+    if (desc.initializer === void 0) {
+      Object['define' + 'Property'](target, property, desc);
+      desc = null;
+    }
+
+    return desc;
+  }
+
+  function _initializerWarningHelper(descriptor, context) {
+    throw new Error('Decorating class property failed. Please ensure that transform-class-properties is enabled.');
+  }
+
+  var _dec, _dec2, _class, _desc, _value, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4;
+
+  
+
+  var SwapStrategies = function () {
+    function SwapStrategies() {
+      
+    }
+
+    SwapStrategies.prototype.before = function before(viewSlot, previousView, callback) {
+      var promise = Promise.resolve(callback());
+
+      if (previousView !== undefined) {
+        return promise.then(function () {
+          return viewSlot.remove(previousView, true);
+        });
+      }
+
+      return promise;
+    };
+
+    SwapStrategies.prototype.with = function _with(viewSlot, previousView, callback) {
+      var promise = Promise.resolve(callback());
+
+      if (previousView !== undefined) {
+        return Promise.all([viewSlot.remove(previousView, true), promise]);
+      }
+
+      return promise;
+    };
+
+    SwapStrategies.prototype.after = function after(viewSlot, previousView, callback) {
+      return Promise.resolve(viewSlot.removeAll(true)).then(callback);
+    };
+
+    return SwapStrategies;
+  }();
+
+  var swapStrategies = new SwapStrategies();
+
+  var RouterView = exports.RouterView = (_dec = (0, _aureliaTemplating.customElement)('router-view'), _dec2 = (0, _aureliaDependencyInjection.inject)(_aureliaPal.DOM.Element, _aureliaDependencyInjection.Container, _aureliaTemplating.ViewSlot, _aureliaRouter.Router, _aureliaTemplating.ViewLocator, _aureliaTemplating.CompositionTransaction, _aureliaTemplating.CompositionEngine), _dec(_class = (0, _aureliaTemplating.noView)(_class = _dec2(_class = (_class2 = function () {
+    function RouterView(element, container, viewSlot, router, viewLocator, compositionTransaction, compositionEngine) {
+      
+
+      _initDefineProp(this, 'swapOrder', _descriptor, this);
+
+      _initDefineProp(this, 'layoutView', _descriptor2, this);
+
+      _initDefineProp(this, 'layoutViewModel', _descriptor3, this);
+
+      _initDefineProp(this, 'layoutModel', _descriptor4, this);
+
+      this.element = element;
+      this.container = container;
+      this.viewSlot = viewSlot;
+      this.router = router;
+      this.viewLocator = viewLocator;
+      this.compositionTransaction = compositionTransaction;
+      this.compositionEngine = compositionEngine;
+      this.router.registerViewPort(this, this.element.getAttribute('name'));
+
+      if (!('initialComposition' in compositionTransaction)) {
+        compositionTransaction.initialComposition = true;
+        this.compositionTransactionNotifier = compositionTransaction.enlist();
+      }
+    }
+
+    RouterView.prototype.created = function created(owningView) {
+      this.owningView = owningView;
+    };
+
+    RouterView.prototype.bind = function bind(bindingContext, overrideContext) {
+      this.container.viewModel = bindingContext;
+      this.overrideContext = overrideContext;
+    };
+
+    RouterView.prototype.process = function process(viewPortInstruction, waitToSwap) {
+      var _this = this;
+
+      var component = viewPortInstruction.component;
+      var childContainer = component.childContainer;
+      var viewModel = component.viewModel;
+      var viewModelResource = component.viewModelResource;
+      var metadata = viewModelResource.metadata;
+      var config = component.router.currentInstruction.config;
+      var viewPort = config.viewPorts ? config.viewPorts[viewPortInstruction.name] : {};
+
+      var layoutInstruction = {
+        viewModel: viewPort.layoutViewModel || config.layoutViewModel || this.layoutViewModel,
+        view: viewPort.layoutView || config.layoutView || this.layoutView,
+        model: viewPort.layoutModel || config.layoutModel || this.layoutModel,
+        router: viewPortInstruction.component.router,
+        childContainer: childContainer,
+        viewSlot: this.viewSlot
+      };
+
+      var viewStrategy = this.viewLocator.getViewStrategy(component.view || viewModel);
+      if (viewStrategy && component.view) {
+        viewStrategy.makeRelativeTo(_aureliaMetadata.Origin.get(component.router.container.viewModel.constructor).moduleId);
+      }
+
+      return metadata.load(childContainer, viewModelResource.value, null, viewStrategy, true).then(function (viewFactory) {
+        if (!_this.compositionTransactionNotifier) {
+          _this.compositionTransactionOwnershipToken = _this.compositionTransaction.tryCapture();
         }
 
-        instruction = existingInstruction || _aureliaTemplating.BehaviorInstruction.attribute(theInfo.attrName);
-        instruction.attributes[theInfo.attrName] = theInfo.expression;
-      } else if (theInfo.command) {
-        instruction = this.syntaxInterpreter.interpret(resources, element, theInfo, existingInstruction, context);
-      }
+        if (layoutInstruction.viewModel || layoutInstruction.view) {
+          viewPortInstruction.layoutInstruction = layoutInstruction;
+        }
 
-      return instruction;
+        viewPortInstruction.controller = metadata.create(childContainer, _aureliaTemplating.BehaviorInstruction.dynamic(_this.element, viewModel, viewFactory));
+
+        if (waitToSwap) {
+          return;
+        }
+
+        _this.swap(viewPortInstruction);
+      });
     };
 
-    TemplatingBindingLanguage.prototype.inspectTextContent = function inspectTextContent(resources, value) {
-      var parts = this.parseInterpolation(resources, value);
-      if (parts === null) {
-        return null;
-      }
-      return new InterpolationBindingExpression(this.observerLocator, 'textContent', parts, _aureliaBinding.bindingMode.oneWay, resources.lookupFunctions, 'textContent');
-    };
+    RouterView.prototype.swap = function swap(viewPortInstruction) {
+      var _this2 = this;
 
-    TemplatingBindingLanguage.prototype.parseInterpolation = function parseInterpolation(resources, value) {
-      var i = value.indexOf('${', 0);
-      var ii = value.length;
-      var char = void 0;
-      var pos = 0;
-      var open = 0;
-      var quote = null;
-      var interpolationStart = void 0;
-      var parts = void 0;
-      var partIndex = 0;
+      var work = function work() {
+        var previousView = _this2.view;
+        var swapStrategy = void 0;
+        var viewSlot = _this2.viewSlot;
+        var layoutInstruction = viewPortInstruction.layoutInstruction;
 
-      while (i >= 0 && i < ii - 2) {
-        open = 1;
-        interpolationStart = i;
-        i += 2;
+        swapStrategy = _this2.swapOrder in swapStrategies ? swapStrategies[_this2.swapOrder] : swapStrategies.after;
 
-        do {
-          char = value[i];
-          i++;
+        swapStrategy(viewSlot, previousView, function () {
+          var waitForView = void 0;
 
-          if (char === "'" || char === '"') {
-            if (quote === null) {
-              quote = char;
-            } else if (quote === char) {
-              quote = null;
+          if (layoutInstruction) {
+            if (!layoutInstruction.viewModel) {
+              layoutInstruction.viewModel = {};
             }
-            continue;
-          }
 
-          if (char === '\\') {
-            i++;
-            continue;
-          }
-
-          if (quote !== null) {
-            continue;
-          }
-
-          if (char === '{') {
-            open++;
-          } else if (char === '}') {
-            open--;
-          }
-        } while (open > 0 && i < ii);
-
-        if (open === 0) {
-          parts = parts || [];
-          if (value[interpolationStart - 1] === '\\' && value[interpolationStart - 2] !== '\\') {
-            parts[partIndex] = value.substring(pos, interpolationStart - 1) + value.substring(interpolationStart, i);
-            partIndex++;
-            parts[partIndex] = this.emptyStringExpression;
-            partIndex++;
+            waitForView = _this2.compositionEngine.createController(layoutInstruction).then(function (layout) {
+              _aureliaTemplating.ShadowDOM.distributeView(viewPortInstruction.controller.view, layout.slots || layout.view.slots);
+              return layout.view || layout;
+            });
           } else {
-            parts[partIndex] = value.substring(pos, interpolationStart);
-            partIndex++;
-            parts[partIndex] = this.parser.parse(value.substring(interpolationStart + 2, i - 1));
-            partIndex++;
+            waitForView = Promise.resolve(viewPortInstruction.controller.view);
           }
-          pos = i;
-          i = value.indexOf('${', i);
-        } else {
+
+          return waitForView.then(function (newView) {
+            _this2.view = newView;
+            return viewSlot.add(newView);
+          }).then(function () {
+            _this2._notify();
+          });
+        });
+      };
+
+      viewPortInstruction.controller.automate(this.overrideContext, this.owningView);
+
+      if (this.compositionTransactionOwnershipToken) {
+        return this.compositionTransactionOwnershipToken.waitForCompositionComplete().then(function () {
+          _this2.compositionTransactionOwnershipToken = null;
+          return work();
+        });
+      }
+
+      return work();
+    };
+
+    RouterView.prototype._notify = function _notify() {
+      if (this.compositionTransactionNotifier) {
+        this.compositionTransactionNotifier.done();
+        this.compositionTransactionNotifier = null;
+      }
+    };
+
+    return RouterView;
+  }(), (_descriptor = _applyDecoratedDescriptor(_class2.prototype, 'swapOrder', [_aureliaTemplating.bindable], {
+    enumerable: true,
+    initializer: null
+  }), _descriptor2 = _applyDecoratedDescriptor(_class2.prototype, 'layoutView', [_aureliaTemplating.bindable], {
+    enumerable: true,
+    initializer: null
+  }), _descriptor3 = _applyDecoratedDescriptor(_class2.prototype, 'layoutViewModel', [_aureliaTemplating.bindable], {
+    enumerable: true,
+    initializer: null
+  }), _descriptor4 = _applyDecoratedDescriptor(_class2.prototype, 'layoutModel', [_aureliaTemplating.bindable], {
+    enumerable: true,
+    initializer: null
+  })), _class2)) || _class) || _class) || _class);
+});
+define('aurelia-templating-router/route-href',['exports', 'aurelia-templating', 'aurelia-dependency-injection', 'aurelia-router', 'aurelia-pal', 'aurelia-logging'], function (exports, _aureliaTemplating, _aureliaDependencyInjection, _aureliaRouter, _aureliaPal, _aureliaLogging) {
+  'use strict';
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.RouteHref = undefined;
+
+  var LogManager = _interopRequireWildcard(_aureliaLogging);
+
+  function _interopRequireWildcard(obj) {
+    if (obj && obj.__esModule) {
+      return obj;
+    } else {
+      var newObj = {};
+
+      if (obj != null) {
+        for (var key in obj) {
+          if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key];
+        }
+      }
+
+      newObj.default = obj;
+      return newObj;
+    }
+  }
+
+  
+
+  var _dec, _dec2, _dec3, _dec4, _dec5, _class;
+
+  var logger = LogManager.getLogger('route-href');
+
+  var RouteHref = exports.RouteHref = (_dec = (0, _aureliaTemplating.customAttribute)('route-href'), _dec2 = (0, _aureliaTemplating.bindable)({ name: 'route', changeHandler: 'processChange' }), _dec3 = (0, _aureliaTemplating.bindable)({ name: 'params', changeHandler: 'processChange' }), _dec4 = (0, _aureliaTemplating.bindable)({ name: 'attribute', defaultValue: 'href' }), _dec5 = (0, _aureliaDependencyInjection.inject)(_aureliaRouter.Router, _aureliaPal.DOM.Element), _dec(_class = _dec2(_class = _dec3(_class = _dec4(_class = _dec5(_class = function () {
+    function RouteHref(router, element) {
+      
+
+      this.router = router;
+      this.element = element;
+    }
+
+    RouteHref.prototype.bind = function bind() {
+      this.isActive = true;
+      this.processChange();
+    };
+
+    RouteHref.prototype.unbind = function unbind() {
+      this.isActive = false;
+    };
+
+    RouteHref.prototype.attributeChanged = function attributeChanged(value, previous) {
+      if (previous) {
+        this.element.removeAttribute(previous);
+      }
+
+      this.processChange();
+    };
+
+    RouteHref.prototype.processChange = function processChange() {
+      var _this = this;
+
+      return this.router.ensureConfigured().then(function () {
+        if (!_this.isActive) {
+          return null;
+        }
+
+        var href = _this.router.generate(_this.route, _this.params);
+        _this.element.setAttribute(_this.attribute, href);
+        return null;
+      }).catch(function (reason) {
+        logger.error(reason);
+      });
+    };
+
+    return RouteHref;
+  }()) || _class) || _class) || _class) || _class) || _class);
+});
+define('aurelia-testing/aurelia-testing',['exports', './compile-spy', './view-spy', './component-tester'], function (exports, _compileSpy, _viewSpy, _componentTester) {
+  'use strict';
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.configure = exports.ComponentTester = exports.StageComponent = exports.ViewSpy = exports.CompileSpy = undefined;
+
+
+  function configure(config) {
+    config.globalResources('./compile-spy', './view-spy');
+  }
+
+  exports.CompileSpy = _compileSpy.CompileSpy;
+  exports.ViewSpy = _viewSpy.ViewSpy;
+  exports.StageComponent = _componentTester.StageComponent;
+  exports.ComponentTester = _componentTester.ComponentTester;
+  exports.configure = configure;
+});;define('aurelia-testing', ['aurelia-testing/aurelia-testing'], function (main) { return main; });
+
+define('aurelia-testing/compile-spy',['exports', 'aurelia-templating', 'aurelia-dependency-injection', 'aurelia-logging', 'aurelia-pal'], function (exports, _aureliaTemplating, _aureliaDependencyInjection, _aureliaLogging, _aureliaPal) {
+  'use strict';
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.CompileSpy = undefined;
+
+  var LogManager = _interopRequireWildcard(_aureliaLogging);
+
+  function _interopRequireWildcard(obj) {
+    if (obj && obj.__esModule) {
+      return obj;
+    } else {
+      var newObj = {};
+
+      if (obj != null) {
+        for (var key in obj) {
+          if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key];
+        }
+      }
+
+      newObj.default = obj;
+      return newObj;
+    }
+  }
+
+  
+
+  var _dec, _dec2, _class;
+
+  var CompileSpy = exports.CompileSpy = (_dec = (0, _aureliaTemplating.customAttribute)('compile-spy'), _dec2 = (0, _aureliaDependencyInjection.inject)(_aureliaPal.DOM.Element, _aureliaTemplating.TargetInstruction), _dec(_class = _dec2(_class = function CompileSpy(element, instruction) {
+    
+
+    LogManager.getLogger('compile-spy').info(element, instruction);
+  }) || _class) || _class);
+});
+define('aurelia-testing/view-spy',['exports', 'aurelia-templating', 'aurelia-logging'], function (exports, _aureliaTemplating, _aureliaLogging) {
+  'use strict';
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.ViewSpy = undefined;
+
+  var LogManager = _interopRequireWildcard(_aureliaLogging);
+
+  function _interopRequireWildcard(obj) {
+    if (obj && obj.__esModule) {
+      return obj;
+    } else {
+      var newObj = {};
+
+      if (obj != null) {
+        for (var key in obj) {
+          if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key];
+        }
+      }
+
+      newObj.default = obj;
+      return newObj;
+    }
+  }
+
+  
+
+  var _dec, _class;
+
+  var ViewSpy = exports.ViewSpy = (_dec = (0, _aureliaTemplating.customAttribute)('view-spy'), _dec(_class = function () {
+    function ViewSpy() {
+      
+
+      this.logger = LogManager.getLogger('view-spy');
+    }
+
+    ViewSpy.prototype._log = function _log(lifecycleName, context) {
+      if (!this.value && lifecycleName === 'created') {
+        this.logger.info(lifecycleName, this.view);
+      } else if (this.value && this.value.indexOf(lifecycleName) !== -1) {
+        this.logger.info(lifecycleName, this.view, context);
+      }
+    };
+
+    ViewSpy.prototype.created = function created(view) {
+      this.view = view;
+      this._log('created');
+    };
+
+    ViewSpy.prototype.bind = function bind(bindingContext) {
+      this._log('bind', bindingContext);
+    };
+
+    ViewSpy.prototype.attached = function attached() {
+      this._log('attached');
+    };
+
+    ViewSpy.prototype.detached = function detached() {
+      this._log('detached');
+    };
+
+    ViewSpy.prototype.unbind = function unbind() {
+      this._log('unbind');
+    };
+
+    return ViewSpy;
+  }()) || _class);
+});
+define('aurelia-testing/component-tester',['exports', 'aurelia-templating', 'aurelia-framework'], function (exports, _aureliaTemplating, _aureliaFramework) {
+  'use strict';
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.ComponentTester = exports.StageComponent = undefined;
+
+  
+
+  var StageComponent = exports.StageComponent = {
+    withResources: function withResources(resources) {
+      return new ComponentTester().withResources(resources);
+    }
+  };
+
+  var ComponentTester = exports.ComponentTester = function () {
+    function ComponentTester() {
+      
+
+      this.configure = function (aurelia) {
+        return aurelia.use.standardConfiguration();
+      };
+
+      this._resources = [];
+    }
+
+    ComponentTester.prototype.bootstrap = function bootstrap(configure) {
+      this.configure = configure;
+    };
+
+    ComponentTester.prototype.withResources = function withResources(resources) {
+      this._resources = resources;
+      return this;
+    };
+
+    ComponentTester.prototype.inView = function inView(html) {
+      this._html = html;
+      return this;
+    };
+
+    ComponentTester.prototype.boundTo = function boundTo(bindingContext) {
+      this._bindingContext = bindingContext;
+      return this;
+    };
+
+    ComponentTester.prototype.manuallyHandleLifecycle = function manuallyHandleLifecycle() {
+      this._prepareLifecycle();
+      return this;
+    };
+
+    ComponentTester.prototype.create = function create(bootstrap) {
+      var _this = this;
+
+      return bootstrap(function (aurelia) {
+        return Promise.resolve(_this.configure(aurelia)).then(function () {
+          if (_this._resources) {
+            aurelia.use.globalResources(_this._resources);
+          }
+
+          return aurelia.start().then(function (a) {
+            _this.host = document.createElement('div');
+            _this.host.innerHTML = _this._html;
+
+            document.body.appendChild(_this.host);
+
+            return aurelia.enhance(_this._bindingContext, _this.host).then(function () {
+              _this._rootView = aurelia.root;
+              _this.element = _this.host.firstElementChild;
+
+              if (aurelia.root.controllers.length) {
+                _this.viewModel = aurelia.root.controllers[0].viewModel;
+              }
+
+              return new Promise(function (resolve) {
+                return setTimeout(function () {
+                  return resolve();
+                }, 0);
+              });
+            });
+          });
+        });
+      });
+    };
+
+    ComponentTester.prototype.dispose = function dispose() {
+      if (this.host === undefined || this._rootView === undefined) {
+        throw new Error('Cannot call ComponentTester.dispose() before ComponentTester.create()');
+      }
+
+      this._rootView.detached();
+      this._rootView.unbind();
+
+      return this.host.parentNode.removeChild(this.host);
+    };
+
+    ComponentTester.prototype._prepareLifecycle = function _prepareLifecycle() {
+      var _this2 = this;
+
+      var bindPrototype = _aureliaTemplating.View.prototype.bind;
+      _aureliaTemplating.View.prototype.bind = function () {};
+      this.bind = function (bindingContext) {
+        return new Promise(function (resolve) {
+          _aureliaTemplating.View.prototype.bind = bindPrototype;
+          if (bindingContext !== undefined) {
+            _this2._bindingContext = bindingContext;
+          }
+          _this2._rootView.bind(_this2._bindingContext);
+          setTimeout(function () {
+            return resolve();
+          }, 0);
+        });
+      };
+
+      var attachedPrototype = _aureliaTemplating.View.prototype.attached;
+      _aureliaTemplating.View.prototype.attached = function () {};
+      this.attached = function () {
+        return new Promise(function (resolve) {
+          _aureliaTemplating.View.prototype.attached = attachedPrototype;
+          _this2._rootView.attached();
+          setTimeout(function () {
+            return resolve();
+          }, 0);
+        });
+      };
+
+      this.detached = function () {
+        return new Promise(function (resolve) {
+          _this2._rootView.detached();
+          setTimeout(function () {
+            return resolve();
+          }, 0);
+        });
+      };
+
+      this.unbind = function () {
+        return new Promise(function (resolve) {
+          _this2._rootView.unbind();
+          setTimeout(function () {
+            return resolve();
+          }, 0);
+        });
+      };
+    };
+
+    return ComponentTester;
+  }();
+});
+define('regenerator-runtime/runtime',['require','exports','module'],function (require, exports, module) {/**
+ * Copyright (c) 2014, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * https://raw.github.com/facebook/regenerator/master/LICENSE file. An
+ * additional grant of patent rights can be found in the PATENTS file in
+ * the same directory.
+ */
+
+!(function(global) {
+  "use strict";
+
+  var hasOwn = Object.prototype.hasOwnProperty;
+  var undefined; // More compressible than void 0.
+  var $Symbol = typeof Symbol === "function" ? Symbol : {};
+  var iteratorSymbol = $Symbol.iterator || "@@iterator";
+  var toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag";
+
+  var inModule = typeof module === "object";
+  var runtime = global.regeneratorRuntime;
+  if (runtime) {
+    if (inModule) {
+      // If regeneratorRuntime is defined globally and we're in a module,
+      // make the exports object identical to regeneratorRuntime.
+      module.exports = runtime;
+    }
+    // Don't bother evaluating the rest of this file if the runtime was
+    // already defined globally.
+    return;
+  }
+
+  // Define the runtime globally (as expected by generated code) as either
+  // module.exports (if we're in a module) or a new, empty object.
+  runtime = global.regeneratorRuntime = inModule ? module.exports : {};
+
+  function wrap(innerFn, outerFn, self, tryLocsList) {
+    // If outerFn provided, then outerFn.prototype instanceof Generator.
+    var generator = Object.create((outerFn || Generator).prototype);
+    var context = new Context(tryLocsList || []);
+
+    // The ._invoke method unifies the implementations of the .next,
+    // .throw, and .return methods.
+    generator._invoke = makeInvokeMethod(innerFn, self, context);
+
+    return generator;
+  }
+  runtime.wrap = wrap;
+
+  // Try/catch helper to minimize deoptimizations. Returns a completion
+  // record like context.tryEntries[i].completion. This interface could
+  // have been (and was previously) designed to take a closure to be
+  // invoked without arguments, but in all the cases we care about we
+  // already have an existing method we want to call, so there's no need
+  // to create a new function object. We can even get away with assuming
+  // the method takes exactly one argument, since that happens to be true
+  // in every case, so we don't have to touch the arguments object. The
+  // only additional allocation required is the completion record, which
+  // has a stable shape and so hopefully should be cheap to allocate.
+  function tryCatch(fn, obj, arg) {
+    try {
+      return { type: "normal", arg: fn.call(obj, arg) };
+    } catch (err) {
+      return { type: "throw", arg: err };
+    }
+  }
+
+  var GenStateSuspendedStart = "suspendedStart";
+  var GenStateSuspendedYield = "suspendedYield";
+  var GenStateExecuting = "executing";
+  var GenStateCompleted = "completed";
+
+  // Returning this object from the innerFn has the same effect as
+  // breaking out of the dispatch switch statement.
+  var ContinueSentinel = {};
+
+  // Dummy constructor functions that we use as the .constructor and
+  // .constructor.prototype properties for functions that return Generator
+  // objects. For full spec compliance, you may wish to configure your
+  // minifier not to mangle the names of these two functions.
+  function Generator() {}
+  function GeneratorFunction() {}
+  function GeneratorFunctionPrototype() {}
+
+  var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype;
+  GeneratorFunction.prototype = Gp.constructor = GeneratorFunctionPrototype;
+  GeneratorFunctionPrototype.constructor = GeneratorFunction;
+  GeneratorFunctionPrototype[toStringTagSymbol] = GeneratorFunction.displayName = "GeneratorFunction";
+
+  // Helper for defining the .next, .throw, and .return methods of the
+  // Iterator interface in terms of a single ._invoke method.
+  function defineIteratorMethods(prototype) {
+    ["next", "throw", "return"].forEach(function(method) {
+      prototype[method] = function(arg) {
+        return this._invoke(method, arg);
+      };
+    });
+  }
+
+  runtime.isGeneratorFunction = function(genFun) {
+    var ctor = typeof genFun === "function" && genFun.constructor;
+    return ctor
+      ? ctor === GeneratorFunction ||
+        // For the native GeneratorFunction constructor, the best we can
+        // do is to check its .name property.
+        (ctor.displayName || ctor.name) === "GeneratorFunction"
+      : false;
+  };
+
+  runtime.mark = function(genFun) {
+    if (Object.setPrototypeOf) {
+      Object.setPrototypeOf(genFun, GeneratorFunctionPrototype);
+    } else {
+      genFun.__proto__ = GeneratorFunctionPrototype;
+      if (!(toStringTagSymbol in genFun)) {
+        genFun[toStringTagSymbol] = "GeneratorFunction";
+      }
+    }
+    genFun.prototype = Object.create(Gp);
+    return genFun;
+  };
+
+  // Within the body of any async function, `await x` is transformed to
+  // `yield regeneratorRuntime.awrap(x)`, so that the runtime can test
+  // `value instanceof AwaitArgument` to determine if the yielded value is
+  // meant to be awaited. Some may consider the name of this method too
+  // cutesy, but they are curmudgeons.
+  runtime.awrap = function(arg) {
+    return new AwaitArgument(arg);
+  };
+
+  function AwaitArgument(arg) {
+    this.arg = arg;
+  }
+
+  function AsyncIterator(generator) {
+    function invoke(method, arg, resolve, reject) {
+      var record = tryCatch(generator[method], generator, arg);
+      if (record.type === "throw") {
+        reject(record.arg);
+      } else {
+        var result = record.arg;
+        var value = result.value;
+        if (value instanceof AwaitArgument) {
+          return Promise.resolve(value.arg).then(function(value) {
+            invoke("next", value, resolve, reject);
+          }, function(err) {
+            invoke("throw", err, resolve, reject);
+          });
+        }
+
+        return Promise.resolve(value).then(function(unwrapped) {
+          // When a yielded Promise is resolved, its final value becomes
+          // the .value of the Promise<{value,done}> result for the
+          // current iteration. If the Promise is rejected, however, the
+          // result for this iteration will be rejected with the same
+          // reason. Note that rejections of yielded Promises are not
+          // thrown back into the generator function, as is the case
+          // when an awaited Promise is rejected. This difference in
+          // behavior between yield and await is important, because it
+          // allows the consumer to decide what to do with the yielded
+          // rejection (swallow it and continue, manually .throw it back
+          // into the generator, abandon iteration, whatever). With
+          // await, by contrast, there is no opportunity to examine the
+          // rejection reason outside the generator function, so the
+          // only option is to throw it from the await expression, and
+          // let the generator function handle the exception.
+          result.value = unwrapped;
+          resolve(result);
+        }, reject);
+      }
+    }
+
+    if (typeof process === "object" && process.domain) {
+      invoke = process.domain.bind(invoke);
+    }
+
+    var previousPromise;
+
+    function enqueue(method, arg) {
+      function callInvokeWithMethodAndArg() {
+        return new Promise(function(resolve, reject) {
+          invoke(method, arg, resolve, reject);
+        });
+      }
+
+      return previousPromise =
+        // If enqueue has been called before, then we want to wait until
+        // all previous Promises have been resolved before calling invoke,
+        // so that results are always delivered in the correct order. If
+        // enqueue has not been called before, then it is important to
+        // call invoke immediately, without waiting on a callback to fire,
+        // so that the async generator function has the opportunity to do
+        // any necessary setup in a predictable way. This predictability
+        // is why the Promise constructor synchronously invokes its
+        // executor callback, and why async functions synchronously
+        // execute code before the first await. Since we implement simple
+        // async functions in terms of async generators, it is especially
+        // important to get this right, even though it requires care.
+        previousPromise ? previousPromise.then(
+          callInvokeWithMethodAndArg,
+          // Avoid propagating failures to Promises returned by later
+          // invocations of the iterator.
+          callInvokeWithMethodAndArg
+        ) : callInvokeWithMethodAndArg();
+    }
+
+    // Define the unified helper method that is used to implement .next,
+    // .throw, and .return (see defineIteratorMethods).
+    this._invoke = enqueue;
+  }
+
+  defineIteratorMethods(AsyncIterator.prototype);
+
+  // Note that simple async functions are implemented on top of
+  // AsyncIterator objects; they just return a Promise for the value of
+  // the final result produced by the iterator.
+  runtime.async = function(innerFn, outerFn, self, tryLocsList) {
+    var iter = new AsyncIterator(
+      wrap(innerFn, outerFn, self, tryLocsList)
+    );
+
+    return runtime.isGeneratorFunction(outerFn)
+      ? iter // If outerFn is a generator, return the full iterator.
+      : iter.next().then(function(result) {
+          return result.done ? result.value : iter.next();
+        });
+  };
+
+  function makeInvokeMethod(innerFn, self, context) {
+    var state = GenStateSuspendedStart;
+
+    return function invoke(method, arg) {
+      if (state === GenStateExecuting) {
+        throw new Error("Generator is already running");
+      }
+
+      if (state === GenStateCompleted) {
+        if (method === "throw") {
+          throw arg;
+        }
+
+        // Be forgiving, per 25.3.3.3.3 of the spec:
+        // https://people.mozilla.org/~jorendorff/es6-draft.html#sec-generatorresume
+        return doneResult();
+      }
+
+      while (true) {
+        var delegate = context.delegate;
+        if (delegate) {
+          if (method === "return" ||
+              (method === "throw" && delegate.iterator[method] === undefined)) {
+            // A return or throw (when the delegate iterator has no throw
+            // method) always terminates the yield* loop.
+            context.delegate = null;
+
+            // If the delegate iterator has a return method, give it a
+            // chance to clean up.
+            var returnMethod = delegate.iterator["return"];
+            if (returnMethod) {
+              var record = tryCatch(returnMethod, delegate.iterator, arg);
+              if (record.type === "throw") {
+                // If the return method threw an exception, let that
+                // exception prevail over the original return or throw.
+                method = "throw";
+                arg = record.arg;
+                continue;
+              }
+            }
+
+            if (method === "return") {
+              // Continue with the outer return, now that the delegate
+              // iterator has been terminated.
+              continue;
+            }
+          }
+
+          var record = tryCatch(
+            delegate.iterator[method],
+            delegate.iterator,
+            arg
+          );
+
+          if (record.type === "throw") {
+            context.delegate = null;
+
+            // Like returning generator.throw(uncaught), but without the
+            // overhead of an extra function call.
+            method = "throw";
+            arg = record.arg;
+            continue;
+          }
+
+          // Delegate generator ran and handled its own exceptions so
+          // regardless of what the method was, we continue as if it is
+          // "next" with an undefined arg.
+          method = "next";
+          arg = undefined;
+
+          var info = record.arg;
+          if (info.done) {
+            context[delegate.resultName] = info.value;
+            context.next = delegate.nextLoc;
+          } else {
+            state = GenStateSuspendedYield;
+            return info;
+          }
+
+          context.delegate = null;
+        }
+
+        if (method === "next") {
+          // Setting context._sent for legacy support of Babel's
+          // function.sent implementation.
+          context.sent = context._sent = arg;
+
+        } else if (method === "throw") {
+          if (state === GenStateSuspendedStart) {
+            state = GenStateCompleted;
+            throw arg;
+          }
+
+          if (context.dispatchException(arg)) {
+            // If the dispatched exception was caught by a catch block,
+            // then let that catch block handle the exception normally.
+            method = "next";
+            arg = undefined;
+          }
+
+        } else if (method === "return") {
+          context.abrupt("return", arg);
+        }
+
+        state = GenStateExecuting;
+
+        var record = tryCatch(innerFn, self, context);
+        if (record.type === "normal") {
+          // If an exception is thrown from innerFn, we leave state ===
+          // GenStateExecuting and loop back for another invocation.
+          state = context.done
+            ? GenStateCompleted
+            : GenStateSuspendedYield;
+
+          var info = {
+            value: record.arg,
+            done: context.done
+          };
+
+          if (record.arg === ContinueSentinel) {
+            if (context.delegate && method === "next") {
+              // Deliberately forget the last sent value so that we don't
+              // accidentally pass it on to the delegate.
+              arg = undefined;
+            }
+          } else {
+            return info;
+          }
+
+        } else if (record.type === "throw") {
+          state = GenStateCompleted;
+          // Dispatch the exception by looping back around to the
+          // context.dispatchException(arg) call above.
+          method = "throw";
+          arg = record.arg;
+        }
+      }
+    };
+  }
+
+  // Define Generator.prototype.{next,throw,return} in terms of the
+  // unified ._invoke helper method.
+  defineIteratorMethods(Gp);
+
+  Gp[iteratorSymbol] = function() {
+    return this;
+  };
+
+  Gp[toStringTagSymbol] = "Generator";
+
+  Gp.toString = function() {
+    return "[object Generator]";
+  };
+
+  function pushTryEntry(locs) {
+    var entry = { tryLoc: locs[0] };
+
+    if (1 in locs) {
+      entry.catchLoc = locs[1];
+    }
+
+    if (2 in locs) {
+      entry.finallyLoc = locs[2];
+      entry.afterLoc = locs[3];
+    }
+
+    this.tryEntries.push(entry);
+  }
+
+  function resetTryEntry(entry) {
+    var record = entry.completion || {};
+    record.type = "normal";
+    delete record.arg;
+    entry.completion = record;
+  }
+
+  function Context(tryLocsList) {
+    // The root entry object (effectively a try statement without a catch
+    // or a finally block) gives us a place to store values thrown from
+    // locations where there is no enclosing try statement.
+    this.tryEntries = [{ tryLoc: "root" }];
+    tryLocsList.forEach(pushTryEntry, this);
+    this.reset(true);
+  }
+
+  runtime.keys = function(object) {
+    var keys = [];
+    for (var key in object) {
+      keys.push(key);
+    }
+    keys.reverse();
+
+    // Rather than returning an object with a next method, we keep
+    // things simple and return the next function itself.
+    return function next() {
+      while (keys.length) {
+        var key = keys.pop();
+        if (key in object) {
+          next.value = key;
+          next.done = false;
+          return next;
+        }
+      }
+
+      // To avoid creating an additional object, we just hang the .value
+      // and .done properties off the next function object itself. This
+      // also ensures that the minifier will not anonymize the function.
+      next.done = true;
+      return next;
+    };
+  };
+
+  function values(iterable) {
+    if (iterable) {
+      var iteratorMethod = iterable[iteratorSymbol];
+      if (iteratorMethod) {
+        return iteratorMethod.call(iterable);
+      }
+
+      if (typeof iterable.next === "function") {
+        return iterable;
+      }
+
+      if (!isNaN(iterable.length)) {
+        var i = -1, next = function next() {
+          while (++i < iterable.length) {
+            if (hasOwn.call(iterable, i)) {
+              next.value = iterable[i];
+              next.done = false;
+              return next;
+            }
+          }
+
+          next.value = undefined;
+          next.done = true;
+
+          return next;
+        };
+
+        return next.next = next;
+      }
+    }
+
+    // Return an iterator with no values.
+    return { next: doneResult };
+  }
+  runtime.values = values;
+
+  function doneResult() {
+    return { value: undefined, done: true };
+  }
+
+  Context.prototype = {
+    constructor: Context,
+
+    reset: function(skipTempReset) {
+      this.prev = 0;
+      this.next = 0;
+      // Resetting context._sent for legacy support of Babel's
+      // function.sent implementation.
+      this.sent = this._sent = undefined;
+      this.done = false;
+      this.delegate = null;
+
+      this.tryEntries.forEach(resetTryEntry);
+
+      if (!skipTempReset) {
+        for (var name in this) {
+          // Not sure about the optimal order of these conditions:
+          if (name.charAt(0) === "t" &&
+              hasOwn.call(this, name) &&
+              !isNaN(+name.slice(1))) {
+            this[name] = undefined;
+          }
+        }
+      }
+    },
+
+    stop: function() {
+      this.done = true;
+
+      var rootEntry = this.tryEntries[0];
+      var rootRecord = rootEntry.completion;
+      if (rootRecord.type === "throw") {
+        throw rootRecord.arg;
+      }
+
+      return this.rval;
+    },
+
+    dispatchException: function(exception) {
+      if (this.done) {
+        throw exception;
+      }
+
+      var context = this;
+      function handle(loc, caught) {
+        record.type = "throw";
+        record.arg = exception;
+        context.next = loc;
+        return !!caught;
+      }
+
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+        var record = entry.completion;
+
+        if (entry.tryLoc === "root") {
+          // Exception thrown outside of any try block that could handle
+          // it, so set the completion value of the entire function to
+          // throw the exception.
+          return handle("end");
+        }
+
+        if (entry.tryLoc <= this.prev) {
+          var hasCatch = hasOwn.call(entry, "catchLoc");
+          var hasFinally = hasOwn.call(entry, "finallyLoc");
+
+          if (hasCatch && hasFinally) {
+            if (this.prev < entry.catchLoc) {
+              return handle(entry.catchLoc, true);
+            } else if (this.prev < entry.finallyLoc) {
+              return handle(entry.finallyLoc);
+            }
+
+          } else if (hasCatch) {
+            if (this.prev < entry.catchLoc) {
+              return handle(entry.catchLoc, true);
+            }
+
+          } else if (hasFinally) {
+            if (this.prev < entry.finallyLoc) {
+              return handle(entry.finallyLoc);
+            }
+
+          } else {
+            throw new Error("try statement without catch or finally");
+          }
+        }
+      }
+    },
+
+    abrupt: function(type, arg) {
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+        if (entry.tryLoc <= this.prev &&
+            hasOwn.call(entry, "finallyLoc") &&
+            this.prev < entry.finallyLoc) {
+          var finallyEntry = entry;
           break;
         }
       }
 
-      if (partIndex === 0) {
-        return null;
+      if (finallyEntry &&
+          (type === "break" ||
+           type === "continue") &&
+          finallyEntry.tryLoc <= arg &&
+          arg <= finallyEntry.finallyLoc) {
+        // Ignore the finally entry if control is not jumping to a
+        // location outside the try/catch block.
+        finallyEntry = null;
       }
 
-      parts[partIndex] = value.substr(pos);
-      return parts;
-    };
+      var record = finallyEntry ? finallyEntry.completion : {};
+      record.type = type;
+      record.arg = arg;
 
-    return TemplatingBindingLanguage;
-  }(_aureliaTemplating.BindingLanguage), _class4.inject = [_aureliaBinding.Parser, _aureliaBinding.ObserverLocator, SyntaxInterpreter, AttributeMap], _temp3);
-  function configure(config) {
-    config.container.registerSingleton(_aureliaTemplating.BindingLanguage, TemplatingBindingLanguage);
-    config.container.registerAlias(_aureliaTemplating.BindingLanguage, TemplatingBindingLanguage);
-  }
+      if (finallyEntry) {
+        this.next = finallyEntry.finallyLoc;
+      } else {
+        this.complete(record);
+      }
+
+      return ContinueSentinel;
+    },
+
+    complete: function(record, afterLoc) {
+      if (record.type === "throw") {
+        throw record.arg;
+      }
+
+      if (record.type === "break" ||
+          record.type === "continue") {
+        this.next = record.arg;
+      } else if (record.type === "return") {
+        this.rval = record.arg;
+        this.next = "end";
+      } else if (record.type === "normal" && afterLoc) {
+        this.next = afterLoc;
+      }
+    },
+
+    finish: function(finallyLoc) {
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+        if (entry.finallyLoc === finallyLoc) {
+          this.complete(entry.completion, entry.afterLoc);
+          resetTryEntry(entry);
+          return ContinueSentinel;
+        }
+      }
+    },
+
+    "catch": function(tryLoc) {
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+        if (entry.tryLoc === tryLoc) {
+          var record = entry.completion;
+          if (record.type === "throw") {
+            var thrown = record.arg;
+            resetTryEntry(entry);
+          }
+          return thrown;
+        }
+      }
+
+      // The context.catch method must only be called with a location
+      // argument that corresponds to a known catch block.
+      throw new Error("illegal catch attempt");
+    },
+
+    delegateYield: function(iterable, resultName, nextLoc) {
+      this.delegate = {
+        iterator: values(iterable),
+        resultName: resultName,
+        nextLoc: nextLoc
+      };
+
+      return ContinueSentinel;
+    }
+  };
+})(
+  // Among the various tricks for obtaining a reference to the global
+  // object, this seems to be the most reliable technique that does not
+  // use indirect eval (which violates Content Security Policy).
+  typeof global === "object" ? global :
+  typeof window === "object" ? window :
+  typeof self === "object" ? self : this
+);
+
 });
+;define('regenerator-runtime', ['regenerator-runtime/runtime'], function (main) { return main; });
+
 define('aurelia-templating-resources/aurelia-templating-resources',['exports', './compose', './if', './with', './repeat', './show', './hide', './sanitize-html', './replaceable', './focus', 'aurelia-templating', './css-resource', './html-sanitizer', './binding-mode-behaviors', './throttle-binding-behavior', './debounce-binding-behavior', './signal-binding-behavior', './binding-signaler', './update-trigger-binding-behavior', './abstract-repeater', './repeat-strategy-locator', './html-resource-plugin', './null-repeat-strategy', './array-repeat-strategy', './map-repeat-strategy', './set-repeat-strategy', './number-repeat-strategy', './repeat-utilities', './analyze-view-factory', './aurelia-hide-style'], function (exports, _compose, _if, _with, _repeat, _show, _hide, _sanitizeHtml, _replaceable, _focus, _aureliaTemplating, _cssResource, _htmlSanitizer, _bindingModeBehaviors, _throttleBindingBehavior, _debounceBindingBehavior, _signalBindingBehavior, _bindingSignaler, _updateTriggerBindingBehavior, _abstractRepeater, _repeatStrategyLocator, _htmlResourcePlugin, _nullRepeatStrategy, _arrayRepeatStrategy, _mapRepeatStrategy, _setRepeatStrategy, _numberRepeatStrategy, _repeatUtilities, _analyzeViewFactory, _aureliaHideStyle) {
   'use strict';
 
@@ -24158,1361 +25517,3 @@ define('aurelia-templating-resources/dynamic-element',['exports', 'aurelia-templ
     return DynamicElement;
   }
 });
-define('aurelia-templating-router/aurelia-templating-router',['exports', 'aurelia-router', './route-loader', './router-view', './route-href'], function (exports, _aureliaRouter, _routeLoader, _routerView, _routeHref) {
-  'use strict';
-
-  Object.defineProperty(exports, "__esModule", {
-    value: true
-  });
-  exports.configure = exports.RouteHref = exports.RouterView = exports.TemplatingRouteLoader = undefined;
-
-
-  function configure(config) {
-    config.singleton(_aureliaRouter.RouteLoader, _routeLoader.TemplatingRouteLoader).singleton(_aureliaRouter.Router, _aureliaRouter.AppRouter).globalResources('./router-view', './route-href');
-
-    config.container.registerAlias(_aureliaRouter.Router, _aureliaRouter.AppRouter);
-  }
-
-  exports.TemplatingRouteLoader = _routeLoader.TemplatingRouteLoader;
-  exports.RouterView = _routerView.RouterView;
-  exports.RouteHref = _routeHref.RouteHref;
-  exports.configure = configure;
-});;define('aurelia-templating-router', ['aurelia-templating-router/aurelia-templating-router'], function (main) { return main; });
-
-define('aurelia-templating-router/route-loader',['exports', 'aurelia-dependency-injection', 'aurelia-templating', 'aurelia-router', 'aurelia-path', 'aurelia-metadata'], function (exports, _aureliaDependencyInjection, _aureliaTemplating, _aureliaRouter, _aureliaPath, _aureliaMetadata) {
-  'use strict';
-
-  Object.defineProperty(exports, "__esModule", {
-    value: true
-  });
-  exports.TemplatingRouteLoader = undefined;
-
-  
-
-  function _possibleConstructorReturn(self, call) {
-    if (!self) {
-      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-    }
-
-    return call && (typeof call === "object" || typeof call === "function") ? call : self;
-  }
-
-  function _inherits(subClass, superClass) {
-    if (typeof superClass !== "function" && superClass !== null) {
-      throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
-    }
-
-    subClass.prototype = Object.create(superClass && superClass.prototype, {
-      constructor: {
-        value: subClass,
-        enumerable: false,
-        writable: true,
-        configurable: true
-      }
-    });
-    if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
-  }
-
-  var _dec, _class;
-
-  var TemplatingRouteLoader = exports.TemplatingRouteLoader = (_dec = (0, _aureliaDependencyInjection.inject)(_aureliaTemplating.CompositionEngine), _dec(_class = function (_RouteLoader) {
-    _inherits(TemplatingRouteLoader, _RouteLoader);
-
-    function TemplatingRouteLoader(compositionEngine) {
-      
-
-      var _this = _possibleConstructorReturn(this, _RouteLoader.call(this));
-
-      _this.compositionEngine = compositionEngine;
-      return _this;
-    }
-
-    TemplatingRouteLoader.prototype.loadRoute = function loadRoute(router, config) {
-      var childContainer = router.container.createChild();
-      var instruction = {
-        viewModel: (0, _aureliaPath.relativeToFile)(config.moduleId, _aureliaMetadata.Origin.get(router.container.viewModel.constructor).moduleId),
-        childContainer: childContainer,
-        view: config.view || config.viewStrategy,
-        router: router
-      };
-
-      childContainer.getChildRouter = function () {
-        var childRouter = void 0;
-
-        childContainer.registerHandler(_aureliaRouter.Router, function (c) {
-          return childRouter || (childRouter = router.createChild(childContainer));
-        });
-
-        return childContainer.get(_aureliaRouter.Router);
-      };
-
-      return this.compositionEngine.ensureViewModel(instruction);
-    };
-
-    return TemplatingRouteLoader;
-  }(_aureliaRouter.RouteLoader)) || _class);
-});
-define('aurelia-templating-router/router-view',['exports', 'aurelia-dependency-injection', 'aurelia-templating', 'aurelia-router', 'aurelia-metadata', 'aurelia-pal'], function (exports, _aureliaDependencyInjection, _aureliaTemplating, _aureliaRouter, _aureliaMetadata, _aureliaPal) {
-  'use strict';
-
-  Object.defineProperty(exports, "__esModule", {
-    value: true
-  });
-  exports.RouterView = undefined;
-
-  function _initDefineProp(target, property, descriptor, context) {
-    if (!descriptor) return;
-    Object.defineProperty(target, property, {
-      enumerable: descriptor.enumerable,
-      configurable: descriptor.configurable,
-      writable: descriptor.writable,
-      value: descriptor.initializer ? descriptor.initializer.call(context) : void 0
-    });
-  }
-
-  function _applyDecoratedDescriptor(target, property, decorators, descriptor, context) {
-    var desc = {};
-    Object['ke' + 'ys'](descriptor).forEach(function (key) {
-      desc[key] = descriptor[key];
-    });
-    desc.enumerable = !!desc.enumerable;
-    desc.configurable = !!desc.configurable;
-
-    if ('value' in desc || desc.initializer) {
-      desc.writable = true;
-    }
-
-    desc = decorators.slice().reverse().reduce(function (desc, decorator) {
-      return decorator(target, property, desc) || desc;
-    }, desc);
-
-    if (context && desc.initializer !== void 0) {
-      desc.value = desc.initializer ? desc.initializer.call(context) : void 0;
-      desc.initializer = undefined;
-    }
-
-    if (desc.initializer === void 0) {
-      Object['define' + 'Property'](target, property, desc);
-      desc = null;
-    }
-
-    return desc;
-  }
-
-  function _initializerWarningHelper(descriptor, context) {
-    throw new Error('Decorating class property failed. Please ensure that transform-class-properties is enabled.');
-  }
-
-  var _dec, _dec2, _class, _desc, _value, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4;
-
-  
-
-  var SwapStrategies = function () {
-    function SwapStrategies() {
-      
-    }
-
-    SwapStrategies.prototype.before = function before(viewSlot, previousView, callback) {
-      var promise = Promise.resolve(callback());
-
-      if (previousView !== undefined) {
-        return promise.then(function () {
-          return viewSlot.remove(previousView, true);
-        });
-      }
-
-      return promise;
-    };
-
-    SwapStrategies.prototype.with = function _with(viewSlot, previousView, callback) {
-      var promise = Promise.resolve(callback());
-
-      if (previousView !== undefined) {
-        return Promise.all([viewSlot.remove(previousView, true), promise]);
-      }
-
-      return promise;
-    };
-
-    SwapStrategies.prototype.after = function after(viewSlot, previousView, callback) {
-      return Promise.resolve(viewSlot.removeAll(true)).then(callback);
-    };
-
-    return SwapStrategies;
-  }();
-
-  var swapStrategies = new SwapStrategies();
-
-  var RouterView = exports.RouterView = (_dec = (0, _aureliaTemplating.customElement)('router-view'), _dec2 = (0, _aureliaDependencyInjection.inject)(_aureliaPal.DOM.Element, _aureliaDependencyInjection.Container, _aureliaTemplating.ViewSlot, _aureliaRouter.Router, _aureliaTemplating.ViewLocator, _aureliaTemplating.CompositionTransaction, _aureliaTemplating.CompositionEngine), _dec(_class = (0, _aureliaTemplating.noView)(_class = _dec2(_class = (_class2 = function () {
-    function RouterView(element, container, viewSlot, router, viewLocator, compositionTransaction, compositionEngine) {
-      
-
-      _initDefineProp(this, 'swapOrder', _descriptor, this);
-
-      _initDefineProp(this, 'layoutView', _descriptor2, this);
-
-      _initDefineProp(this, 'layoutViewModel', _descriptor3, this);
-
-      _initDefineProp(this, 'layoutModel', _descriptor4, this);
-
-      this.element = element;
-      this.container = container;
-      this.viewSlot = viewSlot;
-      this.router = router;
-      this.viewLocator = viewLocator;
-      this.compositionTransaction = compositionTransaction;
-      this.compositionEngine = compositionEngine;
-      this.router.registerViewPort(this, this.element.getAttribute('name'));
-
-      if (!('initialComposition' in compositionTransaction)) {
-        compositionTransaction.initialComposition = true;
-        this.compositionTransactionNotifier = compositionTransaction.enlist();
-      }
-    }
-
-    RouterView.prototype.created = function created(owningView) {
-      this.owningView = owningView;
-    };
-
-    RouterView.prototype.bind = function bind(bindingContext, overrideContext) {
-      this.container.viewModel = bindingContext;
-      this.overrideContext = overrideContext;
-    };
-
-    RouterView.prototype.process = function process(viewPortInstruction, waitToSwap) {
-      var _this = this;
-
-      var component = viewPortInstruction.component;
-      var childContainer = component.childContainer;
-      var viewModel = component.viewModel;
-      var viewModelResource = component.viewModelResource;
-      var metadata = viewModelResource.metadata;
-      var config = component.router.currentInstruction.config;
-      var viewPort = config.viewPorts ? config.viewPorts[viewPortInstruction.name] : {};
-
-      var layoutInstruction = {
-        viewModel: viewPort.layoutViewModel || config.layoutViewModel || this.layoutViewModel,
-        view: viewPort.layoutView || config.layoutView || this.layoutView,
-        model: viewPort.layoutModel || config.layoutModel || this.layoutModel,
-        router: viewPortInstruction.component.router,
-        childContainer: childContainer,
-        viewSlot: this.viewSlot
-      };
-
-      var viewStrategy = this.viewLocator.getViewStrategy(component.view || viewModel);
-      if (viewStrategy && component.view) {
-        viewStrategy.makeRelativeTo(_aureliaMetadata.Origin.get(component.router.container.viewModel.constructor).moduleId);
-      }
-
-      return metadata.load(childContainer, viewModelResource.value, null, viewStrategy, true).then(function (viewFactory) {
-        if (!_this.compositionTransactionNotifier) {
-          _this.compositionTransactionOwnershipToken = _this.compositionTransaction.tryCapture();
-        }
-
-        if (layoutInstruction.viewModel || layoutInstruction.view) {
-          viewPortInstruction.layoutInstruction = layoutInstruction;
-        }
-
-        viewPortInstruction.controller = metadata.create(childContainer, _aureliaTemplating.BehaviorInstruction.dynamic(_this.element, viewModel, viewFactory));
-
-        if (waitToSwap) {
-          return;
-        }
-
-        _this.swap(viewPortInstruction);
-      });
-    };
-
-    RouterView.prototype.swap = function swap(viewPortInstruction) {
-      var _this2 = this;
-
-      var work = function work() {
-        var previousView = _this2.view;
-        var swapStrategy = void 0;
-        var viewSlot = _this2.viewSlot;
-        var layoutInstruction = viewPortInstruction.layoutInstruction;
-
-        swapStrategy = _this2.swapOrder in swapStrategies ? swapStrategies[_this2.swapOrder] : swapStrategies.after;
-
-        swapStrategy(viewSlot, previousView, function () {
-          var waitForView = void 0;
-
-          if (layoutInstruction) {
-            if (!layoutInstruction.viewModel) {
-              layoutInstruction.viewModel = {};
-            }
-
-            waitForView = _this2.compositionEngine.createController(layoutInstruction).then(function (layout) {
-              _aureliaTemplating.ShadowDOM.distributeView(viewPortInstruction.controller.view, layout.slots || layout.view.slots);
-              return layout.view || layout;
-            });
-          } else {
-            waitForView = Promise.resolve(viewPortInstruction.controller.view);
-          }
-
-          return waitForView.then(function (newView) {
-            _this2.view = newView;
-            return viewSlot.add(newView);
-          }).then(function () {
-            _this2._notify();
-          });
-        });
-      };
-
-      viewPortInstruction.controller.automate(this.overrideContext, this.owningView);
-
-      if (this.compositionTransactionOwnershipToken) {
-        return this.compositionTransactionOwnershipToken.waitForCompositionComplete().then(function () {
-          _this2.compositionTransactionOwnershipToken = null;
-          return work();
-        });
-      }
-
-      return work();
-    };
-
-    RouterView.prototype._notify = function _notify() {
-      if (this.compositionTransactionNotifier) {
-        this.compositionTransactionNotifier.done();
-        this.compositionTransactionNotifier = null;
-      }
-    };
-
-    return RouterView;
-  }(), (_descriptor = _applyDecoratedDescriptor(_class2.prototype, 'swapOrder', [_aureliaTemplating.bindable], {
-    enumerable: true,
-    initializer: null
-  }), _descriptor2 = _applyDecoratedDescriptor(_class2.prototype, 'layoutView', [_aureliaTemplating.bindable], {
-    enumerable: true,
-    initializer: null
-  }), _descriptor3 = _applyDecoratedDescriptor(_class2.prototype, 'layoutViewModel', [_aureliaTemplating.bindable], {
-    enumerable: true,
-    initializer: null
-  }), _descriptor4 = _applyDecoratedDescriptor(_class2.prototype, 'layoutModel', [_aureliaTemplating.bindable], {
-    enumerable: true,
-    initializer: null
-  })), _class2)) || _class) || _class) || _class);
-});
-define('aurelia-templating-router/route-href',['exports', 'aurelia-templating', 'aurelia-dependency-injection', 'aurelia-router', 'aurelia-pal', 'aurelia-logging'], function (exports, _aureliaTemplating, _aureliaDependencyInjection, _aureliaRouter, _aureliaPal, _aureliaLogging) {
-  'use strict';
-
-  Object.defineProperty(exports, "__esModule", {
-    value: true
-  });
-  exports.RouteHref = undefined;
-
-  var LogManager = _interopRequireWildcard(_aureliaLogging);
-
-  function _interopRequireWildcard(obj) {
-    if (obj && obj.__esModule) {
-      return obj;
-    } else {
-      var newObj = {};
-
-      if (obj != null) {
-        for (var key in obj) {
-          if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key];
-        }
-      }
-
-      newObj.default = obj;
-      return newObj;
-    }
-  }
-
-  
-
-  var _dec, _dec2, _dec3, _dec4, _dec5, _class;
-
-  var logger = LogManager.getLogger('route-href');
-
-  var RouteHref = exports.RouteHref = (_dec = (0, _aureliaTemplating.customAttribute)('route-href'), _dec2 = (0, _aureliaTemplating.bindable)({ name: 'route', changeHandler: 'processChange' }), _dec3 = (0, _aureliaTemplating.bindable)({ name: 'params', changeHandler: 'processChange' }), _dec4 = (0, _aureliaTemplating.bindable)({ name: 'attribute', defaultValue: 'href' }), _dec5 = (0, _aureliaDependencyInjection.inject)(_aureliaRouter.Router, _aureliaPal.DOM.Element), _dec(_class = _dec2(_class = _dec3(_class = _dec4(_class = _dec5(_class = function () {
-    function RouteHref(router, element) {
-      
-
-      this.router = router;
-      this.element = element;
-    }
-
-    RouteHref.prototype.bind = function bind() {
-      this.isActive = true;
-      this.processChange();
-    };
-
-    RouteHref.prototype.unbind = function unbind() {
-      this.isActive = false;
-    };
-
-    RouteHref.prototype.attributeChanged = function attributeChanged(value, previous) {
-      if (previous) {
-        this.element.removeAttribute(previous);
-      }
-
-      this.processChange();
-    };
-
-    RouteHref.prototype.processChange = function processChange() {
-      var _this = this;
-
-      return this.router.ensureConfigured().then(function () {
-        if (!_this.isActive) {
-          return null;
-        }
-
-        var href = _this.router.generate(_this.route, _this.params);
-        _this.element.setAttribute(_this.attribute, href);
-        return null;
-      }).catch(function (reason) {
-        logger.error(reason);
-      });
-    };
-
-    return RouteHref;
-  }()) || _class) || _class) || _class) || _class) || _class);
-});
-define('aurelia-testing/aurelia-testing',['exports', './compile-spy', './view-spy', './component-tester'], function (exports, _compileSpy, _viewSpy, _componentTester) {
-  'use strict';
-
-  Object.defineProperty(exports, "__esModule", {
-    value: true
-  });
-  exports.configure = exports.ComponentTester = exports.StageComponent = exports.ViewSpy = exports.CompileSpy = undefined;
-
-
-  function configure(config) {
-    config.globalResources('./compile-spy', './view-spy');
-  }
-
-  exports.CompileSpy = _compileSpy.CompileSpy;
-  exports.ViewSpy = _viewSpy.ViewSpy;
-  exports.StageComponent = _componentTester.StageComponent;
-  exports.ComponentTester = _componentTester.ComponentTester;
-  exports.configure = configure;
-});;define('aurelia-testing', ['aurelia-testing/aurelia-testing'], function (main) { return main; });
-
-define('aurelia-testing/compile-spy',['exports', 'aurelia-templating', 'aurelia-dependency-injection', 'aurelia-logging', 'aurelia-pal'], function (exports, _aureliaTemplating, _aureliaDependencyInjection, _aureliaLogging, _aureliaPal) {
-  'use strict';
-
-  Object.defineProperty(exports, "__esModule", {
-    value: true
-  });
-  exports.CompileSpy = undefined;
-
-  var LogManager = _interopRequireWildcard(_aureliaLogging);
-
-  function _interopRequireWildcard(obj) {
-    if (obj && obj.__esModule) {
-      return obj;
-    } else {
-      var newObj = {};
-
-      if (obj != null) {
-        for (var key in obj) {
-          if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key];
-        }
-      }
-
-      newObj.default = obj;
-      return newObj;
-    }
-  }
-
-  
-
-  var _dec, _dec2, _class;
-
-  var CompileSpy = exports.CompileSpy = (_dec = (0, _aureliaTemplating.customAttribute)('compile-spy'), _dec2 = (0, _aureliaDependencyInjection.inject)(_aureliaPal.DOM.Element, _aureliaTemplating.TargetInstruction), _dec(_class = _dec2(_class = function CompileSpy(element, instruction) {
-    
-
-    LogManager.getLogger('compile-spy').info(element, instruction);
-  }) || _class) || _class);
-});
-define('aurelia-testing/view-spy',['exports', 'aurelia-templating', 'aurelia-logging'], function (exports, _aureliaTemplating, _aureliaLogging) {
-  'use strict';
-
-  Object.defineProperty(exports, "__esModule", {
-    value: true
-  });
-  exports.ViewSpy = undefined;
-
-  var LogManager = _interopRequireWildcard(_aureliaLogging);
-
-  function _interopRequireWildcard(obj) {
-    if (obj && obj.__esModule) {
-      return obj;
-    } else {
-      var newObj = {};
-
-      if (obj != null) {
-        for (var key in obj) {
-          if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key];
-        }
-      }
-
-      newObj.default = obj;
-      return newObj;
-    }
-  }
-
-  
-
-  var _dec, _class;
-
-  var ViewSpy = exports.ViewSpy = (_dec = (0, _aureliaTemplating.customAttribute)('view-spy'), _dec(_class = function () {
-    function ViewSpy() {
-      
-
-      this.logger = LogManager.getLogger('view-spy');
-    }
-
-    ViewSpy.prototype._log = function _log(lifecycleName, context) {
-      if (!this.value && lifecycleName === 'created') {
-        this.logger.info(lifecycleName, this.view);
-      } else if (this.value && this.value.indexOf(lifecycleName) !== -1) {
-        this.logger.info(lifecycleName, this.view, context);
-      }
-    };
-
-    ViewSpy.prototype.created = function created(view) {
-      this.view = view;
-      this._log('created');
-    };
-
-    ViewSpy.prototype.bind = function bind(bindingContext) {
-      this._log('bind', bindingContext);
-    };
-
-    ViewSpy.prototype.attached = function attached() {
-      this._log('attached');
-    };
-
-    ViewSpy.prototype.detached = function detached() {
-      this._log('detached');
-    };
-
-    ViewSpy.prototype.unbind = function unbind() {
-      this._log('unbind');
-    };
-
-    return ViewSpy;
-  }()) || _class);
-});
-define('aurelia-testing/component-tester',['exports', 'aurelia-templating', 'aurelia-framework'], function (exports, _aureliaTemplating, _aureliaFramework) {
-  'use strict';
-
-  Object.defineProperty(exports, "__esModule", {
-    value: true
-  });
-  exports.ComponentTester = exports.StageComponent = undefined;
-
-  
-
-  var StageComponent = exports.StageComponent = {
-    withResources: function withResources(resources) {
-      return new ComponentTester().withResources(resources);
-    }
-  };
-
-  var ComponentTester = exports.ComponentTester = function () {
-    function ComponentTester() {
-      
-
-      this.configure = function (aurelia) {
-        return aurelia.use.standardConfiguration();
-      };
-
-      this._resources = [];
-    }
-
-    ComponentTester.prototype.bootstrap = function bootstrap(configure) {
-      this.configure = configure;
-    };
-
-    ComponentTester.prototype.withResources = function withResources(resources) {
-      this._resources = resources;
-      return this;
-    };
-
-    ComponentTester.prototype.inView = function inView(html) {
-      this._html = html;
-      return this;
-    };
-
-    ComponentTester.prototype.boundTo = function boundTo(bindingContext) {
-      this._bindingContext = bindingContext;
-      return this;
-    };
-
-    ComponentTester.prototype.manuallyHandleLifecycle = function manuallyHandleLifecycle() {
-      this._prepareLifecycle();
-      return this;
-    };
-
-    ComponentTester.prototype.create = function create(bootstrap) {
-      var _this = this;
-
-      return bootstrap(function (aurelia) {
-        return Promise.resolve(_this.configure(aurelia)).then(function () {
-          if (_this._resources) {
-            aurelia.use.globalResources(_this._resources);
-          }
-
-          return aurelia.start().then(function (a) {
-            _this.host = document.createElement('div');
-            _this.host.innerHTML = _this._html;
-
-            document.body.appendChild(_this.host);
-
-            return aurelia.enhance(_this._bindingContext, _this.host).then(function () {
-              _this._rootView = aurelia.root;
-              _this.element = _this.host.firstElementChild;
-
-              if (aurelia.root.controllers.length) {
-                _this.viewModel = aurelia.root.controllers[0].viewModel;
-              }
-
-              return new Promise(function (resolve) {
-                return setTimeout(function () {
-                  return resolve();
-                }, 0);
-              });
-            });
-          });
-        });
-      });
-    };
-
-    ComponentTester.prototype.dispose = function dispose() {
-      if (this.host === undefined || this._rootView === undefined) {
-        throw new Error('Cannot call ComponentTester.dispose() before ComponentTester.create()');
-      }
-
-      this._rootView.detached();
-      this._rootView.unbind();
-
-      return this.host.parentNode.removeChild(this.host);
-    };
-
-    ComponentTester.prototype._prepareLifecycle = function _prepareLifecycle() {
-      var _this2 = this;
-
-      var bindPrototype = _aureliaTemplating.View.prototype.bind;
-      _aureliaTemplating.View.prototype.bind = function () {};
-      this.bind = function (bindingContext) {
-        return new Promise(function (resolve) {
-          _aureliaTemplating.View.prototype.bind = bindPrototype;
-          if (bindingContext !== undefined) {
-            _this2._bindingContext = bindingContext;
-          }
-          _this2._rootView.bind(_this2._bindingContext);
-          setTimeout(function () {
-            return resolve();
-          }, 0);
-        });
-      };
-
-      var attachedPrototype = _aureliaTemplating.View.prototype.attached;
-      _aureliaTemplating.View.prototype.attached = function () {};
-      this.attached = function () {
-        return new Promise(function (resolve) {
-          _aureliaTemplating.View.prototype.attached = attachedPrototype;
-          _this2._rootView.attached();
-          setTimeout(function () {
-            return resolve();
-          }, 0);
-        });
-      };
-
-      this.detached = function () {
-        return new Promise(function (resolve) {
-          _this2._rootView.detached();
-          setTimeout(function () {
-            return resolve();
-          }, 0);
-        });
-      };
-
-      this.unbind = function () {
-        return new Promise(function (resolve) {
-          _this2._rootView.unbind();
-          setTimeout(function () {
-            return resolve();
-          }, 0);
-        });
-      };
-    };
-
-    return ComponentTester;
-  }();
-});
-define('regenerator-runtime/runtime',['require','exports','module'],function (require, exports, module) {/**
- * Copyright (c) 2014, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * https://raw.github.com/facebook/regenerator/master/LICENSE file. An
- * additional grant of patent rights can be found in the PATENTS file in
- * the same directory.
- */
-
-!(function(global) {
-  "use strict";
-
-  var hasOwn = Object.prototype.hasOwnProperty;
-  var undefined; // More compressible than void 0.
-  var $Symbol = typeof Symbol === "function" ? Symbol : {};
-  var iteratorSymbol = $Symbol.iterator || "@@iterator";
-  var toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag";
-
-  var inModule = typeof module === "object";
-  var runtime = global.regeneratorRuntime;
-  if (runtime) {
-    if (inModule) {
-      // If regeneratorRuntime is defined globally and we're in a module,
-      // make the exports object identical to regeneratorRuntime.
-      module.exports = runtime;
-    }
-    // Don't bother evaluating the rest of this file if the runtime was
-    // already defined globally.
-    return;
-  }
-
-  // Define the runtime globally (as expected by generated code) as either
-  // module.exports (if we're in a module) or a new, empty object.
-  runtime = global.regeneratorRuntime = inModule ? module.exports : {};
-
-  function wrap(innerFn, outerFn, self, tryLocsList) {
-    // If outerFn provided, then outerFn.prototype instanceof Generator.
-    var generator = Object.create((outerFn || Generator).prototype);
-    var context = new Context(tryLocsList || []);
-
-    // The ._invoke method unifies the implementations of the .next,
-    // .throw, and .return methods.
-    generator._invoke = makeInvokeMethod(innerFn, self, context);
-
-    return generator;
-  }
-  runtime.wrap = wrap;
-
-  // Try/catch helper to minimize deoptimizations. Returns a completion
-  // record like context.tryEntries[i].completion. This interface could
-  // have been (and was previously) designed to take a closure to be
-  // invoked without arguments, but in all the cases we care about we
-  // already have an existing method we want to call, so there's no need
-  // to create a new function object. We can even get away with assuming
-  // the method takes exactly one argument, since that happens to be true
-  // in every case, so we don't have to touch the arguments object. The
-  // only additional allocation required is the completion record, which
-  // has a stable shape and so hopefully should be cheap to allocate.
-  function tryCatch(fn, obj, arg) {
-    try {
-      return { type: "normal", arg: fn.call(obj, arg) };
-    } catch (err) {
-      return { type: "throw", arg: err };
-    }
-  }
-
-  var GenStateSuspendedStart = "suspendedStart";
-  var GenStateSuspendedYield = "suspendedYield";
-  var GenStateExecuting = "executing";
-  var GenStateCompleted = "completed";
-
-  // Returning this object from the innerFn has the same effect as
-  // breaking out of the dispatch switch statement.
-  var ContinueSentinel = {};
-
-  // Dummy constructor functions that we use as the .constructor and
-  // .constructor.prototype properties for functions that return Generator
-  // objects. For full spec compliance, you may wish to configure your
-  // minifier not to mangle the names of these two functions.
-  function Generator() {}
-  function GeneratorFunction() {}
-  function GeneratorFunctionPrototype() {}
-
-  var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype;
-  GeneratorFunction.prototype = Gp.constructor = GeneratorFunctionPrototype;
-  GeneratorFunctionPrototype.constructor = GeneratorFunction;
-  GeneratorFunctionPrototype[toStringTagSymbol] = GeneratorFunction.displayName = "GeneratorFunction";
-
-  // Helper for defining the .next, .throw, and .return methods of the
-  // Iterator interface in terms of a single ._invoke method.
-  function defineIteratorMethods(prototype) {
-    ["next", "throw", "return"].forEach(function(method) {
-      prototype[method] = function(arg) {
-        return this._invoke(method, arg);
-      };
-    });
-  }
-
-  runtime.isGeneratorFunction = function(genFun) {
-    var ctor = typeof genFun === "function" && genFun.constructor;
-    return ctor
-      ? ctor === GeneratorFunction ||
-        // For the native GeneratorFunction constructor, the best we can
-        // do is to check its .name property.
-        (ctor.displayName || ctor.name) === "GeneratorFunction"
-      : false;
-  };
-
-  runtime.mark = function(genFun) {
-    if (Object.setPrototypeOf) {
-      Object.setPrototypeOf(genFun, GeneratorFunctionPrototype);
-    } else {
-      genFun.__proto__ = GeneratorFunctionPrototype;
-      if (!(toStringTagSymbol in genFun)) {
-        genFun[toStringTagSymbol] = "GeneratorFunction";
-      }
-    }
-    genFun.prototype = Object.create(Gp);
-    return genFun;
-  };
-
-  // Within the body of any async function, `await x` is transformed to
-  // `yield regeneratorRuntime.awrap(x)`, so that the runtime can test
-  // `value instanceof AwaitArgument` to determine if the yielded value is
-  // meant to be awaited. Some may consider the name of this method too
-  // cutesy, but they are curmudgeons.
-  runtime.awrap = function(arg) {
-    return new AwaitArgument(arg);
-  };
-
-  function AwaitArgument(arg) {
-    this.arg = arg;
-  }
-
-  function AsyncIterator(generator) {
-    function invoke(method, arg, resolve, reject) {
-      var record = tryCatch(generator[method], generator, arg);
-      if (record.type === "throw") {
-        reject(record.arg);
-      } else {
-        var result = record.arg;
-        var value = result.value;
-        if (value instanceof AwaitArgument) {
-          return Promise.resolve(value.arg).then(function(value) {
-            invoke("next", value, resolve, reject);
-          }, function(err) {
-            invoke("throw", err, resolve, reject);
-          });
-        }
-
-        return Promise.resolve(value).then(function(unwrapped) {
-          // When a yielded Promise is resolved, its final value becomes
-          // the .value of the Promise<{value,done}> result for the
-          // current iteration. If the Promise is rejected, however, the
-          // result for this iteration will be rejected with the same
-          // reason. Note that rejections of yielded Promises are not
-          // thrown back into the generator function, as is the case
-          // when an awaited Promise is rejected. This difference in
-          // behavior between yield and await is important, because it
-          // allows the consumer to decide what to do with the yielded
-          // rejection (swallow it and continue, manually .throw it back
-          // into the generator, abandon iteration, whatever). With
-          // await, by contrast, there is no opportunity to examine the
-          // rejection reason outside the generator function, so the
-          // only option is to throw it from the await expression, and
-          // let the generator function handle the exception.
-          result.value = unwrapped;
-          resolve(result);
-        }, reject);
-      }
-    }
-
-    if (typeof process === "object" && process.domain) {
-      invoke = process.domain.bind(invoke);
-    }
-
-    var previousPromise;
-
-    function enqueue(method, arg) {
-      function callInvokeWithMethodAndArg() {
-        return new Promise(function(resolve, reject) {
-          invoke(method, arg, resolve, reject);
-        });
-      }
-
-      return previousPromise =
-        // If enqueue has been called before, then we want to wait until
-        // all previous Promises have been resolved before calling invoke,
-        // so that results are always delivered in the correct order. If
-        // enqueue has not been called before, then it is important to
-        // call invoke immediately, without waiting on a callback to fire,
-        // so that the async generator function has the opportunity to do
-        // any necessary setup in a predictable way. This predictability
-        // is why the Promise constructor synchronously invokes its
-        // executor callback, and why async functions synchronously
-        // execute code before the first await. Since we implement simple
-        // async functions in terms of async generators, it is especially
-        // important to get this right, even though it requires care.
-        previousPromise ? previousPromise.then(
-          callInvokeWithMethodAndArg,
-          // Avoid propagating failures to Promises returned by later
-          // invocations of the iterator.
-          callInvokeWithMethodAndArg
-        ) : callInvokeWithMethodAndArg();
-    }
-
-    // Define the unified helper method that is used to implement .next,
-    // .throw, and .return (see defineIteratorMethods).
-    this._invoke = enqueue;
-  }
-
-  defineIteratorMethods(AsyncIterator.prototype);
-
-  // Note that simple async functions are implemented on top of
-  // AsyncIterator objects; they just return a Promise for the value of
-  // the final result produced by the iterator.
-  runtime.async = function(innerFn, outerFn, self, tryLocsList) {
-    var iter = new AsyncIterator(
-      wrap(innerFn, outerFn, self, tryLocsList)
-    );
-
-    return runtime.isGeneratorFunction(outerFn)
-      ? iter // If outerFn is a generator, return the full iterator.
-      : iter.next().then(function(result) {
-          return result.done ? result.value : iter.next();
-        });
-  };
-
-  function makeInvokeMethod(innerFn, self, context) {
-    var state = GenStateSuspendedStart;
-
-    return function invoke(method, arg) {
-      if (state === GenStateExecuting) {
-        throw new Error("Generator is already running");
-      }
-
-      if (state === GenStateCompleted) {
-        if (method === "throw") {
-          throw arg;
-        }
-
-        // Be forgiving, per 25.3.3.3.3 of the spec:
-        // https://people.mozilla.org/~jorendorff/es6-draft.html#sec-generatorresume
-        return doneResult();
-      }
-
-      while (true) {
-        var delegate = context.delegate;
-        if (delegate) {
-          if (method === "return" ||
-              (method === "throw" && delegate.iterator[method] === undefined)) {
-            // A return or throw (when the delegate iterator has no throw
-            // method) always terminates the yield* loop.
-            context.delegate = null;
-
-            // If the delegate iterator has a return method, give it a
-            // chance to clean up.
-            var returnMethod = delegate.iterator["return"];
-            if (returnMethod) {
-              var record = tryCatch(returnMethod, delegate.iterator, arg);
-              if (record.type === "throw") {
-                // If the return method threw an exception, let that
-                // exception prevail over the original return or throw.
-                method = "throw";
-                arg = record.arg;
-                continue;
-              }
-            }
-
-            if (method === "return") {
-              // Continue with the outer return, now that the delegate
-              // iterator has been terminated.
-              continue;
-            }
-          }
-
-          var record = tryCatch(
-            delegate.iterator[method],
-            delegate.iterator,
-            arg
-          );
-
-          if (record.type === "throw") {
-            context.delegate = null;
-
-            // Like returning generator.throw(uncaught), but without the
-            // overhead of an extra function call.
-            method = "throw";
-            arg = record.arg;
-            continue;
-          }
-
-          // Delegate generator ran and handled its own exceptions so
-          // regardless of what the method was, we continue as if it is
-          // "next" with an undefined arg.
-          method = "next";
-          arg = undefined;
-
-          var info = record.arg;
-          if (info.done) {
-            context[delegate.resultName] = info.value;
-            context.next = delegate.nextLoc;
-          } else {
-            state = GenStateSuspendedYield;
-            return info;
-          }
-
-          context.delegate = null;
-        }
-
-        if (method === "next") {
-          // Setting context._sent for legacy support of Babel's
-          // function.sent implementation.
-          context.sent = context._sent = arg;
-
-        } else if (method === "throw") {
-          if (state === GenStateSuspendedStart) {
-            state = GenStateCompleted;
-            throw arg;
-          }
-
-          if (context.dispatchException(arg)) {
-            // If the dispatched exception was caught by a catch block,
-            // then let that catch block handle the exception normally.
-            method = "next";
-            arg = undefined;
-          }
-
-        } else if (method === "return") {
-          context.abrupt("return", arg);
-        }
-
-        state = GenStateExecuting;
-
-        var record = tryCatch(innerFn, self, context);
-        if (record.type === "normal") {
-          // If an exception is thrown from innerFn, we leave state ===
-          // GenStateExecuting and loop back for another invocation.
-          state = context.done
-            ? GenStateCompleted
-            : GenStateSuspendedYield;
-
-          var info = {
-            value: record.arg,
-            done: context.done
-          };
-
-          if (record.arg === ContinueSentinel) {
-            if (context.delegate && method === "next") {
-              // Deliberately forget the last sent value so that we don't
-              // accidentally pass it on to the delegate.
-              arg = undefined;
-            }
-          } else {
-            return info;
-          }
-
-        } else if (record.type === "throw") {
-          state = GenStateCompleted;
-          // Dispatch the exception by looping back around to the
-          // context.dispatchException(arg) call above.
-          method = "throw";
-          arg = record.arg;
-        }
-      }
-    };
-  }
-
-  // Define Generator.prototype.{next,throw,return} in terms of the
-  // unified ._invoke helper method.
-  defineIteratorMethods(Gp);
-
-  Gp[iteratorSymbol] = function() {
-    return this;
-  };
-
-  Gp[toStringTagSymbol] = "Generator";
-
-  Gp.toString = function() {
-    return "[object Generator]";
-  };
-
-  function pushTryEntry(locs) {
-    var entry = { tryLoc: locs[0] };
-
-    if (1 in locs) {
-      entry.catchLoc = locs[1];
-    }
-
-    if (2 in locs) {
-      entry.finallyLoc = locs[2];
-      entry.afterLoc = locs[3];
-    }
-
-    this.tryEntries.push(entry);
-  }
-
-  function resetTryEntry(entry) {
-    var record = entry.completion || {};
-    record.type = "normal";
-    delete record.arg;
-    entry.completion = record;
-  }
-
-  function Context(tryLocsList) {
-    // The root entry object (effectively a try statement without a catch
-    // or a finally block) gives us a place to store values thrown from
-    // locations where there is no enclosing try statement.
-    this.tryEntries = [{ tryLoc: "root" }];
-    tryLocsList.forEach(pushTryEntry, this);
-    this.reset(true);
-  }
-
-  runtime.keys = function(object) {
-    var keys = [];
-    for (var key in object) {
-      keys.push(key);
-    }
-    keys.reverse();
-
-    // Rather than returning an object with a next method, we keep
-    // things simple and return the next function itself.
-    return function next() {
-      while (keys.length) {
-        var key = keys.pop();
-        if (key in object) {
-          next.value = key;
-          next.done = false;
-          return next;
-        }
-      }
-
-      // To avoid creating an additional object, we just hang the .value
-      // and .done properties off the next function object itself. This
-      // also ensures that the minifier will not anonymize the function.
-      next.done = true;
-      return next;
-    };
-  };
-
-  function values(iterable) {
-    if (iterable) {
-      var iteratorMethod = iterable[iteratorSymbol];
-      if (iteratorMethod) {
-        return iteratorMethod.call(iterable);
-      }
-
-      if (typeof iterable.next === "function") {
-        return iterable;
-      }
-
-      if (!isNaN(iterable.length)) {
-        var i = -1, next = function next() {
-          while (++i < iterable.length) {
-            if (hasOwn.call(iterable, i)) {
-              next.value = iterable[i];
-              next.done = false;
-              return next;
-            }
-          }
-
-          next.value = undefined;
-          next.done = true;
-
-          return next;
-        };
-
-        return next.next = next;
-      }
-    }
-
-    // Return an iterator with no values.
-    return { next: doneResult };
-  }
-  runtime.values = values;
-
-  function doneResult() {
-    return { value: undefined, done: true };
-  }
-
-  Context.prototype = {
-    constructor: Context,
-
-    reset: function(skipTempReset) {
-      this.prev = 0;
-      this.next = 0;
-      // Resetting context._sent for legacy support of Babel's
-      // function.sent implementation.
-      this.sent = this._sent = undefined;
-      this.done = false;
-      this.delegate = null;
-
-      this.tryEntries.forEach(resetTryEntry);
-
-      if (!skipTempReset) {
-        for (var name in this) {
-          // Not sure about the optimal order of these conditions:
-          if (name.charAt(0) === "t" &&
-              hasOwn.call(this, name) &&
-              !isNaN(+name.slice(1))) {
-            this[name] = undefined;
-          }
-        }
-      }
-    },
-
-    stop: function() {
-      this.done = true;
-
-      var rootEntry = this.tryEntries[0];
-      var rootRecord = rootEntry.completion;
-      if (rootRecord.type === "throw") {
-        throw rootRecord.arg;
-      }
-
-      return this.rval;
-    },
-
-    dispatchException: function(exception) {
-      if (this.done) {
-        throw exception;
-      }
-
-      var context = this;
-      function handle(loc, caught) {
-        record.type = "throw";
-        record.arg = exception;
-        context.next = loc;
-        return !!caught;
-      }
-
-      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
-        var entry = this.tryEntries[i];
-        var record = entry.completion;
-
-        if (entry.tryLoc === "root") {
-          // Exception thrown outside of any try block that could handle
-          // it, so set the completion value of the entire function to
-          // throw the exception.
-          return handle("end");
-        }
-
-        if (entry.tryLoc <= this.prev) {
-          var hasCatch = hasOwn.call(entry, "catchLoc");
-          var hasFinally = hasOwn.call(entry, "finallyLoc");
-
-          if (hasCatch && hasFinally) {
-            if (this.prev < entry.catchLoc) {
-              return handle(entry.catchLoc, true);
-            } else if (this.prev < entry.finallyLoc) {
-              return handle(entry.finallyLoc);
-            }
-
-          } else if (hasCatch) {
-            if (this.prev < entry.catchLoc) {
-              return handle(entry.catchLoc, true);
-            }
-
-          } else if (hasFinally) {
-            if (this.prev < entry.finallyLoc) {
-              return handle(entry.finallyLoc);
-            }
-
-          } else {
-            throw new Error("try statement without catch or finally");
-          }
-        }
-      }
-    },
-
-    abrupt: function(type, arg) {
-      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
-        var entry = this.tryEntries[i];
-        if (entry.tryLoc <= this.prev &&
-            hasOwn.call(entry, "finallyLoc") &&
-            this.prev < entry.finallyLoc) {
-          var finallyEntry = entry;
-          break;
-        }
-      }
-
-      if (finallyEntry &&
-          (type === "break" ||
-           type === "continue") &&
-          finallyEntry.tryLoc <= arg &&
-          arg <= finallyEntry.finallyLoc) {
-        // Ignore the finally entry if control is not jumping to a
-        // location outside the try/catch block.
-        finallyEntry = null;
-      }
-
-      var record = finallyEntry ? finallyEntry.completion : {};
-      record.type = type;
-      record.arg = arg;
-
-      if (finallyEntry) {
-        this.next = finallyEntry.finallyLoc;
-      } else {
-        this.complete(record);
-      }
-
-      return ContinueSentinel;
-    },
-
-    complete: function(record, afterLoc) {
-      if (record.type === "throw") {
-        throw record.arg;
-      }
-
-      if (record.type === "break" ||
-          record.type === "continue") {
-        this.next = record.arg;
-      } else if (record.type === "return") {
-        this.rval = record.arg;
-        this.next = "end";
-      } else if (record.type === "normal" && afterLoc) {
-        this.next = afterLoc;
-      }
-    },
-
-    finish: function(finallyLoc) {
-      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
-        var entry = this.tryEntries[i];
-        if (entry.finallyLoc === finallyLoc) {
-          this.complete(entry.completion, entry.afterLoc);
-          resetTryEntry(entry);
-          return ContinueSentinel;
-        }
-      }
-    },
-
-    "catch": function(tryLoc) {
-      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
-        var entry = this.tryEntries[i];
-        if (entry.tryLoc === tryLoc) {
-          var record = entry.completion;
-          if (record.type === "throw") {
-            var thrown = record.arg;
-            resetTryEntry(entry);
-          }
-          return thrown;
-        }
-      }
-
-      // The context.catch method must only be called with a location
-      // argument that corresponds to a known catch block.
-      throw new Error("illegal catch attempt");
-    },
-
-    delegateYield: function(iterable, resultName, nextLoc) {
-      this.delegate = {
-        iterator: values(iterable),
-        resultName: resultName,
-        nextLoc: nextLoc
-      };
-
-      return ContinueSentinel;
-    }
-  };
-})(
-  // Among the various tricks for obtaining a reference to the global
-  // object, this seems to be the most reliable technique that does not
-  // use indirect eval (which violates Content Security Policy).
-  typeof global === "object" ? global :
-  typeof window === "object" ? window :
-  typeof self === "object" ? self : this
-);
-
-});
-;define('regenerator-runtime', ['regenerator-runtime/runtime'], function (main) { return main; });

@@ -7,8 +7,8 @@ export class Posts {
     this.api = api;
   }
 
-  get() {
-    return this.api.get('posts');
+  get(options) {
+    return this.api.get('posts', options);
   }
 
   getBySlug(slug) {

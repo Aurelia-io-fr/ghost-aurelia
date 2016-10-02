@@ -1,0 +1,34 @@
+<template>
+<require
+  from="./pagination.css"></require>
+<div>
+  <ul
+    class="pagination">
+    <li
+      class="paginate_button previous ${current == 1 ? 'disabled' : ''}">
+      <a
+        href="#"
+        tabindex="0"
+        click.delegate="(current != 1) && navigateTo($event, current - 1)">Previous</a>
+    </li>
+    <li
+      class="
+        paginate_button
+        ${current == page ? 'active' : ''}
+        ${loading == page ? 'loading' : ''}"
+      repeat.for="page of pages">
+      <a
+        href="#"
+        tabindex="0"
+        click.delegate="navigateTo($event, page)">${page}</a>
+    </li>
+    <li
+      class="paginate_button next ${current == lastPage ? 'disabled' : ''}">
+      <a
+        href="#"
+        tabindex="0"
+        click.delegate="(current != lastPage) && navigateTo($event, current + 1)">Next</a>
+    </li>
+  </ul>
+</div>
+</template>

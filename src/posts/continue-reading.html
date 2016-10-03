@@ -1,0 +1,29 @@
+<template>
+<require
+  from="resources/value-converters/excerpt"></require>
+<aside
+  class="read-next">
+  <a
+    if.bind="next"
+    class="read-next-story ${next.image ? '' : 'no-cover'}"
+    css="background-image: url(${next.image})"
+    href="${next.url}">
+    <section
+      class="post">
+      <h2>${next.title}</h2>
+      <p>${next.html|excerpt:{ length: 19, type: 'words' }}&hellip;</p>
+    </section>
+  </a>
+  <a
+    if.bind="previous"
+    class="read-next-story ${previous.image ? '' : 'no-cover'}"
+    css="background-image: url(${previous.image})"
+    href="${previous.url}">
+    <section
+      class="post">
+      <h2>${previous.title}</h2>
+      <p>${previous.html|excerpt:{ length: 19, type: 'words' }}&hellip;</p>
+    </section>
+  </a>
+</aside>
+</template>

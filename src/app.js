@@ -21,7 +21,7 @@ export class App {
     }, {
       route: '/:slug',
       name: 'post',
-      moduleId: './posts/list'
+      moduleId: './posts/post'
     }]);
 
     router.handleUnknownRoutes({

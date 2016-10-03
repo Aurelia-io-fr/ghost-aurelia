@@ -28,7 +28,20 @@
 </head>
 <body
   aurelia-app="main"
-  class="{{body_class}} nav-closed">
+  class="{{body_class}} nav-closed"
+  data-blog-url="{{@blog.url}}"
+  data-blog-title="{{@blog.title}}"
+  data-blog-description="{{@blog.description}}"
+  data-blog-logo="{{@blog.logo}}"
+  data-blog-cover="{{@blog.cover}}"
+  data-blog-twitter="{{@blog.twitter}}"
+  data-blog-facebook="{{@blog.facebook}}"
+  data-blog-permalinks="{{@blog.permalinks}}"
+  data-blog-twitter="{{@blog.twitter}}"
+  data-blog-posts-per-page="{{@blog.posts_per_page}}"
+  data-blog-timezone="{{@blog.timezone}}"
+  data-labs-public-api="{{@labs.publicAPI}}"
+  data-labs-subscribers="{{@labs.subscribers}}">
   <div
     class="splashscreen">
     Wait for it

@@ -1,17 +1,19 @@
 import {inject} from 'aurelia-framework';
 import {Router} from 'aurelia-router';
 import {Posts} from '../api/posts';
+import {Blog} from '../api/blog';
 
-@inject(Router, Posts)
+@inject(Router, Blog, Posts)
 export class List {
   posts = [];
   total = 0;
   perPage = 0;
   current = 1;
 
-  constructor(router, posts) {
+  constructor(router, blog, posts) {
     this.router = router;
     this.postsService = posts;
+    this.perPage = blog.postsPerPage;
   }
 
   async activate(routeParams = {}) {
@@ -20,10 +22,13 @@ export class List {
   }
 
   async loadPosts() {
-    const results = await this.postsService.get({ page: this.current, limit: 5, include: ['author', 'tags'] });
+    const results = await this.postsService.get({
+      page: this.current,
+      limit: this.perPage,
+      include: ['author', 'tags']
+    });
     this.posts = results.posts;
     this.total = +results.meta.pagination.total;
-    this.perPage = +results.meta.pagination.limit;
   }
 
   navigate({ navigateTo }) {

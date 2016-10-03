@@ -1,0 +1,57 @@
+<template>
+<require
+  from="resources/value-converters/date-format"></require>
+<require
+  from="../tags/tags-flat-list"></require>
+<require
+  from="./author"></require>
+<require
+  from="./share"></require>
+<require
+  from="./subscribe"></require>
+<require
+  from="./continue-reading"></require>
+<main
+  class="content"
+  role="main">
+  <article
+    class="post">
+
+    <header
+      class="post-header">
+      <h1
+        class="post-title">${post.title}</h1>
+      <section
+        class="post-meta">
+        <time
+          class="post-date"
+          datetime="${post.date|dateFormat:'YYYY-MM-DD'}">
+          ${post.date|dateFormat:'DD MMMM YYYY'}
+        </time>
+        on
+        <tags-flat-list
+          tags.bind="post.tags"></tags-flat-list>
+      </section>
+    </header>
+
+    <section
+      class="post-content"
+      innerHTML.bind="post.html"></section>
+
+    <footer
+      class="post-footer">
+      <author
+        author.bind="post.author"></author>
+      <share
+        post.bind="post"></share>
+      <subscribe
+        if.bind="labs.subscribers"></subscribe>
+    </footer>
+
+  </article>
+</main>
+
+<continue-reading
+  current.bind="post"></continue-reading>
+
+</template>

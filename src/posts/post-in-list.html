@@ -3,6 +3,8 @@
   from="resources/value-converters/excerpt"></require>
 <require
   from="resources/value-converters/date-format"></require>
+<require
+  from="../tags/tags-flat-list"></require>
 <article
   class="post">
   <header
@@ -27,12 +29,8 @@
       nopin="nopin" />
       ${post.author.name}
       on
-      <span
-        repeat.for="tag of post.tags">
-        <a
-          route-href="route: tag; params.bind: { tag: tag.slug }">${tag.name}</a><span
-          if.bind="!$last">, </span>
-      </span>
+      <tags-flat-list
+        tags.bind="post.tags"></tags-flat-list>
       <time
         class="post-date"
         datetime="${date|dateFormat:'YYYY-MM-DD'}">

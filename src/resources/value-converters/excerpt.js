@@ -8,7 +8,7 @@ export class ExcerptValueConverter {
       const words = text.split(/\s+/);
       return words.splice(0, length).join(' ') + '…';
     } else {
-      return text.substr(0, length)+ '…';
+      return text.substr(0, length);
     }
   }
 }

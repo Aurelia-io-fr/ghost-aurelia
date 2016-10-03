@@ -1,0 +1,41 @@
+<template>
+<figure
+  if.bind="author.image"
+  class="author-image">
+  <a
+    class="img"
+    href.bind="author.url"
+    css="background-image: url(${author.image})">
+    <span
+      class="hidden">${author.name}'s Picture</span>
+  </a>
+</figure>
+<section
+  class="author">
+  <h4>
+    <a
+      href.bind="author.url">${author.name}
+    </a>
+  </h4>
+  <p
+    if.bind="author.bio">${author.bio}</p>
+  <p
+    if.bind="!author.bio">Read <a href.bind="author.url">more posts</a> by this author.</p>
+  <div
+    class="author-meta">
+    <span
+      if.bind="author.location"
+      class="author-location icon-location">
+      ${author.location}
+    </span>
+    <span
+      if.bind="author.website"
+      class="author-link icon-link">
+      <a
+        href="${author.website}">${author.website}
+      </a>
+    </span>
+  </div>
+</section>
+
+</template>

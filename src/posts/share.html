@@ -1,0 +1,30 @@
+<template>
+<require
+  from="resources/value-converters/encode"></require>
+<require
+  from="resources/value-converters/absolute-url"></require>
+<require
+  from="resources/attributes/popup"></require>
+<section
+  class="share">
+  <h4>Share this post</h4>
+  <a
+    class="icon-twitter"
+    href="https://twitter.com/intent/tweet?text=${post.title|encode}&amp;url=${post.url|absoluteUrl}"
+    popup>
+    <span class="hidden">Twitter</span>
+  </a>
+  <a
+    class="icon-facebook"
+    href="https://www.facebook.com/sharer/sharer.php?u=${post.url|absoluteUrl}"
+    popup>
+    <span class="hidden">Facebook</span>
+  </a>
+  <a
+    class="icon-google-plus"
+    href="https://plus.google.com/share?url=${post.url|absoluteUrl}"
+    popup>
+    <span class="hidden">Google+</span>
+  </a>
+</section>
+</template>

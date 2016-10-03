@@ -1,0 +1,8 @@
+<template>
+<span
+  repeat.for="tag of tags">
+  <a
+    route-href="route: tag; params.bind: { tag: tag.slug }">${tag.name}</a><span
+    if.bind="!$last">, </span>
+</span>
+</template>

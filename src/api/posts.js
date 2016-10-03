@@ -11,7 +11,7 @@ export class Posts {
     return this.api.get('posts', options);
   }
 
-  getBySlug(slug) {
-    return this.httpClient.get(`${environment}posts/?slug=${slug}`);
+  getBySlug(slug, options) {
+    return this.api.get(`posts/slug/${slug}`, options);
   }
 }

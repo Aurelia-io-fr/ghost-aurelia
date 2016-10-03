@@ -1,0 +1,19 @@
+main-loader {
+  height: 1rem;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  display: block;
+  z-index: 9999;
+  opacity: 0;
+  transition: opacity .1s ease-in;
+
+  &.visible {
+    opacity: 1;
+  }
+}
+.main-loader__progress {
+  box-shadow: 0 0 3px 3px #c3e6fb;
+  width: 0;
+  height: 0;
+}

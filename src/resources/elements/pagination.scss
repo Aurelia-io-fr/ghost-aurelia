@@ -1,0 +1,28 @@
+pagination {
+  .pagination {
+    margin: 0 auto;
+    list-style: none;
+    padding: 0;
+    text-align: center;
+    .paginate_button {
+      display: inline-block;
+      a {
+        display: inline-block;
+        width: 3rem;
+        height: 3rem;
+        text-decoration: none;
+      }
+      &.previous a,
+      &.next a {
+        width: auto;
+      }
+      &.active {
+        border-bottom: 1px solid gray;
+        color: #333;
+      }
+      &.loading {
+        border-bottom: 1px solid lightgray;
+      }
+    }
+  }
+}

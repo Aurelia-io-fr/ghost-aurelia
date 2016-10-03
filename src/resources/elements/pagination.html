@@ -1,7 +1,7 @@
 <template>
 <require
   from="./pagination.css"></require>
-<div>
+<nav>
   <ul
     class="pagination">
     <li
@@ -30,5 +30,5 @@
         click.delegate="(current != lastPage) && navigateTo($event, current + 1)">Next</a>
     </li>
   </ul>
-</div>
+</nav>
 </template>

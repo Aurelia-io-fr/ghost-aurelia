@@ -16,8 +16,10 @@ export class Post {
       throw new Error('Not found');
     }
 
-    this.post = results.posts[0];
+    this.postsService.current = this.post = results.posts[0];
+  }
 
-    console.log(this.post);
+  deactivate() {
+    this.postsService.current = null;
   }
 }

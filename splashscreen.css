@@ -7,5 +7,26 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: red;
+  background: white;
+}
+
+.splashscreen::after {
+  content: '';
+  background: url('/assets/img/aurelia-logo.svg') no-repeat;
+  width: 145px;
+  height: 42px;
+  animation: pulse 1s infinite ease-in;
+  display: block;
+  margin: 10% auto 0 auto;
+}
+@keyframes pulse {
+  0% {
+    transform: scale3d(1,1,1);
+  }
+  25% {
+    transform: scale3d(2,2,2);
+  }
+  100% {
+    transform: scale3d(1,1,1);
+  }
 }

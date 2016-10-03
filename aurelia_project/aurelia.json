@@ -116,6 +116,7 @@
           "aurelia-templating",
           "aurelia-templating-binding",
           "aurelia-fetch-client",
+          "smoothscroll-polyfill",
           {
             "name": "text",
             "path": "../scripts/text"

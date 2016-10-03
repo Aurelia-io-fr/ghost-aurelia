@@ -3,6 +3,8 @@ import {Api} from './api';
 
 @inject(Api)
 export class Posts {
+  current;
+
   constructor(api) {
     this.api = api;
   }

@@ -1,6 +1,12 @@
+import {inject} from 'aurelia-framework';
+import {EventAggregator} from 'aurelia-event-aggregator';
+import smoothscroll from 'smoothscroll-polyfill';
+smoothscroll.polyfill();
+
+@inject(EventAggregator)
 export class App {
-  constructor() {
-    this.message = 'Hello World!';
+  constructor(ea) {
+    ea.subscribe('router:navigation:success', () => window.scroll({ top: 0, behavior: 'smooth' }));
   }
 
   configureRouter(config, router) {

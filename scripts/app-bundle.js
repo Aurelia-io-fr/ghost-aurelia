@@ -1695,6 +1695,8 @@ define('resources/value-converters/date-format',['exports', 'aurelia-framework',
 
   var _dec, _class;
 
+  _moment2.default.locale(navigator.language);
+
   var DateFormatValueConverter = exports.DateFormatValueConverter = (_dec = (0, _aureliaFramework.inject)(function () {
     return _moment2.default;
   }), _dec(_class = function () {

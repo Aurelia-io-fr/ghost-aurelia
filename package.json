@@ -35,14 +35,15 @@
   "bugs": "https://github.com/TryGhost/Casper/issues",
   "contributors": "https://github.com/TryGhost/Casper/graphs/contributors",
   "dependencies": {
-    "aurelia-animator-css": "^1.0.0",
+    "aurelia-animator-css": "^1.0.1",
     "aurelia-bootstrapper": "^1.0.0",
     "aurelia-fetch-client": "^1.0.0",
     "bluebird": "^3.4.1",
     "express": "^4.14.0",
     "moment": "^2.15.1",
     "regenerator-runtime": "^0.9.5",
-    "smoothscroll-polyfill": "^0.3.3"
+    "smoothscroll-polyfill": "^0.3.3",
+    "whatwg-fetch": "^1.0.0"
   },
   "peerDependencies": {},
   "devDependencies": {

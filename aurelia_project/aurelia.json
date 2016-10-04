@@ -116,6 +116,7 @@
           "aurelia-templating",
           "aurelia-templating-binding",
           "aurelia-fetch-client",
+          "aurelia-animator-css",
           "smoothscroll-polyfill",
           {
             "name": "text",
@@ -144,6 +145,10 @@
             "name": "moment",
             "path": "../node_modules/moment/min",
             "main": "moment-with-locales"
+          }, {
+            "name": "whatwg-fetch",
+            "path": "../node_modules/whatwg-fetch",
+            "main": "fetch"
           }
         ]
       }

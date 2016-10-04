@@ -3,20 +3,27 @@
   from="resources/elements/pagination"></require>
 <require
   from="./post-in-list"></require>
+<div
+  class="au-animate"
+  ref="content">
+  <pagination
+    total.bind="total"
+    per-page.bind="perPage"
+    current.bind="current"
+    navigate.call="navigate($event)"></pagination>
 
-<pagination
-  total.bind="total"
-  per-page.bind="perPage"
-  current.bind="current"
-  navigate.call="navigate($event)"></pagination>
+  <div
+    class="au-stagger">
+    <post-in-list
+      repeat.for="post of posts"
+      post.bind="post"
+      class="au-animate"></post-in-list>
+  </div>
 
-<post-in-list
-  repeat.for="post of posts"
-  post.bind="post"></post-in-list>
-
-<pagination
-  total.bind="total"
-  per-page.bind="perPage"
-  current.bind="current"
-  navigate.call="navigate($event)"></pagination>
+  <pagination
+    total.bind="total"
+    per-page.bind="perPage"
+    current.bind="current"
+    navigate.call="navigate($event)"></pagination>
+</div>
 </template>

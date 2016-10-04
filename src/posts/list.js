@@ -43,6 +43,8 @@ export class List {
       this._paginateListener = this.ea.subscribe('router:navigation:success', () => {
         this._paginateListener.dispose();
         resolve();
+        const top = window.scrollY + this.content.getBoundingClientRect().top;
+        window.scroll({ top, behavior: 'smooth' })
       });
       if (navigateTo > 1) {
         this.router.navigateToRoute('posts', { page: navigateTo });

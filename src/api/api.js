@@ -1,4 +1,5 @@
 import {inject} from 'aurelia-framework';
+import 'whatwg-fetch';
 import {HttpClient} from 'aurelia-fetch-client';
 
 const ghost = window.ghost;

@@ -2,26 +2,29 @@
 <require
   from="./main-header.css"></require>
 <header
-  class="main-header post-head ${cover ? '' : 'no-cover'}"
-  css="background-image: url(${cover})">
-  <nav
-    class="main-nav clearfix ${cover ? 'overlay' : ''}">
-    <a
-      if.bind="blog.logo"
-      class="blog-logo"
-      route-href="route: home">
-      <img
-        src.bind="blog.logo"
-        alt.bind="blog.title" />
-    </a>
-    <a
-      if.bind="blog.navigation"
-      class="menu-button icon-menu"
-      href="#"
-      click.delegate="toggle()">
-      <span
-        class="word">Menu</span>
-    </a>
-  </nav>
+  class="main-header post-head ${cover ? '' : 'no-cover'}">
+  <div
+    class="main-header__bg"
+    css="background-image: url(${cover})">
+    <nav
+      class="main-nav clearfix ${cover ? 'overlay' : ''}">
+      <a
+        if.bind="blog.logo"
+        class="blog-logo"
+        route-href="route: home">
+        <img
+          src.bind="blog.logo"
+          alt.bind="blog.title" />
+      </a>
+      <a
+        if.bind="blog.navigation"
+        class="menu-button icon-menu"
+        href="#"
+        click.delegate="toggle()">
+        <span
+          class="word">Menu</span>
+      </a>
+    </nav>
+  </div>
 </header>
 </template>

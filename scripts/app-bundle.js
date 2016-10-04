@@ -1,4 +1,4 @@
-define('app',['exports', 'smoothscroll-polyfill'], function (exports, _smoothscrollPolyfill) {
+define('app',['exports', 'aurelia-framework', 'aurelia-event-aggregator', 'smoothscroll-polyfill'], function (exports, _aureliaFramework, _aureliaEventAggregator, _smoothscrollPolyfill) {
   'use strict';
 
   Object.defineProperty(exports, "__esModule", {
@@ -20,11 +20,19 @@ define('app',['exports', 'smoothscroll-polyfill'], function (exports, _smoothscr
     }
   }
 
+  var _dec, _class;
+
   _smoothscrollPolyfill2.default.polyfill();
 
-  var App = exports.App = function () {
-    function App() {
+  var App = exports.App = (_dec = (0, _aureliaFramework.inject)(_aureliaEventAggregator.EventAggregator), _dec(_class = function () {
+    function App(ea) {
+      var _this = this;
+
       _classCallCheck(this, App);
+
+      ea.subscribe('router:navigation:success', function (response) {
+        return _this._updateBodyClass(response.instruction);
+      });
     }
 
     App.prototype.configureRouter = function configureRouter(config, router) {
@@ -55,8 +63,29 @@ define('app',['exports', 'smoothscroll-polyfill'], function (exports, _smoothscr
       this.router = router;
     };
 
+    App.prototype._updateBodyClass = function _updateBodyClass(currentInstruction) {
+      var bodyClass = void 0;
+      switch (currentInstruction.config.name) {
+        case 'home':
+          bodyClass = 'home-template';
+          break;
+        case 'posts':
+          bodyClass = 'archive-template paged';
+          break;
+        case 'tag':
+          bodyClass = 'tag-template ' + currentInstruction.params.tag;
+          break;
+        case 'post':
+          bodyClass = 'post-template ' + currentInstruction.params.slug;
+          break;
+      }
+      var body = document.body;
+      var navClosed = body.classList.contains('nav-closed');
+      document.body.className = bodyClass + ' ' + (navClosed ? 'nav-closed' : '');
+    };
+
     return App;
-  }();
+  }()) || _class);
 });
 define('environment',['exports'], function (exports) {
   'use strict';

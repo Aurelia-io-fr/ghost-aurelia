@@ -6,6 +6,7 @@ pagination {
     text-align: center;
     .paginate_button {
       display: inline-block;
+      transition: opacity .2s ease-in;
       a {
         display: inline-block;
         width: 3rem;
@@ -22,6 +23,9 @@ pagination {
       }
       &.loading {
         border-bottom: 1px solid lightgray;
+      }
+      &.disabled {
+        opacity: .2;
       }
     }
   }

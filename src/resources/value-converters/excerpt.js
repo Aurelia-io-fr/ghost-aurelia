@@ -1,7 +1,9 @@
 export class ExcerptValueConverter {
   toView(str, { length, type }) {
     const div = document.createElement('div');
-    div.innerHTML = str.replace(/<img[^>]+>/g, '');
+    div.innerHTML = str
+      .replace(/<img[^>]+>/g, '')
+      .replace(/<iframe[^>]+>.*?<\/iframe>/g, '');
     const text = div.innerText;
 
     if (type === 'words') {

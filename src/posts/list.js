@@ -10,6 +10,7 @@ export class List {
   total = 0;
   perPage = 0;
   current = 1;
+  order = 'asc';
 
   constructor(router, blog, posts, ea) {
     this.router = router;
@@ -39,6 +40,7 @@ export class List {
 
   navigate({ navigateTo }) {
     return new Promise(resolve => {
+      this.order = this.current < navigateTo ? 'asc' : 'desc';
       this._resetPaginateListener();
       this._paginateListener = this.ea.subscribe('router:navigation:success', () => {
         this._paginateListener.dispose();

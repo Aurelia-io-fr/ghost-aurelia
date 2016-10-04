@@ -1127,7 +1127,7 @@ define('resources/attributes/popup',['exports', 'aurelia-framework'], function (
     return PopupCustomAttribute;
   }()) || _class);
 });
-define('resources/elements/main-header',['exports', 'aurelia-framework', '../../api/posts', '../../api/blog'], function (exports, _aureliaFramework, _posts, _blog) {
+define('resources/elements/main-header',['exports', 'aurelia-framework', 'aurelia-event-aggregator', '../../api/posts', '../../api/blog'], function (exports, _aureliaFramework, _aureliaEventAggregator, _posts, _blog) {
   'use strict';
 
   Object.defineProperty(exports, "__esModule", {
@@ -1190,7 +1190,7 @@ define('resources/elements/main-header',['exports', 'aurelia-framework', '../../
 
   var _dec, _dec2, _class, _desc, _value, _class2;
 
-  var MainHeaderCustomElement = exports.MainHeaderCustomElement = (_dec = (0, _aureliaFramework.inject)(_aureliaFramework.ObserverLocator, _blog.Blog, _posts.Posts), _dec2 = (0, _aureliaFramework.computedFrom)('post', 'blog'), _dec(_class = (_class2 = function () {
+  var MainHeaderCustomElement = exports.MainHeaderCustomElement = (_dec = (0, _aureliaFramework.inject)(_aureliaEventAggregator.EventAggregator, _blog.Blog, _posts.Posts), _dec2 = (0, _aureliaFramework.computedFrom)('post', 'blog'), _dec(_class = (_class2 = function () {
     _createClass(MainHeaderCustomElement, [{
       key: 'cover',
       get: function get() {
@@ -1201,14 +1201,19 @@ define('resources/elements/main-header',['exports', 'aurelia-framework', '../../
       }
     }]);
 
-    function MainHeaderCustomElement(observerLocator, blog, postsService) {
+    function MainHeaderCustomElement(ea, blog, postsService) {
       var _this = this;
 
       _classCallCheck(this, MainHeaderCustomElement);
 
       this.blog = blog;
-      observerLocator.getObserver(postsService, 'current').subscribe(function (newVal) {
-        return _this.post = newVal;
+
+      ea.subscribe('router:navigation:success', function (response) {
+        if (response.instruction.config.name === 'post') {
+          _this.post = postsService.current;
+        } else {
+          _this.post = null;
+        }
       });
     }
 
@@ -1641,7 +1646,7 @@ define('resources/value-converters/excerpt',['exports'], function (exports) {
       var type = _ref.type;
 
       var div = document.createElement('div');
-      div.innerHTML = str.replace(/<img[^>]+>/g, '');
+      div.innerHTML = str.replace(/<img[^>]+>/g, '').replace(/<iframe[^>]+>.*?<\/iframe>/g, '');
       var text = div.innerText;
 
       if (type === 'words') {
@@ -1669,8 +1674,9 @@ define('text!posts/posts.html', ['module'], function(module) { module.exports = 
 define('text!posts/share.html', ['module'], function(module) { module.exports = "<template>\n<require\n  from=\"resources/value-converters/encode\"></require>\n<require\n  from=\"resources/value-converters/absolute-url\"></require>\n<require\n  from=\"resources/attributes/popup\"></require>\n<section\n  class=\"share\">\n  <h4>Share this post</h4>\n  <a\n    class=\"icon-twitter\"\n    href=\"https://twitter.com/intent/tweet?text=${post.title|encode}&amp;url=${post.url|absoluteUrl}\"\n    popup>\n    <span class=\"hidden\">Twitter</span>\n  </a>\n  <a\n    class=\"icon-facebook\"\n    href=\"https://www.facebook.com/sharer/sharer.php?u=${post.url|absoluteUrl}\"\n    popup>\n    <span class=\"hidden\">Facebook</span>\n  </a>\n  <a\n    class=\"icon-google-plus\"\n    href=\"https://plus.google.com/share?url=${post.url|absoluteUrl}\"\n    popup>\n    <span class=\"hidden\">Google+</span>\n  </a>\n</section>\n</template>\n"; });
 define('text!posts/subscribe.html', ['module'], function(module) { module.exports = "<template>\n<section\n  class=\"gh-subscribe\">\n  <h3\n    class=\"gh-subscribe-title\">Subscribe to ${blog.title}</h3>\n  <p>Get the latest posts delivered right to your inbox.</p>\n  <form></form>\n  <span\n    class=\"gh-subscribe-rss\">or subscribe <a href=\"http://cloud.feedly.com/#subscription/feed/${blog.url}/rss/\">via RSS</a> with Feedly!</span>\n</section>\n</template>\n"; });
 define('text!tags/tags-flat-list.html', ['module'], function(module) { module.exports = "<template>\n<span\n  repeat.for=\"tag of tags\">\n  <a\n    route-href=\"route: tag; params.bind: { tag: tag.slug }\">${tag.name}</a><span\n    if.bind=\"!$last\">, </span>\n</span>\n</template>\n"; });
-define('text!resources/elements/main-header.html', ['module'], function(module) { module.exports = "<template>\n<header\n  class=\"main-header post-head ${cover ? '' : 'no-cover'}\"\n  css=\"background-image: url(${cover})\">\n  <nav\n    class=\"main-nav clearfix ${cover ? 'overlay' : ''}\">\n    <a\n      if.bind=\"blog.logo\"\n      class=\"blog-logo\"\n      route-href=\"route: home\">\n      <img\n        src.bind=\"blog.logo\"\n        alt.bind=\"blog.title\" />\n    </a>\n    <a\n      if.bind=\"blog.navigation\"\n      class=\"menu-button icon-menu\"\n      href=\"#\">\n      <span\n        class=\"word\">Menu</span>\n    </a>\n  </nav>\n</header>\n</template>\n"; });
+define('text!resources/elements/main-header.html', ['module'], function(module) { module.exports = "<template>\n<require\n  from=\"./main-header.css\"></require>\n<header\n  class=\"main-header post-head ${cover ? '' : 'no-cover'}\"\n  css=\"background-image: url(${cover})\">\n  <nav\n    class=\"main-nav clearfix ${cover ? 'overlay' : ''}\">\n    <a\n      if.bind=\"blog.logo\"\n      class=\"blog-logo\"\n      route-href=\"route: home\">\n      <img\n        src.bind=\"blog.logo\"\n        alt.bind=\"blog.title\" />\n    </a>\n    <a\n      if.bind=\"blog.navigation\"\n      class=\"menu-button icon-menu\"\n      href=\"#\">\n      <span\n        class=\"word\">Menu</span>\n    </a>\n  </nav>\n</header>\n</template>\n"; });
 define('text!resources/elements/main-loader.html', ['module'], function(module) { module.exports = "<template>\n<require\n  from=\"./main-loader.css\"></require>\n<div\n  class=\"main-loader__progress\"\n  ref=\"progress\"></div>\n</template>\n"; });
 define('text!resources/elements/pagination.html', ['module'], function(module) { module.exports = "<template>\n<require\n  from=\"./pagination.css\"></require>\n<nav>\n  <ul\n    class=\"pagination\">\n    <li\n      class=\"paginate_button previous ${current == 1 ? 'disabled' : ''}\">\n      <a\n        href=\"#\"\n        tabindex=\"0\"\n        click.delegate=\"(current != 1) && navigateTo($event, current - 1)\">Previous</a>\n    </li>\n    <li\n      class=\"\n        paginate_button\n        ${current == page ? 'active' : ''}\n        ${loading == page ? 'loading' : ''}\"\n      repeat.for=\"page of pages\">\n      <a\n        href=\"#\"\n        tabindex=\"0\"\n        click.delegate=\"navigateTo($event, page)\">${page}</a>\n    </li>\n    <li\n      class=\"paginate_button next ${current == lastPage ? 'disabled' : ''}\">\n      <a\n        href=\"#\"\n        tabindex=\"0\"\n        click.delegate=\"(current != lastPage) && navigateTo($event, current + 1)\">Next</a>\n    </li>\n  </ul>\n</nav>\n</template>\n"; });
 define('text!animations.css', ['module'], function(module) { module.exports = ".au-animate {\n  -webkit-animation-delay: 1000ms;\n  animation-delay: 1000ms; }\n\n.au-enter {\n  opacity: 0 !important; }\n\n.au-enter-active {\n  -webkit-animation: fadeIn 2s;\n  animation: fadeIn .2s; }\n\n.au-leave-active {\n  -webkit-animation: fadeOut 2s;\n  animation: fadeOut .2s; }\n\n/* CSS3-Animations */\n@-webkit-keyframes fadeIn {\n  0% {\n    opacity: 0; }\n  100% {\n    opacity: 1; } }\n\n@keyframes fadeIn {\n  0% {\n    opacity: 0; }\n  100% {\n    opacity: 1; } }\n\n@-webkit-keyframes fadeOut {\n  0% {\n    opacity: 1; }\n  100% {\n    opacity: 0; } }\n\n@keyframes fadeOut {\n  0% {\n    opacity: 1; }\n  100% {\n    opacity: 0; } }\n"; });
+define('text!resources/elements/main-header.css', ['module'], function(module) { module.exports = "main-header .main-header {\n  transition: height .2s ease-in, background .2s ease-in; }\n"; });
 //# sourceMappingURL=app-bundle.js.map

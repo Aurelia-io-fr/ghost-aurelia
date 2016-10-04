@@ -1,8 +1,9 @@
-import {inject, ObserverLocator, computedFrom} from 'aurelia-framework';
+import {inject, computedFrom} from 'aurelia-framework';
+import {EventAggregator} from 'aurelia-event-aggregator';
 import {Posts} from '../../api/posts';
 import {Blog} from '../../api/blog';
 
-@inject(ObserverLocator, Blog, Posts)
+@inject(EventAggregator, Blog, Posts)
 export class MainHeaderCustomElement {
   post;
   blog;
@@ -15,9 +16,15 @@ export class MainHeaderCustomElement {
     return this.blog.cover;
   }
 
-  constructor(observerLocator, blog, postsService) {
+  constructor(ea, blog, postsService) {
     this.blog = blog;
-    observerLocator.getObserver(postsService, 'current')
-    .subscribe(newVal => this.post = newVal);
+
+    ea.subscribe('router:navigation:success', (response) => {
+      if (response.instruction.config.name === 'post') {
+        this.post = postsService.current;
+      } else {
+        this.post = null;
+      }
+    });
   }
 }

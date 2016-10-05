@@ -1,0 +1,15 @@
+<template>
+<require
+  from="resources/value-converters/date-format"></require>
+<footer
+  class="site-footer clearfix">
+  <section
+    class="copyright">
+    <a
+      href="/">${blog.title}</a> &copy; ${now|dateFormat:'YYYY'}
+  </section>
+  <section
+    class="poweredby">Proudly published with <a href="https://ghost.org">Ghost</a>
+  </section>
+</footer>
+</template>

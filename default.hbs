@@ -34,7 +34,7 @@
   data-blog-description="{{@blog.description}}"
   data-blog-logo="{{@blog.logo}}"
   data-blog-cover="{{@blog.cover}}"
-  data-blog-navigation="{{@blog.navigation}}"
+  data-blog-navigation='[{{#foreach @blog.navigation}}{ "slug": "{{slug}}", "current": {{#if current}}true{{else}}false{{/if}}, "url": "{{url}}", "label": "{{label}}" }{{^if @last}},{{/if}}{{/foreach}}]'
   data-blog-twitter="{{@blog.twitter}}"
   data-blog-facebook="{{@blog.facebook}}"
   data-blog-permalinks="{{@blog.permalinks}}"

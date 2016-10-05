@@ -5,5 +5,11 @@ import {DatasetConstructor} from './dataset-constructor';
 export class Blog {
   constructor(body, datasetConstructor) {
     datasetConstructor.construct(this, body, 'blog');
+
+    try {
+      this.navigation = JSON.parse(this.navigation);
+    } catch (e) {
+
+    }
   }
 }

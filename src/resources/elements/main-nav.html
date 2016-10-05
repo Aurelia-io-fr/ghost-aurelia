@@ -11,11 +11,15 @@
   </a>
   <ul>
     <li
-      class="nav-home nav-current"
-      role="presentation"><a href="/">Home</a></li>
-    <li
-      class="nav-coin nav-current" role="presentation"><a href="/">Coin</a></li>
+      repeat.for="link of blog.navigation"
+      class="nav-home ${link.current ? 'nav-current' : ''}"
+      role="presentation"><a href.bind="link.url">${link.label}</a></li>
   </ul>
-  <a class="subscribe-button icon-feed" href="/rss/">Subscribe</a>
+  <a
+    class="subscribe-button icon-feed" href="/rss/">Subscribe</a>
+  <a
+    if.bind="labs.subscribers"
+    class="subscribe-button"
+    href="${blog.url}/subscribe/">Subscribe</a>
 </div>
 </template>

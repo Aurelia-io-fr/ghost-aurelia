@@ -7,9 +7,13 @@ export class Blog {
     datasetConstructor.construct(this, body, 'blog');
 
     try {
-      this.navigation = JSON.parse(this.navigation);
-    } catch (e) {
+      const nav = document.querySelector('[data-navigation]');
 
+      if (nav) {
+        this.navigation = JSON.parse(nav.dataset.navigation);
+      }
+    } catch (e) {
+      //
     }
   }
 }

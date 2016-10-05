@@ -1,4 +1,5 @@
-<div class="nav">
+<div class="nav"
+    data-navigation='[{{#foreach navigation}}{ "slug": "{{slug}}", "url": "{{url}}", "label": "{{label}}" }{{^if @last}},{{/if}}{{/foreach}}]'>
     <h3 class="nav-title">Menu</h3>
     <a href="#" class="nav-close">
         <span class="hidden">Close</span>

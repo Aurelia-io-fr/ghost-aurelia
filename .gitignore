@@ -2,3 +2,6 @@ node_modules
 .idea
 .DS_STORE
 *.sublime-project
+scripts/app-bundle*
+scripts/vendor-bundle*
+src/environment.js

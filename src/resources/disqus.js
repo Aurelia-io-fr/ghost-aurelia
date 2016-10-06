@@ -31,8 +31,7 @@ export class Disqus {
   }
 
   async count() {
-    const disqus = await this.getInstance('count');
-    console.log(DISQUSWIDGETS);
+    await this.getInstance('count');
     DISQUSWIDGETS.getCount({ reset: true });
   }
 }

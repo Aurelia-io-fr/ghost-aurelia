@@ -4,6 +4,10 @@
 <require
   from="resources/value-converters/date-format"></require>
 <require
+  from="resources/elements/comments-count"></require>
+<require
+  from="resources/value-converters/absolute-url"></require>
+<require
   from="../tags/tags-flat-list"></require>
 <article
   class="post au-animate">
@@ -36,6 +40,8 @@
         datetime="${date|dateFormat:'YYYY-MM-DD'}">
         ${date|dateFormat:'DD MMMM YYYY'}
       </time>
+      <comments-count
+        url.bind="post.url|absoluteUrl"></comments-count>
   </footer>
 </article>
 </template>

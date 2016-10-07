@@ -1,8 +1,12 @@
-import {inject} from 'aurelia-property-injection';
+import {inject} from 'aurelia-framework';
 import {EventAggregator} from 'aurelia-event-aggregator';
 
+@inject(EventAggregator)
 export class AnalyticsCustomElement {
-  @inject(EventAggregator) ea;
+  constructor(ea) {
+    this.ea = ea;
+  }
+
   attached() {
     this._listener = this.ea.subscribe('router:navigation:success', response => {
       window.ga && window.ga('send', 'pageview');

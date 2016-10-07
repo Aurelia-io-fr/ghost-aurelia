@@ -1,11 +1,13 @@
 import {inject} from 'aurelia-framework';
 import {EventAggregator} from 'aurelia-event-aggregator';
+import {Blog} from './api/blog';
 import smoothscroll from 'smoothscroll-polyfill';
 smoothscroll.polyfill();
 
-@inject(EventAggregator)
+@inject(EventAggregator, Blog)
 export class App {
-  constructor(ea) {
+  constructor(ea, blog) {
+    this.blog = blog;
     ea.subscribe('router:navigation:success',
       response => this._updateBodyClass(response.instruction));
   }
@@ -26,7 +28,7 @@ export class App {
       name: 'tag',
       moduleId: './tags/tag'
     }, {
-      route: '/:slug',
+      route: this.blog.permalinks,
       name: 'post',
       moduleId: './posts/post'
     }]);
@@ -53,6 +55,8 @@ export class App {
     case 'post':
       bodyClass = `post-template ${currentInstruction.params.slug}`;
       break;
+    default:
+      bodyClass = '';
     }
     const body = document.body;
     const navClosed = body.classList.contains('nav-closed');

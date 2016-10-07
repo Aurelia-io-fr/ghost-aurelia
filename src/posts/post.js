@@ -7,7 +7,7 @@ export class Post {
   constructor(element, postsService, labs) {
     this.element = element;
     this.postsService = postsService;
-    this.labs = labs
+    this.labs = labs;
   }
 
   async activate(routeParams) {
@@ -20,7 +20,7 @@ export class Post {
     this.postsService.current = this.post = results.posts[0];
 
     const top = this.element.getBoundingClientRect().top;
-    window.scroll({ top: top, behavior: 'smooth' })
+    window.scroll({ top: top, behavior: 'smooth' });
   }
 
   deactivate() {

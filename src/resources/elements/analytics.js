@@ -1,6 +1,7 @@
-import {inject} from 'aurelia-framework';
+import {inject, noView} from 'aurelia-framework';
 import {EventAggregator} from 'aurelia-event-aggregator';
 
+@noView
 @inject(EventAggregator)
 export class AnalyticsCustomElement {
   constructor(ea) {
